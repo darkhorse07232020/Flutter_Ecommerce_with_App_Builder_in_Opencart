@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:shop_app/helpers/colors.dart';
 import 'package:shop_app/models/HomeScreen.dart';
+import 'package:shop_app/models/TokenData.dart';
 import 'package:shop_app/screens/home/components/home_app_bar.dart';
+import 'package:shop_app/screens/home/components/nav_bar.dart';
 import 'package:shop_app/screens/home/loading_screen.dart';
 
 import 'components/body.dart';
@@ -14,19 +17,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // bool isLoaded;
-
   Future<void> initialize() async {
+    if (isLoaded) return;
+    await getAPItoken();
     await getHomeData();
+    isLoaded = true;
   }
 
   @override
   void initState() {
-    // isLoaded = false;
-    // getHomeData().whenComplete(() {
-    //   print(homeScreenVariable.titleBarLogoUrl);
-    //   isLoaded = true;
-    // });
     super.initState();
   }
 
@@ -36,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
       future: initialize(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
+          print(homeScreenVariable.currencies);
           return HomePage();
         } else {
           return LoadingScreen();
@@ -56,29 +56,8 @@ class HomePage extends StatelessWidget {
         backgroundColor: kBackgroundDarkColor,
         title: Text("ShopCart"),
       ),
-      drawer: leftNavBar(),
+      drawer: NavBar(),
       body: Body(),
-    );
-  }
-
-  Widget leftNavBar() {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.symmetric(vertical: 70.0, horizontal: 30.0),
-        children: <Widget>[
-          SwitchListTile(
-            title: const Text('Darkmode'),
-            value: true,
-            onChanged: (value) {},
-            activeTrackColor: Colors.lightBlueAccent,
-            activeColor: Colors.blue,
-          ),
-          ExpansionTile(
-            title: Text("Languages"),
-            children: <Widget>[],
-          ),
-        ],
-      ),
     );
   }
 }

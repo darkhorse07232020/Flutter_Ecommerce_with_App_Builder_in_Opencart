@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:shop_app/models/TokenData.dart';
 
 Future<bool> getHomeData() async {
   final response = await http.post(
-    'https://easycartapp.com/index.php?route=webservices/api&method=appGetHome&version=1.6&api_token=2e03ec554e84d45353be41509e',
+    'https://easycartapp.com/index.php?route=webservices/api&method=appGetHome&version=1.6&api_token=' +
+        apiTokenKey,
     body: jsonEncode(
       <String, String>{
         'id_currency': 'USD',
@@ -23,6 +25,8 @@ Future<bool> getHomeData() async {
   return true;
 }
 
+HomeScreenModel homeScreenVariable;
+
 class HomeScreenModel {
   final int isMarketplace;
   final int wishlistActive;
@@ -37,6 +41,14 @@ class HomeScreenModel {
   final int contactUsAvailable;
   final String contactUsLink;
   final String message;
+  final List<dynamic> elements;
+  final List<dynamic> menuCategories;
+  final List<dynamic> cmsLinks;
+  final Map<String, dynamic> currencies;
+  final Map<String, dynamic> languages;
+  final List<dynamic> languagesRecord;
+  final int isTabBarEnabled;
+  final Map<String, dynamic> spinWinResponse;
 
   HomeScreenModel({
     this.isMarketplace,
@@ -52,6 +64,14 @@ class HomeScreenModel {
     this.contactUsAvailable,
     this.contactUsLink,
     this.message,
+    this.elements,
+    this.menuCategories,
+    this.cmsLinks,
+    this.currencies,
+    this.languages,
+    this.languagesRecord,
+    this.isTabBarEnabled,
+    this.spinWinResponse,
   });
 
   factory HomeScreenModel.fromJson(Map<String, dynamic> json) {
@@ -70,8 +90,14 @@ class HomeScreenModel {
       contactUsAvailable: json['contact_us_available'],
       contactUsLink: json['contact_us_link'],
       message: json['message'],
+      elements: json['elements'],
+      menuCategories: json['Menu_Categories'],
+      cmsLinks: json['cms_links'],
+      currencies: json['currencies'],
+      languages: json['languages'],
+      languagesRecord: json['languages_record'],
+      isTabBarEnabled: int.parse(json['is_tab_bar_enabled']),
+      spinWinResponse: json['spin_win_response'],
     );
   }
 }
-
-HomeScreenModel homeScreenVariable;

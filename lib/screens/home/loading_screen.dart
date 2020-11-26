@@ -8,7 +8,7 @@ class LoadingScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            "Initialization",
+            "Loading data...",
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.bold,
