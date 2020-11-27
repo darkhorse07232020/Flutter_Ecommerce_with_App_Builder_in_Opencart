@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/helpers/colors.dart';
 import 'package:shop_app/models/HomeScreen.dart';
 
 class NavBar extends StatelessWidget {
@@ -15,7 +14,7 @@ class NavBar extends StatelessWidget {
             child: DrawerHeader(
               child: Text('Drawer Header'),
               decoration: BoxDecoration(
-                color: kBackgroundDarkColor,
+                color: Colors.white,
               ),
             ),
           ),

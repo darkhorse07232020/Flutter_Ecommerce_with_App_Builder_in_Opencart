@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/TokenData.dart';
 
 Future<bool> getHomeData() async {
@@ -18,6 +20,13 @@ Future<bool> getHomeData() async {
   Map<String, dynamic> responseJson = json.decode(response.body);
   if (response.statusCode == 200) {
     homeScreenVariable = HomeScreenModel.fromJson(responseJson);
+
+    // Set color variable
+    kPrimaryColor = Color(int.parse('0xFF' + responseJson['app_theme_color']));
+    kButtonColor = Color(int.parse('0xFF' + responseJson['app_button_color']));
+    kBtnTxtColor =
+        Color(int.parse('0xFF' + responseJson['app_button_text_color']));
+    kBGColor = Color(int.parse('0xFF' + responseJson['app_background_color']));
   } else {
     throw Exception('Failed to load LangClass');
   }
@@ -30,10 +39,6 @@ class HomeScreenModel {
   final int isMarketplace;
   final int wishlistActive;
   final int cartButtonStatus;
-  final String appThemeColor;
-  final String appButtonColor;
-  final String appButtonTextColor;
-  final String appBackgroundColor;
   final int addToCartRedirectEnabled;
   final int displayLogoOnTitleBar;
   final String titleBarLogoUrl;
@@ -53,10 +58,6 @@ class HomeScreenModel {
     this.isMarketplace,
     this.wishlistActive,
     this.cartButtonStatus,
-    this.appThemeColor,
-    this.appButtonColor,
-    this.appButtonTextColor,
-    this.appBackgroundColor,
     this.addToCartRedirectEnabled,
     this.displayLogoOnTitleBar,
     this.titleBarLogoUrl,
@@ -78,10 +79,6 @@ class HomeScreenModel {
       isMarketplace: int.parse(json['is_marketplace']),
       wishlistActive: json['wishlist_active'],
       cartButtonStatus: json['cart_button_status'],
-      appThemeColor: json['app_theme_color'],
-      appButtonColor: json['app_button_color'],
-      appButtonTextColor: json['app_button_text_color'],
-      appBackgroundColor: json['app_background_color'],
       addToCartRedirectEnabled: int.parse(json['add_to_cart_redirect_enabled']),
       displayLogoOnTitleBar: int.parse(json['display_logo_on_title_bar']),
       titleBarLogoUrl: json['title_bar_logo_url'],

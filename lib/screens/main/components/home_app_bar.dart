@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/HomeScreen.dart';
-import 'package:shop_app/helpers/colors.dart';
 
 class HommeAppBar extends PreferredSize {
   @override
@@ -11,9 +11,9 @@ class HommeAppBar extends PreferredSize {
   Widget build(BuildContext context) {
     return AppBar(
       iconTheme: IconThemeData(
-        color: kBackgroundLightColor,
+        color: kBtnTxtColor,
       ),
-      backgroundColor: kBackgroundDarkColor,
+      backgroundColor: kPrimaryColor,
       title: homeScreenVariable.displayLogoOnTitleBar == 1
           ? Image.network(homeScreenVariable.titleBarLogoUrl)
           : Container(),

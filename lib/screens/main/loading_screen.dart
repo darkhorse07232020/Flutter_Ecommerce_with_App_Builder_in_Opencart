@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/constants.dart';
 
 class LoadingScreen extends StatelessWidget {
   @override
@@ -12,6 +13,7 @@ class LoadingScreen extends StatelessWidget {
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.bold,
+              color: kTGreyColor,
             ),
           ),
           SizedBox(height: 20),
