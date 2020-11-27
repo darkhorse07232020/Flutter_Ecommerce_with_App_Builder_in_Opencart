@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:shop_app/helpers/colors.dart';
 import 'package:shop_app/models/HomeScreen.dart';
 import 'package:shop_app/models/TokenData.dart';
@@ -35,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
       future: initialize(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          print(homeScreenVariable.currencies);
           return HomePage();
         } else {
           return LoadingScreen();

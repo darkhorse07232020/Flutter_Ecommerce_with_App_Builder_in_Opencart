@@ -18,7 +18,6 @@ Future<bool> getHomeData() async {
   Map<String, dynamic> responseJson = json.decode(response.body);
   if (response.statusCode == 200) {
     homeScreenVariable = HomeScreenModel.fromJson(responseJson);
-    print('hello:  ${homeScreenVariable.titleBarLogoUrl}');
   } else {
     throw Exception('Failed to load LangClass');
   }
@@ -75,7 +74,6 @@ class HomeScreenModel {
   });
 
   factory HomeScreenModel.fromJson(Map<String, dynamic> json) {
-    // print(json["languages"]);
     return new HomeScreenModel(
       isMarketplace: int.parse(json['is_marketplace']),
       wishlistActive: json['wishlist_active'],
