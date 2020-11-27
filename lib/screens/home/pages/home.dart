@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../../size_config.dart';
-import 'categories.dart';
-import 'discount_banner.dart';
-import 'home_header.dart';
-import 'popular_product.dart';
-import 'special_offers.dart';
+import '../components/categories.dart';
+import '../components/discount_banner.dart';
+import '../components/home_header.dart';
+import '../components/popular_product.dart';
+import '../components/special_offers.dart';
 
-class Body extends StatelessWidget {
+class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

@@ -6,7 +6,7 @@ import 'package:shop_app/screens/home/components/home_app_bar.dart';
 import 'package:shop_app/screens/home/components/nav_bar.dart';
 import 'package:shop_app/screens/home/loading_screen.dart';
 
-import 'components/body.dart';
+import 'pages/home.dart';
 
 class HomeScreen extends StatefulWidget {
   static String routeName = "/home";
@@ -43,19 +43,107 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  TabController tabController;
+
+  @override
+  void initState() {
+    tabController = TabController(length: 5, vsync: this);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: kBackgroundLightColor,
-        ),
-        backgroundColor: kBackgroundDarkColor,
-        title: Text("ShopCart"),
-      ),
+      appBar: HommeAppBar(),
       drawer: NavBar(),
-      body: Body(),
+      body: TabBarView(
+        children: <Widget>[
+          HomeTab(),
+          page('the other one!'),
+          page('the other one!'),
+          page('the other one!'),
+          page('headset is on?')
+        ],
+        controller: tabController,
+      ),
+      bottomNavigationBar: _bottomNavBar(),
+    );
+  }
+
+  Widget _bottomNavBar() {
+    return Material(
+      color: kBackgroundDarkColor,
+      child: TabBar(
+        labelPadding: EdgeInsets.all(0),
+        controller: tabController,
+        tabs: <Widget>[
+          Tab(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(Icons.home),
+                Text('Home', style: TextStyle(fontSize: 11)),
+              ],
+            ),
+          ),
+          Tab(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(Icons.widgets),
+                Text('Categories', style: TextStyle(fontSize: 11)),
+              ],
+            ),
+          ),
+          Tab(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(Icons.search),
+                Text('Search', style: TextStyle(fontSize: 11)),
+              ],
+            ),
+          ),
+          Tab(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(Icons.shopping_cart_outlined),
+                Text('Cart', style: TextStyle(fontSize: 11)),
+              ],
+            ),
+          ),
+          Tab(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(Icons.person_outline),
+                Text('Login', style: TextStyle(fontSize: 11)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class page extends StatelessWidget {
+  String title;
+  page(this.title);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text(title),
+      ),
     );
   }
 }

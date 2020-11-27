@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../size_config.dart';
+import 'package:shop_app/models/HomeScreen.dart';
+import 'package:shop_app/helpers/colors.dart';
 
 class HommeAppBar extends PreferredSize {
   @override
@@ -10,45 +9,28 @@ class HommeAppBar extends PreferredSize {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding:
-            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-        child: Row(
-          children: [
-            // SizedBox(
-            //   height: getProportionateScreenWidth(40),
-            //   width: getProportionateScreenWidth(40),
-            //   child: FlatButton(
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(60),
-            //     ),
-            //     color: Colors.white,
-            //     padding: EdgeInsets.zero,
-            //     onPressed: () => Navigator.pop(context),
-            //     child: SvgPicture.asset(
-            //       "assets/icons/Back ICon.svg",
-            //       height: 15,
-            //     ),
-            //   ),
-            // ),
-            Spacer(),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Row(
-                children: [
-                  const SizedBox(width: 5),
-                  SvgPicture.asset("assets/icons/Star Icon.svg"),
-                ],
-              ),
-            )
-          ],
-        ),
+    return AppBar(
+      iconTheme: IconThemeData(
+        color: kBackgroundLightColor,
       ),
+      backgroundColor: kBackgroundDarkColor,
+      title: homeScreenVariable.displayLogoOnTitleBar == 1
+          ? Image.network(homeScreenVariable.titleBarLogoUrl)
+          : Container(),
+      actions: [
+        IconButton(
+          icon: Icon(Icons.search),
+          onPressed: () {},
+        ),
+        IconButton(
+          icon: Icon(Icons.favorite_outline),
+          onPressed: () {},
+        ),
+        IconButton(
+          icon: Icon(Icons.card_travel),
+          onPressed: () {},
+        ),
+      ],
     );
   }
 }
