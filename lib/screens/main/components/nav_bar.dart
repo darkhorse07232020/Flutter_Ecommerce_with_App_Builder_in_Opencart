@@ -14,7 +14,7 @@ class NavBar extends StatelessWidget {
             child: DrawerHeader(
               child: Text('Drawer Header'),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Colors.black87,
               ),
             ),
           ),
