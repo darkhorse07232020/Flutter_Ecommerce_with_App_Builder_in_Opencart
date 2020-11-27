@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-class BannersHorizontalSliding extends StatelessWidget {
+class BannerGrid extends StatelessWidget {
   final dynamic banner;
   final String title;
-  const BannersHorizontalSliding({Key key, this.banner, this.title})
-      : super(key: key);
+  const BannerGrid({Key key, this.banner, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +20,18 @@ class BannersHorizontalSliding extends StatelessWidget {
                 )
               : Container(),
           Container(
-            height: 200,
-            child: ListView.builder(
+            child: GridView.builder(
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
               padding: EdgeInsets.all(0),
-              scrollDirection: Axis.horizontal,
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: banner.length,
               itemBuilder: (context, index) {
                 return Container(
-                  width: 400,
+                  width: MediaQuery.of(context).size.width,
                   color: Colors.white,
-                  margin: EdgeInsets.symmetric(horizontal: 5),
+                  margin: EdgeInsets.all(5),
                   child: Image.network(
                     banner[index]['src'],
                     fit: banner[index]['image_contentMode'] == 'scaleAspectFill'

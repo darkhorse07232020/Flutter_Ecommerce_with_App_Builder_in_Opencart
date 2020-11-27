@@ -28,11 +28,12 @@ Future<bool> getHomeData() async {
         Color(int.parse('0xFF' + responseJson['app_button_text_color']));
     kBGColor = Color(int.parse('0xFF' + responseJson['app_background_color']));
   } else {
-    throw Exception('Failed to load LangClass');
+    throw Exception('Failed to load Response');
   }
   return true;
 }
 
+List<int> currentTime = [];
 HomeScreenModel homeScreenVariable;
 
 class HomeScreenModel {
