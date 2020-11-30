@@ -67,20 +67,34 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                Text(
-                  widget.product['name'],
-                  style: TextStyle(color: Colors.black),
-                  maxLines: 2,
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "${widget.product['price']}",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        color: kPrimaryColor,
+                    Container(
+                      width: widget.width * 0.8,
+                      padding: EdgeInsets.only(left: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "${widget.product['name']}",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 3,
+                          ),
+                          Text(
+                            "${widget.product['price']}",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: kPrimaryColor,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     InkWell(
