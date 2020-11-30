@@ -44,7 +44,7 @@ class NavBar extends StatelessWidget {
                 Divider(),
                 DrawerItem(icon: Icons.contacts, text: 'Contact Us'),
                 ExpandItem(
-                  icon: Icons.monetization_on,
+                  icon: Icons.language,
                   title: 'Language(s)',
                   subMenu: homeScreenVariable.languages['lang_list'],
                 ),

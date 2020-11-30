@@ -10,7 +10,7 @@ class CategoriesTop extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(0),
       child: Container(
-        height: 100,
+        height: MediaQuery.of(context).size.width / 4.0,
         child: ListView.builder(
           padding: EdgeInsets.all(0),
           scrollDirection: Axis.horizontal,
@@ -42,8 +42,8 @@ class CategoryCard extends StatelessWidget {
       onTap: press,
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 5),
-        height: 100,
-        width: 100,
+        height: MediaQuery.of(context).size.width / 4.0,
+        width: MediaQuery.of(context).size.width / 4.0,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
