@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:shop_app/models/Product.dart';
-import 'package:shop_app/screens/details/details_screen.dart';
+// import 'package:shop_app/screens/details/details_screen.dart';
 
 import '../constants.dart';
 // import '../size_config.dart';
@@ -12,21 +12,23 @@ class ProductCard extends StatefulWidget {
     this.width = 140,
     this.aspectRetio = 1.02,
     @required this.product,
+    @required this.incVal,
   }) : super(key: key);
 
   final double width, aspectRetio;
   final dynamic product;
+  final int incVal;
 
   @override
   _ProductCardState createState() => _ProductCardState();
 }
 
 class _ProductCardState extends State<ProductCard> {
-  int cart_num;
+  int _cartNum;
 
   @override
   void initState() {
-    cart_num = 0;
+    _cartNum = 0;
     super.initState();
   }
 
@@ -52,10 +54,6 @@ class _ProductCardState extends State<ProductCard> {
                   aspectRatio: 1.02,
                   child: Container(
                     padding: EdgeInsets.all(0),
-                    decoration: BoxDecoration(
-                      color: kSecondaryColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
                     child: Hero(
                       tag: widget.product['id'].toString(),
                       child: Image.network(
@@ -98,17 +96,19 @@ class _ProductCardState extends State<ProductCard> {
                     ),
                   ],
                 ),
-                cart_num == 0
+                _cartNum == 0
                     ? FlatButton(
-                        minWidth: MediaQuery.of(context).size.width,
+                        minWidth: widget.width,
                         color: kButtonColor,
                         textColor: kBtnTxtColor,
                         padding: EdgeInsets.all(8.0),
                         splashColor: Colors.blueAccent,
                         onPressed: () {
-                          setState(() {
-                            cart_num = 1;
-                          });
+                          if (widget.incVal > 0) {
+                            setState(() {
+                              _cartNum = widget.incVal;
+                            });
+                          }
                         },
                         child: Text(
                           "Add to Cart",
@@ -119,14 +119,14 @@ class _ProductCardState extends State<ProductCard> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           FlatButton(
-                            minWidth: MediaQuery.of(context).size.width / 3.0,
+                            minWidth: widget.width / 3.0,
                             color: kButtonColor,
                             textColor: kBtnTxtColor,
                             padding: EdgeInsets.all(8.0),
                             splashColor: Colors.blueAccent,
                             onPressed: () {
                               setState(() {
-                                cart_num--;
+                                _cartNum -= widget.incVal;
                               });
                             },
                             child: Text(
@@ -138,18 +138,18 @@ class _ProductCardState extends State<ProductCard> {
                             // width: MediaQuery.of(context).size.width / 4.0,
                             alignment: Alignment.center,
                             child: Text(
-                              cart_num.toString(),
+                              _cartNum.toString(),
                             ),
                           ),
                           FlatButton(
-                            minWidth: MediaQuery.of(context).size.width / 3.0,
+                            minWidth: widget.width / 3.0,
                             color: kButtonColor,
                             textColor: kBtnTxtColor,
                             padding: EdgeInsets.all(8.0),
                             splashColor: Colors.blueAccent,
                             onPressed: () {
                               setState(() {
-                                cart_num++;
+                                _cartNum += widget.incVal;
                               });
                             },
                             child: Text(

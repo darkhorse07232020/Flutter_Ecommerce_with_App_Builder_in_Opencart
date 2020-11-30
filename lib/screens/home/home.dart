@@ -7,6 +7,7 @@ import 'package:shop_app/screens/home/component/categories_top.dart';
 import 'package:shop_app/screens/home/component/products_recent.dart';
 
 import 'component/banners_countdown.dart';
+import 'component/products_grid.dart';
 import 'component/products_horizontal.dart';
 import 'component/products_square.dart';
 
@@ -57,6 +58,12 @@ class HomeTab extends StatelessWidget {
               break;
             case 'products_horizontal':
               child = ProductsHorizontal(
+                title: homeScreenVariable.elements[index]['heading'],
+                products: homeScreenVariable.elements[index]['data'],
+              );
+              break;
+            case 'products_grid':
+              child = ProductsGrid(
                 title: homeScreenVariable.elements[index]['heading'],
                 products: homeScreenVariable.elements[index]['data'],
               );

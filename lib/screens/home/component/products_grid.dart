@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/components/product_card.dart';
 
-class ProductSquare extends StatelessWidget {
+class ProductsGrid extends StatelessWidget {
   final dynamic products;
   final String title;
-  const ProductSquare({Key key, this.products, this.title}) : super(key: key);
+  const ProductsGrid({Key key, this.products, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,28 +20,25 @@ class ProductSquare extends StatelessWidget {
                 )
               : Container(),
           Container(
-            child: ListView.builder(
+            child: GridView.builder(
+              gridDelegate:
+                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
               padding: EdgeInsets.all(0),
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: products.length,
               itemBuilder: (context, index) {
-                // return Container(
-                //   width: MediaQuery.of(context).size.width,
-                //   color: Colors.white,
-                //   margin: EdgeInsets.all(5),
-                //   child: Image.network(
-                //     products[index]['src'],
-                //     fit: products[index]['image_contentMode'] ==
-                //             'scaleAspectFill'
-                //         ? BoxFit.cover
-                //         : BoxFit.fitWidth,
-                //   ),
-                // );
-                return ProductCard(
-                  incVal: 1,
+                return Container(
                   width: MediaQuery.of(context).size.width,
-                  product: products[index],
+                  color: Colors.white,
+                  margin: EdgeInsets.all(5),
+                  child: Image.network(
+                    products[index]['src'],
+                    fit: products[index]['image_contentMode'] ==
+                            'scaleAspectFill'
+                        ? BoxFit.cover
+                        : BoxFit.fitWidth,
+                  ),
                 );
               },
             ),

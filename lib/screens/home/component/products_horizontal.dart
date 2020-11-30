@@ -1,26 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/components/product_card.dart';
 
 class ProductsHorizontal extends StatelessWidget {
-  final categories;
+  final products;
+  final String title;
 
-  const ProductsHorizontal({Key key, this.categories}) : super(key: key);
+  const ProductsHorizontal({Key key, this.products, this.title})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(0),
-      child: Container(
-        height: 100,
-        child: ListView.builder(
-          padding: EdgeInsets.all(0),
-          scrollDirection: Axis.horizontal,
-          shrinkWrap: true,
-          itemCount: categories.length,
-          itemBuilder: (context, index) => CategoryCard(
-            image: categories[index]["image_src"],
-            press: () {},
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          title.length > 0
+              ? Center(
+                  child: Text(
+                    title.toUpperCase(),
+                    style: TextStyle(fontSize: 20),
+                  ),
+                )
+              : Container(),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.45,
+            child: ListView.builder(
+              padding: EdgeInsets.all(0),
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: products.length,
+              itemBuilder: (context, index) => ProductCard(
+                incVal: 0,
+                width: MediaQuery.of(context).size.width / 2.5,
+                product: products[index],
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
