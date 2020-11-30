@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/components/product_card.dart';
 
 class ProductsGrid extends StatelessWidget {
   final dynamic products;
@@ -21,23 +22,24 @@ class ProductsGrid extends StatelessWidget {
               : Container(),
           Container(
             child: GridView.builder(
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: MediaQuery.of(context).size.width /
+                    (MediaQuery.of(context).size.height),
+              ),
               padding: EdgeInsets.all(0),
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemCount: products.length,
               itemBuilder: (context, index) {
                 return Container(
-                  width: MediaQuery.of(context).size.width,
+                  // width: MediaQuery.of(context).size.width,
                   color: Colors.white,
                   margin: EdgeInsets.all(5),
-                  child: Image.network(
-                    products[index]['src'],
-                    fit: products[index]['image_contentMode'] ==
-                            'scaleAspectFill'
-                        ? BoxFit.cover
-                        : BoxFit.fitWidth,
+                  child: ProductCard(
+                    product: products[index],
+                    width: MediaQuery.of(context).size.width,
+                    incVal: 0,
                   ),
                 );
               },
