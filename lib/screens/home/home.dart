@@ -7,6 +7,7 @@ import 'package:shop_app/screens/home/component/categories_top.dart';
 import 'package:shop_app/screens/home/component/products_recent.dart';
 
 import 'component/banners_countdown.dart';
+import 'component/products_square.dart';
 
 class HomeTab extends StatelessWidget {
   @override
@@ -47,8 +48,17 @@ class HomeTab extends StatelessWidget {
                 banner: homeScreenVariable.elements[index]['data'],
               );
               break;
-            case 'products_recent':
-              child = Container();
+            case 'products_square':
+              child = ProductSquare(
+                title: homeScreenVariable.elements[index]['heading'],
+                products: homeScreenVariable.elements[index]['data'],
+              );
+              break;
+            case 'products_horizontal':
+              child = ProductHorizontal(
+                title: homeScreenVariable.elements[index]['heading'],
+                products: homeScreenVariable.elements[index]['data'],
+              );
               break;
             default:
               child = Container();
