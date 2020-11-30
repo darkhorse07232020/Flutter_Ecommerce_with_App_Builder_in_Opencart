@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CategoriesTop extends StatelessWidget {
+class ProductsHorizontal extends StatelessWidget {
   final categories;
 
-  const CategoriesTop({Key key, this.categories}) : super(key: key);
+  const ProductsHorizontal({Key key, this.categories}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

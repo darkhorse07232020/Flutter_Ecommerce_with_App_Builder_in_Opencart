@@ -14,7 +14,7 @@ class BannerGrid extends StatelessWidget {
           title.length > 0
               ? Center(
                   child: Text(
-                    title,
+                    title.toUpperCase(),
                     style: TextStyle(fontSize: 20),
                   ),
                 )
