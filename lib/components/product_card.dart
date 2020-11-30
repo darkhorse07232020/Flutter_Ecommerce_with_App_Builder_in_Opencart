@@ -60,8 +60,8 @@ class _ProductCardState extends State<ProductCard> {
                         widget.product['src'],
                         fit: widget.product['image_contentMode'] ==
                                 'scaleAspectFill'
-                            ? BoxFit.cover
-                            : BoxFit.fitWidth,
+                            ? BoxFit.fill
+                            : BoxFit.contain,
                       ),
                     ),
                   ),

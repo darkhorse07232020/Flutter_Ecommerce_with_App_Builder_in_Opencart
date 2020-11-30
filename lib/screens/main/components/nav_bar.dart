@@ -45,6 +45,11 @@ class NavBar extends StatelessWidget {
                 DrawerItem(icon: Icons.contacts, text: 'Contact Us'),
                 ExpandItem(
                   icon: Icons.monetization_on,
+                  title: 'Language(s)',
+                  subMenu: homeScreenVariable.languages['lang_list'],
+                ),
+                ExpandItem(
+                  icon: Icons.monetization_on,
                   title: 'Currency(s)',
                   subMenu: homeScreenVariable.currencies['currency_list'],
                 ),

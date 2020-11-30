@@ -130,7 +130,7 @@ class _CountdownCardState extends State<CountdownCard> {
           image: NetworkImage(widget.image),
           fit: widget.imageMode == 'scaleAspectFill'
               ? BoxFit.fill
-              : BoxFit.cover,
+              : BoxFit.contain,
         ),
       ),
       child: Align(

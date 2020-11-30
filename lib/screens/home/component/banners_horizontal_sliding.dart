@@ -29,14 +29,14 @@ class BannersHorizontalSliding extends StatelessWidget {
               itemCount: banner.length,
               itemBuilder: (context, index) {
                 return Container(
-                  width: 400,
+                  width: MediaQuery.of(context).size.width * 0.8,
                   color: Colors.white,
                   margin: EdgeInsets.symmetric(horizontal: 5),
                   child: Image.network(
                     banner[index]['src'],
                     fit: banner[index]['image_contentMode'] == 'scaleAspectFill'
-                        ? BoxFit.cover
-                        : BoxFit.fitWidth,
+                        ? BoxFit.fill
+                        : BoxFit.contain,
                   ),
                 );
               },

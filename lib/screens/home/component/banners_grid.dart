@@ -35,8 +35,8 @@ class BannerGrid extends StatelessWidget {
                   child: Image.network(
                     banner[index]['src'],
                     fit: banner[index]['image_contentMode'] == 'scaleAspectFill'
-                        ? BoxFit.cover
-                        : BoxFit.fitWidth,
+                        ? BoxFit.fill
+                        : BoxFit.contain,
                   ),
                 );
               },
