@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/drawer_item.dart';
 
-import 'drawer_item_check.dart';
+import 'drawer_item_lang.dart';
 
 class ExpandItem extends StatefulWidget {
   final IconData icon;
@@ -63,9 +63,8 @@ class _ExpandItemState extends State<ExpandItem> {
                 itemCount: widget.subMenu.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  return (widget.title == 'languages' ||
-                          widget.title == 'currencies')
-                      ? DrawerItemWithCheck(
+                  return (widget.title == 'Language(s)')
+                      ? DrawerItemWithLang(
                           text: widget.subMenu[index]['name'],
                           horizonPadding: 20,
                         )

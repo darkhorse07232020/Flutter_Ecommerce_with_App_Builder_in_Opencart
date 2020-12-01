@@ -3,8 +3,6 @@ import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/HomeScreen.dart';
 import 'package:shop_app/models/TokenData.dart';
 import 'package:shop_app/screens/cart/cart_screen.dart';
-import 'package:shop_app/screens/main/components/home_app_bar.dart';
-import 'package:shop_app/screens/main/components/nav_bar.dart';
 import 'package:shop_app/screens/main/loading_screen.dart';
 import 'package:shop_app/screens/categories/categories.dart';
 import 'package:shop_app/screens/search/search.dart';
@@ -82,8 +80,6 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HommeAppBar(),
-      drawer: NavBar(),
       body: _currentPage,
       bottomNavigationBar: _bottomNavBar(),
       backgroundColor: kBGColor,
