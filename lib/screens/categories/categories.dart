@@ -11,7 +11,6 @@ class CategoriesTab extends StatelessWidget {
     return Container(
       child: ListView.builder(
         padding: EdgeInsets.all(0),
-        physics: const NeverScrollableScrollPhysics(),
         itemCount: homeScreenVariable.menuCategories.length,
         shrinkWrap: true,
         itemBuilder: (context, index) {
