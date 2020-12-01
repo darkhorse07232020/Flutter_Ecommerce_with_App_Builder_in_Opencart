@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/components/expand_menu.dart';
+import 'package:shop_app/screens/home/component/left_nav_bar/expand_menu.dart';
 import 'package:shop_app/models/HomeScreen.dart';
-import 'package:shop_app/components/drawer_item.dart';
+import 'package:shop_app/screens/home/component/left_nav_bar/drawer_item.dart';
 
 class CategoriesTab extends StatelessWidget {
   const CategoriesTab({Key key}) : super(key: key);

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/HomeScreen.dart';
-import 'package:shop_app/screens/home/component/banners_grid.dart';
-import 'package:shop_app/screens/home/component/banners_horizontal_sliding.dart';
-import 'package:shop_app/screens/home/component/banners_square.dart';
-import 'package:shop_app/screens/home/component/categories_top.dart';
-import 'package:shop_app/screens/home/component/products_recent.dart';
+import 'package:shop_app/screens/components/banners_grid.dart';
+import 'package:shop_app/screens/components/banners_horizontal_sliding.dart';
+import 'package:shop_app/screens/components/banners_square.dart';
+import 'package:shop_app/screens/components/categories_top.dart';
+import 'package:shop_app/screens/components/products_recent.dart';
 import 'package:shop_app/screens/home/component/home_app_bar.dart';
-import 'package:shop_app/components/nav_bar.dart';
+import 'package:shop_app/screens/home/component/left_nav_bar/nav_bar.dart';
 
-import 'component/banners_countdown.dart';
-import 'component/products_grid.dart';
-import 'component/products_horizontal.dart';
-import 'component/products_square.dart';
+import '../components/banners_countdown.dart';
+import '../components/products_grid.dart';
+import '../components/products_horizontal.dart';
+import '../components/products_square.dart';
 
 class HomeTab extends StatelessWidget {
   @override

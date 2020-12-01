@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/components/drawer_item.dart';
+import 'package:shop_app/screens/home/component/left_nav_bar/drawer_item.dart';
 
 import 'drawer_item_lang.dart';
 
