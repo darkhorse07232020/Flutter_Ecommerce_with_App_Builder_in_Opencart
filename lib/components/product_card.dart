@@ -49,64 +49,67 @@ class _ProductCardState extends State<ProductCard> {
             color: Colors.white70,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AspectRatio(
-                  aspectRatio: 1.02,
-                  child: Container(
-                    padding: EdgeInsets.all(0),
-                    child: Hero(
-                      tag: widget.product['id'].toString(),
-                      child: Image.network(
-                        widget.product['src'],
-                        fit: widget.product['image_contentMode'] ==
-                                'scaleAspectFill'
-                            ? BoxFit.fill
-                            : BoxFit.contain,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
                   children: [
-                    Container(
-                      width: widget.width * 0.8,
-                      padding: EdgeInsets.only(left: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "${widget.product['name']}",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 3,
+                    AspectRatio(
+                      aspectRatio: 1.02,
+                      child: Container(
+                        padding: EdgeInsets.all(0),
+                        child: Hero(
+                          tag: widget.product['id'].toString(),
+                          child: Image.network(
+                            widget.product['src'],
+                            fit: widget.product['image_contentMode'] ==
+                                    'scaleAspectFill'
+                                ? BoxFit.fill
+                                : BoxFit.contain,
                           ),
-                          Text(
-                            "${widget.product['price']}",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: kPrimaryColor,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
-                    InkWell(
-                      borderRadius: BorderRadius.circular(50),
-                      onTap: () {},
-                      child: Container(
-                        height: 28,
-                        width: 28,
-                        child: widget.product['is_in_wishlist']
-                            ? Icon(Icons.favorite)
-                            : Icon(Icons.favorite_outline),
-                      ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: widget.width * 0.7,
+                          padding: EdgeInsets.only(left: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${widget.product['name']}",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                ),
+                                overflow: TextOverflow.visible,
+                                // maxLines: 2,
+                              ),
+                              Text(
+                                "${widget.product['price']}",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: kPrimaryColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: Container(
+                            height: 28,
+                            width: 28,
+                            child: widget.product['is_in_wishlist']
+                                ? Icon(Icons.favorite)
+                                : Icon(Icons.favorite_outline),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

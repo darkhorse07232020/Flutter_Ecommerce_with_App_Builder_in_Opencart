@@ -23,7 +23,7 @@ class ProductsHorizontal extends StatelessWidget {
                 )
               : Container(),
           Container(
-            height: MediaQuery.of(context).size.height * 0.55,
+            height: MediaQuery.of(context).size.width * 0.9,
             child: ListView.builder(
               padding: EdgeInsets.all(0),
               scrollDirection: Axis.horizontal,
@@ -37,37 +37,6 @@ class ProductsHorizontal extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class CategoryCard extends StatelessWidget {
-  const CategoryCard({
-    Key key,
-    @required this.image,
-    @required this.press,
-  }) : super(key: key);
-
-  final String image;
-  final GestureTapCallback press;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: press,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 5),
-        height: 100,
-        width: 100,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Image.network(
-          image,
-          fit: BoxFit.contain,
-        ),
       ),
     );
   }

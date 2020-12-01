@@ -96,6 +96,39 @@ class DrawerItem extends StatelessWidget {
   }
 }
 
+class DrawerItemWithCheck extends StatelessWidget {
+  final IconData icon;
+  final String text;
+  final double horizonPadding;
+  final GestureTapCallback onTap;
+
+  const DrawerItemWithCheck(
+      {Key key, this.icon, this.text, this.horizonPadding = 10, this.onTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: horizonPadding, vertical: 10),
+        child: Row(
+          children: <Widget>[
+            Icon(icon),
+            Padding(
+              padding: EdgeInsets.only(left: 8.0),
+              child: Text(
+                text,
+                style: TextStyle(fontSize: 14),
+              ),
+            )
+          ],
+        ),
+      ),
+      onTap: onTap,
+    );
+  }
+}
+
 class ExpandItem extends StatefulWidget {
   final IconData icon;
   final String title;
@@ -156,10 +189,16 @@ class _ExpandItemState extends State<ExpandItem> {
                 itemCount: widget.subMenu.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  return DrawerItem(
-                    text: widget.subMenu[index]['name'],
-                    horizonPadding: 20,
-                  );
+                  return (widget.title == 'languages' ||
+                          widget.title == 'currencies')
+                      ? DrawerItemWithCheck(
+                          text: widget.subMenu[index]['name'],
+                          horizonPadding: 20,
+                        )
+                      : DrawerItem(
+                          text: widget.subMenu[index]['name'],
+                          horizonPadding: 20,
+                        );
                 },
               )
             : Container(),
