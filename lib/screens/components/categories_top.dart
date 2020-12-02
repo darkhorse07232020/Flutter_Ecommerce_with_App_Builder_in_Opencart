@@ -20,7 +20,6 @@ class CategoriesTop extends StatelessWidget {
           itemBuilder: (context, index) => CategoryCard(
             image: categories[index]["image_src"],
             press: () {
-              print(ProductScreen.routeName);
               Navigator.pushNamed(
                 context,
                 ProductScreen.routeName,

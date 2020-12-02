@@ -7,15 +7,13 @@ import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/TokenData.dart';
 
 Future<bool> getHomeData() async {
+  var map = new Map<String, dynamic>();
+  map['id_currency'] = 'USD';
+  map['iso_code'] = 'en';
   final response = await http.post(
     'https://easycartapp.com/index.php?route=webservices/api&method=appGetHome&version=1.6&api_token=' +
         apiTokenKey,
-    body: jsonEncode(
-      <String, String>{
-        'id_currency': 'USD',
-        'iso_code': 'en',
-      },
-    ),
+    body: map,
   );
   Map<String, dynamic> responseJson = json.decode(response.body);
   if (response.statusCode == 200) {

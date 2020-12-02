@@ -4,7 +4,11 @@ import 'package:shop_app/components/product_card.dart';
 class ProductSquare extends StatelessWidget {
   final dynamic products;
   final String title;
-  const ProductSquare({Key key, this.products, this.title}) : super(key: key);
+  const ProductSquare({
+    Key key,
+    @required this.products,
+    this.title = '',
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

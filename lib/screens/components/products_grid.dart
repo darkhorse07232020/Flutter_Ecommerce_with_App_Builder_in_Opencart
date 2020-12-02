@@ -4,7 +4,11 @@ import 'package:shop_app/components/product_card.dart';
 class ProductsGrid extends StatelessWidget {
   final dynamic products;
   final String title;
-  const ProductsGrid({Key key, this.products, this.title}) : super(key: key);
+  const ProductsGrid({
+    Key key,
+    @required this.products,
+    this.title = '',
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,8 @@ class ProductsGrid extends StatelessWidget {
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: MediaQuery.of(context).size.width /
-                    (MediaQuery.of(context).size.height),
+                    (MediaQuery.of(context).size.width) /
+                    2.0,
               ),
               padding: EdgeInsets.all(0),
               physics: const NeverScrollableScrollPhysics(),
@@ -33,12 +38,12 @@ class ProductsGrid extends StatelessWidget {
               itemCount: products.length,
               itemBuilder: (context, index) {
                 return Container(
-                  // width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.width,
                   color: Colors.white,
                   margin: EdgeInsets.all(5),
                   child: ProductCard(
                     product: products[index],
-                    width: MediaQuery.of(context).size.width,
+                    width: MediaQuery.of(context).size.width / 2.0,
                     incVal: 0,
                   ),
                 );
