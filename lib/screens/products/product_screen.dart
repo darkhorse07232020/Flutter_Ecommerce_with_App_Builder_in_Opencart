@@ -1,0 +1,120 @@
+import 'package:flutter/material.dart';
+import 'package:shop_app/constants.dart';
+import 'package:shop_app/screens/components/products_grid.dart';
+import 'package:shop_app/screens/components/products_square.dart';
+
+import 'components/product_app_bar.dart';
+
+class ProductScreen extends StatefulWidget {
+  static String routeName = "/products";
+
+  const ProductScreen({Key key}) : super(key: key);
+
+  @override
+  _ProductScreenState createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
+  bool isGridView;
+
+  Future<void> initialize() async {
+    await getHomeData();
+  }
+
+  @override
+  void initState() {
+    isGridView = true;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final ProductsArguments args = ModalRoute.of(context).settings.arguments;
+    return Scaffold(
+      appBar: ProductAppBar(args.product['name']),
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      isGridView = !isGridView;
+                    });
+                  },
+                  child: Container(
+                    width: 50,
+                    height: 30,
+                    color: kSecondaryColor,
+                    child: Center(
+                      child: isGridView
+                          ? Icon(Icons.view_list, color: Colors.white)
+                          : Icon(Icons.laptop_windows, color: Colors.white),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: (MediaQuery.of(context).size.width - 90) / 2.0,
+                  height: 30,
+                  color: kSecondaryColor,
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.sort, color: Colors.white),
+                        SizedBox(width: 5),
+                        Text('Sort', style: TextStyle(color: Colors.white)),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  width: (MediaQuery.of(context).size.width - 90) / 2.0,
+                  height: 30,
+                  color: kSecondaryColor,
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.filter_alt_outlined, color: Colors.white),
+                        SizedBox(width: 2),
+                        Text('Filter', style: TextStyle(color: Colors.white)),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Divider(
+            height: 0,
+            color: Colors.black87,
+          ),
+          SingleChildScrollView(
+            child: isGridView
+                ? FutureBuilder(
+                    future: initialize(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return ProductsGrid();
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    },
+                  )
+                : ProductSquare(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProductsArguments {
+  final dynamic product;
+
+  ProductsArguments({@required this.product});
+}

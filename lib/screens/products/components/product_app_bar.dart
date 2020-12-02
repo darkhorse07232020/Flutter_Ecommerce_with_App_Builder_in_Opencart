@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
-import 'package:shop_app/models/HomeScreen.dart';
 
-class HomeAppBar extends PreferredSize {
+class ProductAppBar extends PreferredSize {
+  final String title;
+
+  ProductAppBar(this.title);
+
   @override
   // AppBar().preferredSize.height provide us the height that appy on our app bar
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
@@ -14,9 +17,10 @@ class HomeAppBar extends PreferredSize {
         color: kBtnTxtColor,
       ),
       backgroundColor: kPrimaryColor,
-      title: homeScreenVariable.displayLogoOnTitleBar == 1
-          ? Image.network(homeScreenVariable.titleBarLogoUrl)
-          : Container(),
+      title: Text(
+        title,
+        style: TextStyle(color: kBtnTxtColor),
+      ),
       actions: [
         IconButton(
           icon: Icon(Icons.search),

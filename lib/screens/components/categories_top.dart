@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/screens/products/product_screen.dart';
 
 class CategoriesTop extends StatelessWidget {
   final categories;
@@ -18,7 +19,14 @@ class CategoriesTop extends StatelessWidget {
           itemCount: categories.length,
           itemBuilder: (context, index) => CategoryCard(
             image: categories[index]["image_src"],
-            press: () {},
+            press: () {
+              print(ProductScreen.routeName);
+              Navigator.pushNamed(
+                context,
+                ProductScreen.routeName,
+                arguments: ProductsArguments(product: categories[index]),
+              );
+            },
           ),
         ),
       ),

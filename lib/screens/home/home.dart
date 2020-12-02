@@ -17,7 +17,7 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HommeAppBar(),
+      appBar: HomeAppBar(),
       drawer: NavBar(),
       body: ListView.builder(
         padding: EdgeInsets.all(0),
