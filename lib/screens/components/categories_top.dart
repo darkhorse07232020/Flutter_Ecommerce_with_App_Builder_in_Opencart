@@ -23,7 +23,10 @@ class CategoriesTop extends StatelessWidget {
               Navigator.pushNamed(
                 context,
                 ProductScreen.routeName,
-                arguments: ProductsArguments(product: categories[index]),
+                arguments: ProductsArguments(
+                  id: categories[index]['id'].toString(),
+                  title: categories[index]['name'],
+                ),
               );
             },
           ),

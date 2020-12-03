@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/HomeScreen.dart';
+import 'package:shop_app/screens/products/product_screen.dart';
 
 class BannerCountdown extends StatelessWidget {
   final dynamic banner;
@@ -32,12 +33,24 @@ class BannerCountdown extends StatelessWidget {
                 if (currentTime.length < banner.length) {
                   currentTime.add(int.parse(banner[index]['upto_time']));
                 }
-                return CountdownCard(
-                  index: index,
-                  image: banner[index]['src'],
-                  imageMode: banner[index]['image_contentMode'],
-                  bgColor: banner[index]['timer_background_color'],
-                  textColor: banner[index]['timer_text_color'],
+                return InkWell(
+                  child: CountdownCard(
+                    index: index,
+                    image: banner[index]['src'],
+                    imageMode: banner[index]['image_contentMode'],
+                    bgColor: banner[index]['timer_background_color'],
+                    textColor: banner[index]['timer_text_color'],
+                  ),
+                  onTap: banner[index]['click_target'] == 'category'
+                      ? () => Navigator.pushNamed(
+                            context,
+                            ProductScreen.routeName,
+                            arguments: ProductsArguments(
+                              id: banner[index]['target_id'].toString(),
+                              title: banner[index]['title'],
+                            ),
+                          )
+                      : () {},
                 );
               },
             ),

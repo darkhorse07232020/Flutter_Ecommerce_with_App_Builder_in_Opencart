@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/screens/products/product_screen.dart';
 
 class BannersHorizontalSliding extends StatelessWidget {
   final dynamic banner;
@@ -28,16 +29,29 @@ class BannersHorizontalSliding extends StatelessWidget {
               shrinkWrap: true,
               itemCount: banner.length,
               itemBuilder: (context, index) {
-                return Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  color: Colors.white,
-                  margin: EdgeInsets.symmetric(horizontal: 5),
-                  child: Image.network(
-                    banner[index]['src'],
-                    fit: banner[index]['image_contentMode'] == 'scaleAspectFill'
-                        ? BoxFit.fill
-                        : BoxFit.contain,
+                return InkWell(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    color: Colors.white,
+                    margin: EdgeInsets.symmetric(horizontal: 5),
+                    child: Image.network(
+                      banner[index]['src'],
+                      fit: banner[index]['image_contentMode'] ==
+                              'scaleAspectFill'
+                          ? BoxFit.fill
+                          : BoxFit.contain,
+                    ),
                   ),
+                  onTap: banner[index]['click_target'] == 'category'
+                      ? () => Navigator.pushNamed(
+                            context,
+                            ProductScreen.routeName,
+                            arguments: ProductsArguments(
+                              id: banner[index]['target_id'].toString(),
+                              title: banner[index]['title'],
+                            ),
+                          )
+                      : () {},
                 );
               },
             ),

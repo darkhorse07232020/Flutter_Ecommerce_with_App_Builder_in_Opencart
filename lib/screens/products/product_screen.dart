@@ -34,7 +34,7 @@ class _ProductScreenState extends State<ProductScreen> {
   Widget build(BuildContext context) {
     final ProductsArguments args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      appBar: ProductAppBar(args.product['name']),
+      appBar: ProductAppBar(args.title),
       body: Container(
         color: kBGColor,
         child: Column(
@@ -102,7 +102,7 @@ class _ProductScreenState extends State<ProductScreen> {
               child: ListView(
                 children: [
                   FutureBuilder(
-                    future: initialize(args.product['id']),
+                    future: initialize(args.id),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         return isGridView
@@ -136,7 +136,8 @@ class _ProductScreenState extends State<ProductScreen> {
 }
 
 class ProductsArguments {
-  final dynamic product;
+  final String id;
+  final String title;
 
-  ProductsArguments({@required this.product});
+  ProductsArguments({@required this.id, @required this.title});
 }

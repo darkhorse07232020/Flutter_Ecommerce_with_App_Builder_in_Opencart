@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/screens/products/product_screen.dart';
 
 class BannerSquare extends StatelessWidget {
   final dynamic banner;
@@ -26,16 +27,29 @@ class BannerSquare extends StatelessWidget {
               shrinkWrap: true,
               itemCount: banner.length,
               itemBuilder: (context, index) {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  color: Colors.white,
-                  margin: EdgeInsets.all(5),
-                  child: Image.network(
-                    banner[index]['src'],
-                    fit: banner[index]['image_contentMode'] == 'scaleAspectFill'
-                        ? BoxFit.fill
-                        : BoxFit.contain,
+                return InkWell(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    color: Colors.white,
+                    margin: EdgeInsets.all(5),
+                    child: Image.network(
+                      banner[index]['src'],
+                      fit: banner[index]['image_contentMode'] ==
+                              'scaleAspectFill'
+                          ? BoxFit.fill
+                          : BoxFit.contain,
+                    ),
                   ),
+                  onTap: banner[index]['click_target'] == 'category'
+                      ? () => Navigator.pushNamed(
+                            context,
+                            ProductScreen.routeName,
+                            arguments: ProductsArguments(
+                              id: banner[index]['target_id'].toString(),
+                              title: '',
+                            ),
+                          )
+                      : () {},
                 );
               },
             ),
