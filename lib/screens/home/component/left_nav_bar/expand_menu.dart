@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/drawer_item.dart';
+import 'package:shop_app/screens/products/product_screen.dart';
 
 import 'drawer_item_lang.dart';
 
@@ -71,6 +72,14 @@ class _ExpandItemState extends State<ExpandItem> {
                       : DrawerItem(
                           text: widget.subMenu[index]['name'],
                           horizonPadding: 20,
+                          onTap: () => Navigator.pushNamed(
+                            context,
+                            ProductScreen.routeName,
+                            arguments: ProductsArguments(
+                              id: widget.subMenu[index]['id'].toString(),
+                              // title: card['title'],
+                            ),
+                          ),
                         );
                 },
               )

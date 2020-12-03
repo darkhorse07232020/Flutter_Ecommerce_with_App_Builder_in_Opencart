@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/expand_menu.dart';
 import 'package:shop_app/models/HomeScreen.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/drawer_item.dart';
+import 'package:shop_app/screens/products/product_screen.dart';
 
 class NavBar extends StatelessWidget {
   @override
@@ -40,7 +41,18 @@ class NavBar extends StatelessWidget {
                             title: card['name'],
                             subMenu: card['second_children'],
                           )
-                        : DrawerItem(icon: Icons.stars, text: card['name']);
+                        : DrawerItem(
+                            icon: Icons.stars,
+                            text: card['name'],
+                            onTap: () => Navigator.pushNamed(
+                              context,
+                              ProductScreen.routeName,
+                              arguments: ProductsArguments(
+                                id: card['id'].toString(),
+                                // title: card['title'],
+                              ),
+                            ),
+                          );
                   },
                 ),
                 Divider(),
