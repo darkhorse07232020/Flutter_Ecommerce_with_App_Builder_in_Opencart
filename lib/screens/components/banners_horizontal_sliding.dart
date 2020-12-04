@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/models/Product.dart';
+import 'package:shop_app/screens/details/details_screen.dart';
 import 'package:shop_app/screens/products/product_screen.dart';
 
 class BannersHorizontalSliding extends StatelessWidget {
@@ -51,7 +53,15 @@ class BannersHorizontalSliding extends StatelessWidget {
                               title: banner[index]['title'],
                             ),
                           )
-                      : () {},
+                      : (banner[index]['click_target'] == 'product'
+                          ? () => Navigator.pushNamed(
+                                context,
+                                DetailsScreen.routeName,
+                                arguments: ProductDetailsArguments(
+                                  product: demoProducts[0],
+                                ),
+                              )
+                          : () {}),
                 );
               },
             ),

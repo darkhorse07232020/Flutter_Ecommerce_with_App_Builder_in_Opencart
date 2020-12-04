@@ -3,6 +3,10 @@ import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/HomeScreen.dart';
 
 class HomeAppBar extends PreferredSize {
+  final Widget title;
+
+  HomeAppBar({this.title});
+
   @override
   // AppBar().preferredSize.height provide us the height that appy on our app bar
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
@@ -14,9 +18,7 @@ class HomeAppBar extends PreferredSize {
         color: kBtnTxtColor,
       ),
       backgroundColor: kPrimaryColor,
-      title: homeScreenVariable.displayLogoOnTitleBar == 1
-          ? Image.network(homeScreenVariable.titleBarLogoUrl)
-          : Container(),
+      title: title,
       actions: [
         IconButton(
           icon: Icon(Icons.search),

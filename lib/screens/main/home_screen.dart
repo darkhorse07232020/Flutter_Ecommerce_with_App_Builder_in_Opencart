@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
-import 'package:shop_app/models/HomeScreen.dart';
 import 'package:shop_app/models/TokenData.dart';
 import 'package:shop_app/screens/cart/cart_screen.dart';
 import 'package:shop_app/screens/main/loading_screen.dart';
@@ -21,7 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> initialize() async {
     if (isLoaded) return;
     await getAPItoken();
-    await getHomeData();
     isLoaded = true;
   }
 

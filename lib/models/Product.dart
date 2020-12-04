@@ -1,6 +1,48 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:shop_app/models/TokenData.dart';
+
+// Future<bool> getCategoryData(String id) async {
+//   var map = new Map<String, dynamic>();
+//   map['id_currency'] = 'USD';
+//   map['iso_code'] = 'en';
+//   map['product_id'] = id;
+//   final response = await http.post(
+//     'https://easycartapp.com/index.php?route=webservices/api&method=appGetProductDetails&version=1.6&api_token=' +
+//         apiTokenKey,
+//     body: map,
+//   );
+//   Map<String, dynamic> responseJson = json.decode(response.body);
+//   if (response.statusCode == 200) {
+//     categoryVariable = Product.fromJson(responseJson['fproducts']);
+//   } else {
+//     throw Exception('Failed to load Response');
+//   }
+//   return true;
+// }
 
 class Product {
+  //   final int id;
+  // final int quantity;
+  // final int allowOutOfStock;
+  // final String name;
+  // final String price;
+  // final String discountPrice;
+  // final String discountPercentage;
+  // final int cartQuantity;
+  // final String hasAttributes;
+  // final String displayWriteReviews;
+  // final String displayReadReviews;
+  // final int numberOfReviews;
+  // final int averagecomments;
+  // final int minimalQuantity;
+  // final List<dynamic> images;
+  // final List<dynamic> options;
+  // final bool isInWishlist;
+
   final int id;
   final String title, description;
   final List<String> images;

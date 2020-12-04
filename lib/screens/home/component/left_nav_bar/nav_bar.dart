@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/screens/details/details_screen.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/expand_menu.dart';
 import 'package:shop_app/models/HomeScreen.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/drawer_item.dart';
@@ -67,7 +68,10 @@ class NavBar extends StatelessWidget {
                   title: 'Currency(s)',
                   subMenu: homeScreenVariable.currencies['currency_list'],
                 ),
-                DrawerItem(icon: Icons.logout, text: 'Logout'),
+                DrawerItem(
+                  icon: Icons.logout,
+                  text: 'Logout',
+                ),
               ],
             ),
           ),
