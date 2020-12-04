@@ -5,12 +5,14 @@ class DrawerItemWithLang extends StatefulWidget {
   final dynamic item;
   final double horizonPadding;
   final bool isChecked;
+  final String field;
   final Function(String) onTap;
 
   const DrawerItemWithLang({
     Key key,
     this.icon,
     this.item,
+    this.field,
     this.horizonPadding = 10,
     this.onTap,
     this.isChecked,
@@ -42,7 +44,7 @@ class _DrawerItemWithLangState extends State<DrawerItemWithLang> {
         ),
       ),
       onTap: () {
-        widget.onTap(widget.item['iso_code']);
+        widget.onTap(widget.item[widget.field]);
       },
     );
   }

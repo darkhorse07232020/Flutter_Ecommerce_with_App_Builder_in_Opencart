@@ -5,28 +5,28 @@ import 'package:shop_app/screens/main/home_screen.dart';
 
 import 'drawer_item_lang.dart';
 
-class LangMenu extends StatefulWidget {
+class CurrencyMenu extends StatefulWidget {
   final dynamic subMenu;
 
-  const LangMenu({
+  const CurrencyMenu({
     Key key,
     this.subMenu,
   }) : super(key: key);
 
   @override
-  _LangMenuState createState() => _LangMenuState();
+  _CurrencyMenuState createState() => _CurrencyMenuState();
 }
 
-class _LangMenuState extends State<LangMenu> {
+class _CurrencyMenuState extends State<CurrencyMenu> {
   bool expand = false;
-  String currentLang;
+  String currentCurrency;
 
   void getCurrentState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     //Return String
-    String isoCode = prefs.getString('ISO_Code') ?? 'en-gb';
+    String idCurrency = prefs.getString('Currency') ?? 'USD';
     setState(() {
-      currentLang = isoCode;
+      currentCurrency = idCurrency;
     });
   }
 
@@ -60,8 +60,8 @@ class _LangMenuState extends State<LangMenu> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 DrawerItem(
-                  icon: Icons.language,
-                  text: 'Language(s)',
+                  icon: Icons.monetization_on,
+                  text: 'Currency(s)',
                 ),
                 Icon(expand
                     ? Icons.keyboard_arrow_up
@@ -79,13 +79,14 @@ class _LangMenuState extends State<LangMenu> {
                 itemBuilder: (context, index) {
                   return DrawerItemWithLang(
                     item: widget.subMenu[index],
+                    field: 'id_currency',
                     horizonPadding: 20,
-                    field: 'iso_code',
-                    isChecked: currentLang == widget.subMenu[index]['iso_code'],
+                    isChecked:
+                        currentCurrency == widget.subMenu[index]['id_currency'],
                     onTap: (String val) {
                       setState(() {
-                        currentLang = val;
-                        setData('ISO_Code', val);
+                        currentCurrency = val;
+                        setData('Currency', val);
                       });
                       Navigator.pushNamed(
                         context,
