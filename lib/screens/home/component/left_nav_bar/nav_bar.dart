@@ -3,6 +3,7 @@ import 'package:shop_app/screens/details/details_screen.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/expand_menu.dart';
 import 'package:shop_app/models/HomeScreen.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/drawer_item.dart';
+import 'package:shop_app/screens/home/component/left_nav_bar/lang_menu.dart';
 import 'package:shop_app/screens/products/product_screen.dart';
 
 class NavBar extends StatelessWidget {
@@ -58,11 +59,7 @@ class NavBar extends StatelessWidget {
                 ),
                 Divider(),
                 DrawerItem(icon: Icons.contacts, text: 'Contact Us'),
-                ExpandItem(
-                  icon: Icons.language,
-                  title: 'Language(s)',
-                  subMenu: homeScreenVariable.languages['lang_list'],
-                ),
+                LangMenu(subMenu: homeScreenVariable.languages['lang_list']),
                 ExpandItem(
                   icon: Icons.monetization_on,
                   title: 'Currency(s)',

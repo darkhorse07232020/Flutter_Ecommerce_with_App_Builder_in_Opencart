@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/HomeScreen.dart';
 import 'package:shop_app/screens/components/banners_grid.dart';
 import 'package:shop_app/screens/components/banners_horizontal_sliding.dart';
@@ -99,6 +100,7 @@ class _HomeTabState extends State<HomeTab> {
                     break;
                 }
                 return Container(
+                  color: kBGColor,
                   padding: EdgeInsets.only(top: 10),
                   child: child,
                 );

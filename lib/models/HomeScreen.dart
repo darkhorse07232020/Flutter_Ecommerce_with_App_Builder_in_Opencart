@@ -3,13 +3,20 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/TokenData.dart';
 
 Future<bool> getHomeData() async {
+  // Read sharedpreference data
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  //Return String
+  String idCurrency = prefs.getString('Currency') ?? 'USD';
+  String isoCode = prefs.getString('ISO_Code') ?? 'zh-hk';
+
   var map = new Map<String, dynamic>();
-  map['id_currency'] = 'USD';
-  map['iso_code'] = 'en';
+  map['id_currency'] = idCurrency;
+  map['iso_code'] = isoCode;
   final response = await http.post(
     'https://easycartapp.com/index.php?route=webservices/api&method=appGetHome&version=1.6&api_token=' +
         apiTokenKey,

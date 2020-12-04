@@ -4,7 +4,7 @@ class DrawerItem extends StatelessWidget {
   final IconData icon;
   final String text;
   final double horizonPadding;
-  final GestureTapCallback onTap;
+  final onTap;
 
   const DrawerItem(
       {Key key, this.icon, this.text, this.horizonPadding = 10, this.onTap})

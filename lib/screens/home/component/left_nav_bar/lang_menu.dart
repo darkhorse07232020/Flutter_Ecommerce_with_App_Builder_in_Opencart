@@ -1,31 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/drawer_item.dart';
-import 'package:shop_app/screens/products/product_screen.dart';
+import 'package:shop_app/screens/main/home_screen.dart';
 
-class ExpandItem extends StatefulWidget {
-  final IconData icon;
-  final String title;
+import 'drawer_item_lang.dart';
+
+class LangMenu extends StatefulWidget {
   final dynamic subMenu;
 
-  const ExpandItem({
+  const LangMenu({
     Key key,
-    this.icon,
-    this.title,
     this.subMenu,
   }) : super(key: key);
 
   @override
-  _ExpandItemState createState() => _ExpandItemState();
+  _LangMenuState createState() => _LangMenuState();
 }
 
-class _ExpandItemState extends State<ExpandItem> {
+class _LangMenuState extends State<LangMenu> {
   bool expand = false;
+  String currentLang;
+
+  void getCurrentState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //Return String
+    String isoCode = prefs.getString('ISO_Code') ?? 'en-gb';
+    setState(() {
+      currentLang = isoCode;
+    });
+  }
+
+  void setData(String key, String data) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(key, data);
+  }
 
   @override
   void initState() {
     setState(() {
       expand = false;
     });
+    getCurrentState();
     super.initState();
   }
 
@@ -45,8 +60,8 @@ class _ExpandItemState extends State<ExpandItem> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 DrawerItem(
-                  icon: widget.icon,
-                  text: widget.title,
+                  icon: Icons.language,
+                  text: 'Language(s)',
                 ),
                 Icon(expand
                     ? Icons.keyboard_arrow_up
@@ -62,17 +77,20 @@ class _ExpandItemState extends State<ExpandItem> {
                 itemCount: widget.subMenu.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  return DrawerItem(
-                    text: widget.subMenu[index]['name'],
+                  return DrawerItemWithLang(
+                    item: widget.subMenu[index],
                     horizonPadding: 20,
-                    onTap: () => Navigator.pushNamed(
-                      context,
-                      ProductScreen.routeName,
-                      arguments: ProductsArguments(
-                        id: widget.subMenu[index]['id'].toString(),
-                        // title: card['title'],
-                      ),
-                    ),
+                    isChecked: currentLang == widget.subMenu[index]['iso_code'],
+                    onTap: (String val) {
+                      setState(() {
+                        currentLang = val;
+                        setData('ISO_Code', val);
+                      });
+                      Navigator.pushNamed(
+                        context,
+                        HomeScreen.routeName,
+                      );
+                    },
                   );
                 },
               )
