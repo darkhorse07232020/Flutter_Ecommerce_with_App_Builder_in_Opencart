@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:shop_app/components/cart_order_btn.dart';
+import 'package:shop_app/components/product_card.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/screens/details/components/details_app_bar.dart';
 
@@ -31,7 +33,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
           if (snapshot.connectionState == ConnectionState.done) {
             return SingleChildScrollView(
               child: Container(
-                height: 2000,
                 color: kBGColor,
                 child: Column(
                   children: [
@@ -78,6 +79,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                             ),
                           ),
+                          SizedBox(height: 2),
                         ],
                       ),
                     ),
@@ -169,8 +171,39 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                             ],
                           ),
-                          Text(productVariable.product['description']),
+                          Html(
+                            data: productVariable.product['description'],
+                          ),
                         ],
+                      ),
+                    ),
+                    Text(
+                      'RELATED PRODUCTS',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    Container(
+                      height: MediaQuery.of(context).size.width * 0.6,
+                      child: ListView.builder(
+                        itemCount: productVariable
+                            .product['related_products']
+                                ['related_products_items']
+                            .length,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            height: MediaQuery.of(context).size.width,
+                            color: Colors.white,
+                            margin: EdgeInsets.all(5),
+                            child: ProductCard(
+                              product:
+                                  productVariable.product['related_products']
+                                      ['related_products_items'][index],
+                              incVal: 0,
+                              isCartButton: false,
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],

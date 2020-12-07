@@ -14,11 +14,13 @@ class ProductCard extends StatefulWidget {
     this.aspectRetio = 1.02,
     @required this.product,
     @required this.incVal,
+    this.isCartButton = true,
   }) : super(key: key);
 
   final double width, aspectRetio;
   final dynamic product;
   final int incVal;
+  final bool isCartButton;
 
   @override
   _ProductCardState createState() => _ProductCardState();
@@ -40,11 +42,6 @@ class _ProductCardState extends State<ProductCard> {
       child: SizedBox(
         width: widget.width,
         child: GestureDetector(
-          // onTap: () => Navigator.pushNamed(
-          //   context,
-          //   DetailsScreen.routeName,
-          //   arguments: ProductDetailsArguments(product: product),
-          // ),
           onTap: () {},
           child: Container(
             color: Colors.white70,
@@ -84,15 +81,15 @@ class _ProductCardState extends State<ProductCard> {
                                 "${widget.product['name']}",
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 20,
+                                  fontSize: 12,
                                 ),
-                                overflow: TextOverflow.visible,
-                                // maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
                               ),
                               Text(
                                 "${widget.product['price']}",
                                 style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: 10,
                                   fontWeight: FontWeight.w600,
                                   color: kPrimaryColor,
                                 ),
@@ -103,37 +100,40 @@ class _ProductCardState extends State<ProductCard> {
                         InkWell(
                           onTap: () {},
                           child: Container(
-                            height: 28,
-                            width: 28,
-                            child: widget.product['is_in_wishlist']
+                            padding: EdgeInsets.only(right: 10),
+                            child:
+                                /* widget.product['is_in_wishlist']
                                 ? Icon(Icons.favorite)
-                                : Icon(Icons.favorite_outline),
+                                :  */
+                                Icon(Icons.favorite_outline, size: 20),
                           ),
                         ),
                       ],
                     ),
                   ],
                 ),
-                _cartNum == 0
-                    ? FlatButton(
-                        minWidth: widget.width,
-                        color: kButtonColor,
-                        textColor: kBtnTxtColor,
-                        padding: EdgeInsets.all(8.0),
-                        splashColor: Colors.blueAccent,
-                        onPressed: () {
-                          if (widget.incVal > 0) {
-                            setState(() {
-                              _cartNum = widget.incVal;
-                            });
-                          }
-                        },
-                        child: Text(
-                          "Add to Cart",
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                      )
-                    : CartOrderBtn(width: widget.width),
+                widget.isCartButton == true
+                    ? (_cartNum == 0
+                        ? FlatButton(
+                            minWidth: widget.width,
+                            color: kButtonColor,
+                            textColor: kBtnTxtColor,
+                            padding: EdgeInsets.all(8.0),
+                            splashColor: Colors.blueAccent,
+                            onPressed: () {
+                              if (widget.incVal > 0) {
+                                setState(() {
+                                  _cartNum = widget.incVal;
+                                });
+                              }
+                            },
+                            child: Text(
+                              "Add to Cart",
+                              style: TextStyle(fontSize: 14.0),
+                            ),
+                          )
+                        : CartOrderBtn(width: widget.width))
+                    : Container(),
               ],
             ),
           ),

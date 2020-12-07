@@ -23,7 +23,7 @@ class ProductsHorizontal extends StatelessWidget {
                 )
               : Container(),
           Container(
-            height: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.width * 0.75,
             child: ListView.builder(
               padding: EdgeInsets.all(0),
               scrollDirection: Axis.horizontal,
