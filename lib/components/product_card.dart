@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/components/cart_order_btn.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:shop_app/models/Product.dart';
 // import 'package:shop_app/screens/details/details_screen.dart';
@@ -132,50 +133,7 @@ class _ProductCardState extends State<ProductCard> {
                           style: TextStyle(fontSize: 20.0),
                         ),
                       )
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          FlatButton(
-                            minWidth: widget.width / 3.0,
-                            color: kButtonColor,
-                            textColor: kBtnTxtColor,
-                            padding: EdgeInsets.all(8.0),
-                            splashColor: Colors.blueAccent,
-                            onPressed: () {
-                              setState(() {
-                                _cartNum -= widget.incVal;
-                              });
-                            },
-                            child: Text(
-                              "-",
-                              style: TextStyle(fontSize: 20.0),
-                            ),
-                          ),
-                          Container(
-                            // width: MediaQuery.of(context).size.width / 4.0,
-                            alignment: Alignment.center,
-                            child: Text(
-                              _cartNum.toString(),
-                            ),
-                          ),
-                          FlatButton(
-                            minWidth: widget.width / 3.0,
-                            color: kButtonColor,
-                            textColor: kBtnTxtColor,
-                            padding: EdgeInsets.all(8.0),
-                            splashColor: Colors.blueAccent,
-                            onPressed: () {
-                              setState(() {
-                                _cartNum += widget.incVal;
-                              });
-                            },
-                            child: Text(
-                              "+",
-                              style: TextStyle(fontSize: 20.0),
-                            ),
-                          ),
-                        ],
-                      ),
+                    : CartOrderBtn(width: widget.width),
               ],
             ),
           ),

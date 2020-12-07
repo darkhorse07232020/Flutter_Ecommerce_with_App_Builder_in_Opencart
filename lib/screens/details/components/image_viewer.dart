@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_multi_carousel/carousel.dart';
+import 'package:shop_app/constants.dart';
 
 class ImageViewer extends StatelessWidget {
   final dynamic images;
@@ -7,31 +9,33 @@ class ImageViewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PageController controller;
-    return Stack(
-      // height: MediaQuery.of(context).size.height * 0.6,
-      children: [
-        PageView.builder(
-          controller: controller,
-          itemCount: images.length,
-          physics: ClampingScrollPhysics(),
-          itemBuilder: (context, index) {
-            return Container(
-              padding: EdgeInsets.all(10),
-              child: Image.network(
-                images[index]['src'],
-                fit: BoxFit.fill,
-              ),
-            );
-          },
+    return Carousel(
+      height: MediaQuery.of(context).size.width,
+      width: MediaQuery.of(context).size.width,
+      initialPage: 0,
+      allowWrap: true,
+      type: Types.simple,
+      onCarouselTap: (i) {
+        print("onTap $i");
+      },
+      indicatorType: IndicatorTypes.bar,
+      indicatorBackgroundOpacity: 0,
+      activeIndicatorColor: kPrimaryColor,
+      unActiveIndicatorColor: Colors.grey,
+      axis: Axis.horizontal,
+      showArrow: true,
+      arrowColor: kPrimaryColor,
+      children: List.generate(
+        images.length,
+        (i) => Container(
+          height: MediaQuery.of(context).size.width,
+          width: MediaQuery.of(context).size.width,
+          child: Image.network(
+            images[i]['src'],
+            fit: BoxFit.fill,
+          ),
         ),
-        Positioned(
-          bottom: 0.0,
-          left: 0.0,
-          right: 0.0,
-          child: Container(),
-        ),
-      ],
+      ),
     );
   }
 }

@@ -32,6 +32,8 @@ dependencies:
   provider: ^4.3.1 # for State management
   http: ^0.12.2
   shared_preferences: ^0.5.12+4
+  flutter_multi_carousel: ^1.0.3
+  flutter_html: ^1.1.1
 
 dev_dependencies:
   flutter_test:
