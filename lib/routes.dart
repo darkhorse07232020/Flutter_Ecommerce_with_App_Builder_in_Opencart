@@ -24,6 +24,6 @@ final Map<String, WidgetBuilder> routes = {
   OtpScreen.routeName: (context) => OtpScreen(),
   HomeScreen.routeName: (context) => HomeScreen(),
   DetailsScreen.routeName: (context) => DetailsScreen(),
-  CartScreen.routeName: (context) => CartScreen(),
+  // CartScreen.routeName: (context) => CartScreen(),
   ProductScreen.routeName: (context) => ProductScreen(),
 };

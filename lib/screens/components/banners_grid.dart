@@ -58,7 +58,7 @@ class BannerGrid extends StatelessWidget {
                                 context,
                                 DetailsScreen.routeName,
                                 arguments: ProductDetailsArguments(
-                                  product: demoProducts[0],
+                                  id: banner[index]['target_id'],
                                 ),
                               )
                           : () {}),

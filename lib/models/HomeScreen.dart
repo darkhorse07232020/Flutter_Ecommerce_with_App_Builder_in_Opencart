@@ -13,8 +13,6 @@ Future<bool> getHomeData() async {
   //Return String
   String idCurrency = prefs.getString('Currency') ?? 'USD';
   String isoCode = prefs.getString('ISO_Code') ?? 'zh-hk';
-  // print("${prefs.getString('Currency')}  $idCurrency");
-  // print("${prefs.getString('ISO_Code')}  $isoCode");
 
   var map = new Map<String, dynamic>();
   map['id_currency'] = idCurrency;
@@ -22,10 +20,10 @@ Future<bool> getHomeData() async {
   final response = await http.post(
     'https://easycartapp.com/index.php?route=webservices/api&method=appGetHome&version=1.6&api_token=' +
         apiTokenKey,
+    headers: {'Cookie': 'language=' + isoCode + '; currency=' + idCurrency},
     body: map,
   );
   Map<String, dynamic> responseJson = json.decode(response.body);
-  // print(response.body);
   if (response.statusCode == 200) {
     homeScreenVariable = HomeScreenModel.fromJson(responseJson);
 

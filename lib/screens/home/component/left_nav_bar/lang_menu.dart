@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/drawer_item.dart';
 import 'package:shop_app/screens/main/home_screen.dart';
 
-import 'drawer_item_lang.dart';
+import 'drawer_item_with_check.dart';
 
 class LangMenu extends StatefulWidget {
   final dynamic subMenu;

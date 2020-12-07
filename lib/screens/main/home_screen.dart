@@ -58,7 +58,8 @@ class _HomePageState extends State<HomePage>
     HomeTab(),
     CategoriesTab(),
     SearchTab(),
-    CartScreen(),
+    SearchTab(),
+    // CartScreen(),
     SignInScreen(),
   ];
   Widget _currentPage;
