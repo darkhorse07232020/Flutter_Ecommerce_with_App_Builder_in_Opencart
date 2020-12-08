@@ -3,7 +3,8 @@ import 'package:shop_app/constants.dart';
 
 class CartOrderBtn extends StatefulWidget {
   final double width;
-  const CartOrderBtn({Key key, this.width}) : super(key: key);
+  final Function(int) onTap;
+  const CartOrderBtn({Key key, this.width, this.onTap}) : super(key: key);
 
   @override
   _CartOrderBtnState createState() => _CartOrderBtnState();
@@ -31,10 +32,11 @@ class _CartOrderBtnState extends State<CartOrderBtn> {
             padding: EdgeInsets.all(0),
             splashColor: Colors.blueAccent,
             onPressed: () {
-              if (_cartNum == 1) return;
+              if (_cartNum == 0) return;
               setState(() {
                 _cartNum--;
               });
+              widget.onTap(_cartNum);
             },
             child: Center(
               child: Text(
@@ -59,6 +61,7 @@ class _CartOrderBtnState extends State<CartOrderBtn> {
               setState(() {
                 _cartNum++;
               });
+              widget.onTap(_cartNum);
             },
             child: Center(
               child: Text(

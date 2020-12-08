@@ -52,16 +52,15 @@ class BannerCountdown extends StatelessWidget {
                               title: banner[index]['title'],
                             ),
                           )
-                      // : (banner[index]['click_target'] == 'product'
-                      //     ? () => Navigator.pushNamed(
-                      //           context,
-                      //           DetailsScreen.routeName,
-                      //           arguments: ProductDetailsArguments(
-                      //             product: demoProducts[0],
-                      //           ),
-                      //         )
-                      //     : () {}),
-                      : () {},
+                      : (banner[index]['click_target'] == 'product'
+                          ? () => Navigator.pushNamed(
+                                context,
+                                DetailsScreen.routeName,
+                                arguments: ProductDetailsArguments(
+                                  id: banner[index]['target_id'],
+                                ),
+                              )
+                          : () {}),
                 );
               },
             ),

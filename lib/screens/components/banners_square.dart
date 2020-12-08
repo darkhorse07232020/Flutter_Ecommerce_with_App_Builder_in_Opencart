@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/screens/details/details_screen.dart';
 import 'package:shop_app/screens/products/product_screen.dart';
 
 class BannerSquare extends StatelessWidget {
@@ -49,7 +50,15 @@ class BannerSquare extends StatelessWidget {
                               title: '',
                             ),
                           )
-                      : () {},
+                      : (banner[index]['click_target'] == 'product'
+                          ? () => Navigator.pushNamed(
+                                context,
+                                DetailsScreen.routeName,
+                                arguments: ProductDetailsArguments(
+                                  id: banner[index]['target_id'],
+                                ),
+                              )
+                          : () {}),
                 );
               },
             ),

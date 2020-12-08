@@ -10,8 +10,8 @@ class ImageViewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Carousel(
-      height: MediaQuery.of(context).size.width * 0.8,
-      width: MediaQuery.of(context).size.width * 0.8,
+      height: MediaQuery.of(context).size.width * 0.7,
+      width: MediaQuery.of(context).size.width * 0.7,
       initialPage: 0,
       allowWrap: true,
       type: Types.simple,

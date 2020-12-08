@@ -28,9 +28,7 @@ class ProductsGrid extends StatelessWidget {
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: MediaQuery.of(context).size.width /
-                    (MediaQuery.of(context).size.width) /
-                    2.0,
+                childAspectRatio: 0.65,
               ),
               padding: EdgeInsets.all(0),
               physics: const NeverScrollableScrollPhysics(),

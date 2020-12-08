@@ -55,6 +55,9 @@ class _HomeTabState extends State<HomeTab> {
                         banner: homeScreenVariable.elements[index]['data']);
                     break;
                   case 'categories_top':
+                    homeScreenVariable.elements[index]['data'] =
+                        homeScreenVariable.elements[index]['data'].reversed
+                            .toList();
                     child = CategoriesTop(
                       categories: homeScreenVariable.elements[index]['data'],
                     );

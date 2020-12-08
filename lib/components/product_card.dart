@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/cart_order_btn.dart';
+import 'package:shop_app/screens/details/details_screen.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:shop_app/models/Product.dart';
 // import 'package:shop_app/screens/details/details_screen.dart';
@@ -42,7 +43,13 @@ class _ProductCardState extends State<ProductCard> {
       child: SizedBox(
         width: widget.width,
         child: GestureDetector(
-          onTap: () {},
+          onTap: () => Navigator.pushNamed(
+            context,
+            DetailsScreen.routeName,
+            arguments: ProductDetailsArguments(
+              id: widget.product['id'].toString(),
+            ),
+          ),
           child: Container(
             color: Colors.white70,
             child: Column(
@@ -89,7 +96,7 @@ class _ProductCardState extends State<ProductCard> {
                               Text(
                                 "${widget.product['price']}",
                                 style: TextStyle(
-                                  fontSize: 10,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                   color: kPrimaryColor,
                                 ),
@@ -132,7 +139,15 @@ class _ProductCardState extends State<ProductCard> {
                               style: TextStyle(fontSize: 14.0),
                             ),
                           )
-                        : CartOrderBtn(width: widget.width))
+                        : CartOrderBtn(
+                            width: widget.width,
+                            onTap: (int cartnum) {
+                              print(cartnum);
+                              setState(() {
+                                _cartNum = cartnum;
+                              });
+                            },
+                          ))
                     : Container(),
               ],
             ),
