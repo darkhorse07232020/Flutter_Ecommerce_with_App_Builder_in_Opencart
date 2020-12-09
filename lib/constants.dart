@@ -38,6 +38,12 @@ const String kMatchPassError = "Passwords don't match";
 const String kNamelNullError = "Please Enter your name";
 const String kPhoneNumberNullError = "Please Enter your phone number";
 const String kAddressNullError = "Please Enter your address";
+const String kFirstNullError = "Please Enter your First Name";
+const String kInvalidFirstError =
+    "First Name must be between 3 and 15 characters";
+const String kLastNullError = "Please Enter your Last Name";
+const String kInvalidLastError =
+    "Last Name must be between 3 and 15 characters";
 
 final otpInputDecoration = InputDecoration(
   contentPadding:
