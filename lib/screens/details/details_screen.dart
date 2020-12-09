@@ -31,6 +31,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
         future: initialize(args.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
+            // productVariable.product['product_info'] =
+            //     productVariable.product['product_info'].reversed.toList();
+            dynamic temp = productVariable.product['product_info'][2];
+            productVariable.product['product_info'][2] =
+                productVariable.product['product_info'][0];
+            productVariable.product['product_info'][0] = temp;
             return SingleChildScrollView(
               child: Container(
                 color: kBGColor,
@@ -96,80 +102,40 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             'Product Info and Care',
                             style: TextStyle(fontSize: 18),
                           ),
-                          Row(
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.48,
-                                child: Text(
-                                  productVariable.product['product_info'][2]
-                                      ['name'],
-                                  style: TextStyle(
-                                      fontSize: 14, color: Colors.grey),
-                                ),
-                              ),
-                              Container(
-                                child: Text(
-                                  productVariable.product['product_info'][2]
-                                              ['value'] ==
-                                          null
-                                      ? ''
-                                      : productVariable.product['product_info']
-                                          [2]['value'],
-                                  style: TextStyle(
-                                      fontSize: 14, color: Colors.grey),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.48,
-                                child: Text(
-                                  productVariable.product['product_info'][1]
-                                      ['name'],
-                                  style: TextStyle(
-                                      fontSize: 14, color: Colors.grey),
-                                ),
-                              ),
-                              Container(
-                                child: Text(
-                                  productVariable.product['product_info'][1]
-                                              ['value'] ==
-                                          null
-                                      ? ''
-                                      : productVariable.product['product_info']
-                                          [1]['value'],
-                                  style: TextStyle(
-                                      fontSize: 14, color: Colors.grey),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width * 0.48,
-                                child: Text(
-                                  productVariable.product['product_info'][0]
-                                      ['name'],
-                                  style: TextStyle(
-                                      fontSize: 14, color: Colors.grey),
-                                ),
-                              ),
-                              Container(
-                                child: Text(
-                                  productVariable.product['product_info'][0]
-                                              ['value'] ==
-                                          null
-                                      ? ''
-                                      : productVariable.product['product_info']
-                                          [0]['value'],
-                                  style: TextStyle(
-                                      fontSize: 14, color: Colors.grey),
-                                ),
-                              ),
-                            ],
+                          ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount:
+                                productVariable.product['product_info'].length,
+                            itemBuilder: (context, index) {
+                              return Row(
+                                children: [
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.48,
+                                    child: Text(
+                                      productVariable.product['product_info']
+                                          [index]['name'],
+                                      style: TextStyle(
+                                          fontSize: 14, color: Colors.grey),
+                                    ),
+                                  ),
+                                  Container(
+                                    child: Text(
+                                      productVariable.product['product_info']
+                                                  [index]['value'] ==
+                                              null
+                                          ? ''
+                                          : productVariable
+                                                  .product['product_info']
+                                              [index]['value'],
+                                      style: TextStyle(
+                                          fontSize: 14, color: Colors.grey),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
                           Html(
                             data: productVariable.product['description'],

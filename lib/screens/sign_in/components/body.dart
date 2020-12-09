@@ -49,8 +49,9 @@ class Body extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: getProportionateScreenHeight(20)),
+                SizedBox(height: 20),
                 NoAccountText(),
+                SizedBox()
               ],
             ),
           ),
