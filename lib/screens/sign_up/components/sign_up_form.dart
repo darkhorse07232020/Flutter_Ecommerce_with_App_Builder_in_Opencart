@@ -78,15 +78,25 @@ class _SignUpFormState extends State<SignUpForm> {
         duration: Toast.LENGTH_LONG,
         gravity: Toast.CENTER,
       );
+      Navigator.maybePop(context);
     } else {
-      responseJson['signup_user']['message'].forEach((key, value) {
+      if (responseJson['signup_user']['message'].runtimeType == String) {
         Toast.show(
-          value,
+          responseJson['signup_user']['message'],
           context,
           duration: Toast.LENGTH_LONG,
           gravity: Toast.CENTER,
         );
-      });
+      } else {
+        responseJson['signup_user']['message'].forEach((key, value) {
+          Toast.show(
+            value,
+            context,
+            duration: Toast.LENGTH_LONG,
+            gravity: Toast.CENTER,
+          );
+        });
+      }
     }
     setState(() {
       endApiCall = true;
