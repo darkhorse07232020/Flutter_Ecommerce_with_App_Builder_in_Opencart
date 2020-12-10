@@ -68,7 +68,13 @@ class _BodyState extends State<Body> {
                     ),
                     Spacer(flex: 3),
                     DefaultButton(
-                      text: "Continue",
+                      child: Text(
+                        'Continue',
+                        style: TextStyle(
+                          fontSize: getProportionateScreenWidth(18),
+                          color: Colors.white,
+                        ),
+                      ),
                       press: () {
                         Navigator.pushNamed(context, HomeScreen.routeName);
                       },

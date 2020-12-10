@@ -70,7 +70,13 @@ class _SignFormState extends State<SignForm> {
           FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
-            text: "Continue",
+            child: Text(
+              'Continue',
+              style: TextStyle(
+                fontSize: getProportionateScreenWidth(18),
+                color: Colors.white,
+              ),
+            ),
             press: () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();

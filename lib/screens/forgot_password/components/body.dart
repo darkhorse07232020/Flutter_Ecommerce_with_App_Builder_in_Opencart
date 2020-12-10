@@ -98,7 +98,13 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
           FormError(errors: errors),
           SizedBox(height: SizeConfig.screenHeight * 0.1),
           DefaultButton(
-            text: "Continue",
+            child: Text(
+              'Continue',
+              style: TextStyle(
+                fontSize: getProportionateScreenWidth(18),
+                color: Colors.white,
+              ),
+            ),
             press: () {
               if (_formKey.currentState.validate()) {
                 // Do what you want to do
