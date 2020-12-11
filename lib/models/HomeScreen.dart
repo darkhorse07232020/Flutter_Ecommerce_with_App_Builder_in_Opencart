@@ -3,17 +3,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/TokenData.dart';
 
-Future<bool> getHomeData() async {
-  // Read sharedpreference data
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  //Return String
-  String idCurrency = prefs.getString('Currency') ?? 'USD';
-  String isoCode = prefs.getString('ISO_Code') ?? 'zh-hk';
+import '../models/Variable.dart';
 
+Future<bool> getHomeData() async {
   var map = new Map<String, dynamic>();
   map['id_currency'] = idCurrency;
   map['iso_code'] = isoCode;

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_app/components/custom_surfix_icon.dart';
 import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/components/form_error.dart';
@@ -9,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:shop_app/models/TokenData.dart';
 import 'package:toast/toast.dart';
 
+import '../../../models/Variable.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
@@ -27,6 +27,7 @@ class _SignUpFormState extends State<SignUpForm> {
   String phoneNumber;
   bool remember = false;
   bool endApiCall = true;
+
   final List<String> errors = [];
 
   void addError({String error}) {
@@ -47,9 +48,6 @@ class _SignUpFormState extends State<SignUpForm> {
     setState(() {
       endApiCall = false;
     });
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String idCurrency = prefs.getString('Currency') ?? 'USD';
-    String isoCode = prefs.getString('ISO_Code') ?? 'zh-hk';
     var map = new Map<String, dynamic>();
     map['id_currency'] = idCurrency;
     map['iso_code'] = isoCode;

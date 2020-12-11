@@ -3,10 +3,13 @@ import 'package:shop_app/components/custom_surfix_icon.dart';
 import 'package:shop_app/components/form_error.dart';
 import 'package:shop_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:shop_app/screens/login_success/login_success_screen.dart';
+import 'package:toast/toast.dart';
 
 import '../../../components/default_button.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
+import '../../../models/LogIn.dart';
+import '../../../models/Variable.dart';
 
 class SignForm extends StatefulWidget {
   @override
@@ -18,6 +21,8 @@ class _SignFormState extends State<SignForm> {
   String email;
   String password;
   bool remember = false;
+  bool endApiCall = true;
+
   final List<String> errors = [];
 
   void addError({String error}) {
@@ -32,6 +37,28 @@ class _SignFormState extends State<SignForm> {
       setState(() {
         errors.remove(error);
       });
+  }
+
+  Future<void> logIn(String email, String password) async {
+    setState(() {
+      endApiCall = false;
+    });
+    await getLogIn(email, password);
+    Toast.show(
+      loginVariable.loginUser['message'],
+      context,
+      duration: Toast.LENGTH_LONG,
+      gravity: Toast.CENTER,
+    );
+    if (loginVariable.loginUser['status'] == 'success') {
+      loginState = true;
+
+      Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+    }
+    // if all are valid then go to success screen
+    setState(() {
+      endApiCall = true;
+    });
   }
 
   @override
@@ -70,20 +97,26 @@ class _SignFormState extends State<SignForm> {
           FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
-            child: Text(
-              'Continue',
-              style: TextStyle(
-                fontSize: getProportionateScreenWidth(18),
-                color: Colors.white,
-              ),
-            ),
-            press: () {
-              if (_formKey.currentState.validate()) {
-                _formKey.currentState.save();
-                // if all are valid then go to success screen
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
-              }
-            },
+            child: endApiCall
+                ? Text(
+                    'Continue',
+                    style: TextStyle(
+                      fontSize: getProportionateScreenWidth(18),
+                      color: Colors.white,
+                    ),
+                  )
+                : CircularProgressIndicator(
+                    backgroundColor: Colors.white.withOpacity(0.5),
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+                  ),
+            press: endApiCall
+                ? () {
+                    if (_formKey.currentState.validate()) {
+                      _formKey.currentState.save();
+                      logIn(email, password);
+                    }
+                  }
+                : () {},
           ),
         ],
       ),

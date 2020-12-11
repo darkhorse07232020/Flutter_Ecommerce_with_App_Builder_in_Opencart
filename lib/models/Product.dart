@@ -2,15 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_app/models/TokenData.dart';
 
+import '../models/Variable.dart';
+
 Future<bool> getProductData(String id) async {
-  // Read sharedpreference data
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  //Return String
-  String idCurrency = prefs.getString('Currency') ?? 'USD';
-  String isoCode = prefs.getString('ISO_Code') ?? 'zh-hk';
   var map = new Map<String, dynamic>();
   map['id_currency'] = idCurrency;
   map['iso_code'] = isoCode;

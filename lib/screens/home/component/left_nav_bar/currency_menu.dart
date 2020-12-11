@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/drawer_item.dart';
 import 'package:shop_app/screens/main/home_screen.dart';
 
+import '../../../../models/Variable.dart';
 import 'drawer_item_with_check.dart';
 
 class CurrencyMenu extends StatefulWidget {
@@ -22,17 +22,9 @@ class _CurrencyMenuState extends State<CurrencyMenu> {
   String currentCurrency;
 
   void getCurrentState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    //Return String
-    String idCurrency = prefs.getString('Currency') ?? 'USD';
     setState(() {
       currentCurrency = idCurrency;
     });
-  }
-
-  void setData(String key, String data) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(key, data);
   }
 
   @override
