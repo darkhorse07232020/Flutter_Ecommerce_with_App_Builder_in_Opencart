@@ -79,6 +79,7 @@ class _CurrencyMenuState extends State<CurrencyMenu> {
                       setState(() {
                         currentCurrency = val;
                         setData('Currency', val);
+                        idCurrency = val;
                       });
                       Navigator.pushNamed(
                         context,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
-import 'package:shop_app/models/HomeScreen.dart';
+
+import 'package:shop_app/models/Variable.dart';
+import 'package:shop_app/components/icon_with_counter.dart';
 
 class HomeAppBar extends PreferredSize {
   final Widget title;
@@ -24,10 +26,14 @@ class HomeAppBar extends PreferredSize {
           icon: Icon(Icons.search),
           onPressed: () {},
         ),
-        IconButton(
-          icon: Icon(Icons.favorite_outline),
-          onPressed: () {},
-        ),
+        loginState
+            ? IconWithCounter(
+                text: '',
+                iconData: Icons.favorite_outline,
+                notificationCount: 11,
+                onTap: () {},
+              )
+            : Container(),
         IconButton(
           icon: Icon(Icons.card_travel),
           onPressed: () {},

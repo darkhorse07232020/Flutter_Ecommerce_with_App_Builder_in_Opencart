@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/HomeScreen.dart';
 import 'package:shop_app/models/TokenData.dart';
-import 'package:shop_app/screens/cart/cart_screen.dart';
+import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/main/loading_screen.dart';
 import 'package:shop_app/screens/categories/categories.dart';
 import 'package:shop_app/screens/search/search.dart';
@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage>
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person_outline),
-          label: 'Login',
+          label: loginState ? 'My Account' : 'Log in',
         ),
       ],
     );

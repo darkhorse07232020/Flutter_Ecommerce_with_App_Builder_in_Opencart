@@ -7,6 +7,7 @@ import 'package:shop_app/screens/home/component/left_nav_bar/lang_menu.dart';
 import 'package:shop_app/screens/products/product_screen.dart';
 
 import 'currency_menu.dart';
+import '../../../../models/Variable.dart';
 
 class NavBar extends StatelessWidget {
   @override
@@ -30,7 +31,9 @@ class NavBar extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
               children: <Widget>[
                 DrawerItem(icon: Icons.home, text: 'Home'),
-                DrawerItem(icon: Icons.account_circle, text: 'My Account'),
+                loginState
+                    ? DrawerItem(icon: Icons.account_circle, text: 'My Account')
+                    : Container(),
                 Divider(),
                 ListView.builder(
                   padding: EdgeInsets.all(0),
@@ -65,10 +68,15 @@ class NavBar extends StatelessWidget {
                 CurrencyMenu(
                   subMenu: homeScreenVariable.currencies['currency_list'],
                 ),
-                DrawerItem(
-                  icon: Icons.logout,
-                  text: 'Logout',
-                ),
+                loginState
+                    ? DrawerItem(
+                        icon: Icons.logout,
+                        text: 'Log out',
+                      )
+                    : DrawerItem(
+                        icon: Icons.login,
+                        text: 'Log in',
+                      ),
               ],
             ),
           ),
