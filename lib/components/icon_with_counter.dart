@@ -33,20 +33,22 @@ class IconWithCounter extends StatelessWidget {
                     : Container(),
               ],
             ),
-            Positioned(
-              top: 8,
-              right: 0,
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.red),
-                alignment: Alignment.center,
-                child: Text(
-                  '$notificationCount',
-                  style: TextStyle(fontSize: 11),
-                ),
-              ),
-            )
+            notificationCount > 0
+                ? Positioned(
+                    top: 8,
+                    right: 0,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.red),
+                      alignment: Alignment.center,
+                      child: Text(
+                        '$notificationCount',
+                        style: TextStyle(fontSize: 11),
+                      ),
+                    ),
+                  )
+                : Container(),
           ],
         ),
       ),

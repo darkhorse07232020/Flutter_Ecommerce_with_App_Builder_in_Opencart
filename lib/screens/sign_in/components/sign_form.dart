@@ -8,7 +8,7 @@ import 'package:toast/toast.dart';
 import '../../../components/default_button.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
-import '../../../models/LogIn.dart';
+import '../../../models/Login.dart';
 import '../../../models/Variable.dart';
 
 class SignForm extends StatefulWidget {

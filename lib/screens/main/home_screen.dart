@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage>
     SearchTab(),
     SearchTab(),
     // CartScreen(),
-    SignInScreen(),
+    loginState ? SearchTab() : SignInScreen(),
   ];
   Widget _currentPage;
 

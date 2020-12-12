@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/models/Login.dart';
 
 import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/components/icon_with_counter.dart';
@@ -30,14 +31,21 @@ class HomeAppBar extends PreferredSize {
             ? IconWithCounter(
                 text: '',
                 iconData: Icons.favorite_outline,
-                notificationCount: 11,
+                notificationCount: loginVariable.loginUser["wishlist_count"],
                 onTap: () {},
               )
             : Container(),
-        IconButton(
-          icon: Icon(Icons.card_travel),
-          onPressed: () {},
-        ),
+        loginState
+            ? IconWithCounter(
+                text: '',
+                iconData: Icons.card_travel,
+                notificationCount: loginVariable.loginUser["cart_count"],
+                onTap: () {},
+              )
+            : IconButton(
+                icon: Icon(Icons.card_travel),
+                onPressed: () {},
+              ),
       ],
     );
   }

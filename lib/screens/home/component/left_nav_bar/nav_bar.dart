@@ -4,7 +4,9 @@ import 'package:shop_app/screens/home/component/left_nav_bar/expand_menu.dart';
 import 'package:shop_app/models/HomeScreen.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/drawer_item.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/lang_menu.dart';
+import 'package:shop_app/screens/main/home_screen.dart';
 import 'package:shop_app/screens/products/product_screen.dart';
+import 'package:shop_app/screens/sign_in/sign_in_screen.dart';
 
 import 'currency_menu.dart';
 import '../../../../models/Variable.dart';
@@ -30,7 +32,13 @@ class NavBar extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
               children: <Widget>[
-                DrawerItem(icon: Icons.home, text: 'Home'),
+                DrawerItem(
+                  icon: Icons.home,
+                  text: 'Home',
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
                 loginState
                     ? DrawerItem(icon: Icons.account_circle, text: 'My Account')
                     : Container(),
@@ -72,10 +80,18 @@ class NavBar extends StatelessWidget {
                     ? DrawerItem(
                         icon: Icons.logout,
                         text: 'Log out',
+                        onTap: () {
+                          loginState = false;
+                          Navigator.popAndPushNamed(
+                              context, HomeScreen.routeName);
+                        },
                       )
                     : DrawerItem(
                         icon: Icons.login,
                         text: 'Log in',
+                        onTap: () {
+                          Navigator.pushNamed(context, SignInScreen.routeName);
+                        },
                       ),
               ],
             ),
