@@ -3,6 +3,8 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:shop_app/components/cart_order_btn.dart';
 import 'package:shop_app/components/product_card.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/models/Languages.dart';
+import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/details/components/details_app_bar.dart';
 
 import '../../models/Product.dart';
@@ -99,7 +101,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Product Info and Care',
+                            getWord(isoCode, 'product_info'),
                             style: TextStyle(fontSize: 18),
                           ),
                           ListView.builder(
@@ -144,7 +146,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ),
                     ),
                     Text(
-                      'RELATED PRODUCTS',
+                      getWord(isoCode, 'related_products'),
                       style: TextStyle(fontSize: 20),
                     ),
                     Container(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_surfix_icon.dart';
 import 'package:shop_app/components/form_error.dart';
+import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:shop_app/screens/login_success/login_success_screen.dart';
 import 'package:toast/toast.dart';
@@ -88,7 +89,7 @@ class _SignFormState extends State<SignForm> {
                 onTap: () => Navigator.pushNamed(
                     context, ForgotPasswordScreen.routeName),
                 child: Text(
-                  "Forgot Password",
+                  getWord(isoCode, 'forgot_password'),
                   style: TextStyle(decoration: TextDecoration.underline),
                 ),
               )
@@ -99,7 +100,7 @@ class _SignFormState extends State<SignForm> {
           DefaultButton(
             child: endApiCall
                 ? Text(
-                    'Continue',
+                    getWord(isoCode, 'continue'),
                     style: TextStyle(
                       fontSize: getProportionateScreenWidth(18),
                       color: Colors.white,

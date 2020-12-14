@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/expand_menu.dart';
 import 'package:shop_app/models/HomeScreen.dart';
@@ -34,7 +35,8 @@ class NavBar extends StatelessWidget {
               children: <Widget>[
                 DrawerItem(
                   icon: Icons.home,
-                  text: 'Home',
+                  // text: getWord(isoCode, 'home'),
+                  text: getWord(isoCode, 'home'),
                   onTap: () {
                     Navigator.pop(context);
                   },
@@ -71,7 +73,8 @@ class NavBar extends StatelessWidget {
                   },
                 ),
                 Divider(),
-                DrawerItem(icon: Icons.contacts, text: 'Contact Us'),
+                DrawerItem(
+                    icon: Icons.contacts, text: getWord(isoCode, 'contact_us')),
                 LangMenu(subMenu: homeScreenVariable.languages['lang_list']),
                 CurrencyMenu(
                   subMenu: homeScreenVariable.currencies['currency_list'],
@@ -88,7 +91,7 @@ class NavBar extends StatelessWidget {
                       )
                     : DrawerItem(
                         icon: Icons.login,
-                        text: 'Log in',
+                        text: getWord(isoCode, 'log_in'),
                         onTap: () {
                           Navigator.pushNamed(context, SignInScreen.routeName);
                         },

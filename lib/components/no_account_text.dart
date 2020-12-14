@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/models/Languages.dart';
+import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/sign_up/sign_up_screen.dart';
 
 import '../constants.dart';
@@ -15,13 +17,13 @@ class NoAccountText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Don’t have an account? ",
+          getWord(isoCode, 'no_account'),
           style: TextStyle(fontSize: getProportionateScreenWidth(16)),
         ),
         GestureDetector(
           onTap: () => Navigator.pushNamed(context, SignUpScreen.routeName),
           child: Text(
-            "Sign Up",
+            getWord(isoCode, 'sign_up'),
             style: TextStyle(
                 fontSize: getProportionateScreenWidth(16),
                 color: kPrimaryColor),

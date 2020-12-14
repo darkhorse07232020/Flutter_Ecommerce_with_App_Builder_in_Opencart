@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/drawer_item.dart';
 import 'package:shop_app/screens/main/home_screen.dart';
 
@@ -53,7 +54,7 @@ class _LangMenuState extends State<LangMenu> {
               children: [
                 DrawerItem(
                   icon: Icons.language,
-                  text: 'Language(s)',
+                  text: getWord(isoCode, 'languages'),
                 ),
                 Icon(expand
                     ? Icons.keyboard_arrow_up

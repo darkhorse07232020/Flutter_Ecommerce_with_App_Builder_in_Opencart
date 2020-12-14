@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/models/Languages.dart';
+import 'package:shop_app/models/Variable.dart';
 
 class DetailsAppBar extends PreferredSize {
   @override
@@ -14,7 +16,7 @@ class DetailsAppBar extends PreferredSize {
       ),
       backgroundColor: kPrimaryColor,
       title: Text(
-        'Product',
+        getWord(isoCode, 'product'),
         style: TextStyle(color: kBtnTxtColor),
       ),
       actions: [

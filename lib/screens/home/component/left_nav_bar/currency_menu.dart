@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/drawer_item.dart';
 import 'package:shop_app/screens/main/home_screen.dart';
 
@@ -53,7 +54,7 @@ class _CurrencyMenuState extends State<CurrencyMenu> {
               children: [
                 DrawerItem(
                   icon: Icons.monetization_on,
-                  text: 'Currency(s)',
+                  text: getWord(isoCode, 'currencies'),
                 ),
                 Icon(expand
                     ? Icons.keyboard_arrow_up

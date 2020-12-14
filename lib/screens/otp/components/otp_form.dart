@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/default_button.dart';
+import 'package:shop_app/models/Languages.dart';
+import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/size_config.dart';
 
 import '../../../constants.dart';
@@ -109,7 +111,7 @@ class _OtpFormState extends State<OtpForm> {
           SizedBox(height: SizeConfig.screenHeight * 0.15),
           DefaultButton(
             child: Text(
-              'Continue',
+              getWord(isoCode, 'continue'),
               style: TextStyle(
                 fontSize: getProportionateScreenWidth(18),
                 color: Colors.white,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/Category.dart';
+import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/components/products_grid.dart';
 import 'package:shop_app/screens/components/products_square.dart';
@@ -82,7 +83,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               children: [
                                 Icon(Icons.sort, color: Colors.white),
                                 SizedBox(width: 5),
-                                Text('Sort',
+                                Text(getWord(isoCode, 'sort'),
                                     style: TextStyle(color: Colors.white)),
                               ],
                             ),
@@ -99,7 +100,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 Icon(Icons.filter_alt_outlined,
                                     color: Colors.white),
                                 SizedBox(width: 2),
-                                Text('Filter',
+                                Text(getWord(isoCode, 'filter'),
                                     style: TextStyle(color: Colors.white)),
                               ],
                             ),
@@ -169,7 +170,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               children: [
                                 Icon(Icons.sort, color: Colors.white),
                                 SizedBox(width: 5),
-                                Text('Sort',
+                                Text(getWord(isoCode, 'sort'),
                                     style: TextStyle(color: Colors.white)),
                               ],
                             ),
@@ -186,7 +187,7 @@ class _ProductScreenState extends State<ProductScreen> {
                                 Icon(Icons.filter_alt_outlined,
                                     color: Colors.white),
                                 SizedBox(width: 2),
-                                Text('Filter',
+                                Text(getWord(isoCode, 'filter'),
                                     style: TextStyle(color: Colors.white)),
                               ],
                             ),

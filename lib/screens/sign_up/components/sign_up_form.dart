@@ -5,6 +5,7 @@ import 'package:shop_app/components/custom_surfix_icon.dart';
 import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/components/form_error.dart';
 import 'package:http/http.dart' as http;
+import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/TokenData.dart';
 import 'package:toast/toast.dart';
 
@@ -123,7 +124,7 @@ class _SignUpFormState extends State<SignUpForm> {
           DefaultButton(
             child: endApiCall
                 ? Text(
-                    'Sign Up',
+                    getWord(isoCode, 'sign_up'),
                     style: TextStyle(
                       fontSize: getProportionateScreenWidth(18),
                       color: Colors.white,

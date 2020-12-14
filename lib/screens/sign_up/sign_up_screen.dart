@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/models/Languages.dart';
+import 'package:shop_app/models/Variable.dart';
 
 import 'components/body.dart';
 
@@ -8,7 +10,7 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign Up"),
+        title: Text(getWord(isoCode, 'sign_up')),
       ),
       body: Body(),
     );

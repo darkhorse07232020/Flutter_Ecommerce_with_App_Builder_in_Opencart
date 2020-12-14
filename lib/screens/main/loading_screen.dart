@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/models/Languages.dart';
+import 'package:shop_app/models/Variable.dart';
 
 class LoadingScreen extends StatelessWidget {
   @override
@@ -9,7 +11,7 @@ class LoadingScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            "Loading data...",
+            getWord(isoCode, 'loading_data'),
             style: TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.bold,

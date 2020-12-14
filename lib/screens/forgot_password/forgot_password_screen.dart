@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/models/Languages.dart';
+import 'package:shop_app/models/Variable.dart';
 
 import 'components/body.dart';
 
@@ -8,7 +10,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Forgot Password"),
+        title: Text(getWord(isoCode, 'forgot_password')),
       ),
       body: Body(),
     );

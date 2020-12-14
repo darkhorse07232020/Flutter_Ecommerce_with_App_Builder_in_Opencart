@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/models/Languages.dart';
+import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/expand_menu.dart';
 import 'package:shop_app/models/HomeScreen.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/drawer_item.dart';
@@ -17,7 +19,7 @@ class CategoriesTab extends StatelessWidget {
         title: Padding(
           padding: EdgeInsets.all(0),
           child: Text(
-            'Categories',
+            getWord(isoCode, 'categories'),
             style: TextStyle(color: kBtnTxtColor),
           ),
         ),

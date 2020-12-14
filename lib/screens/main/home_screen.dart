@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/HomeScreen.dart';
+import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/TokenData.dart';
 import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/main/loading_screen.dart';
@@ -99,11 +100,11 @@ class _HomePageState extends State<HomePage>
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'Home',
+          label: getWord(isoCode, 'home'),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.widgets),
-          label: 'Categories',
+          label: getWord(isoCode, 'categories'),
         ),
         // BottomNavigationBarItem(
         //   icon: Icon(Icons.search),
@@ -111,11 +112,11 @@ class _HomePageState extends State<HomePage>
         // ),
         BottomNavigationBarItem(
           icon: Icon(Icons.shopping_cart_outlined),
-          label: 'Cart',
+          label: getWord(isoCode, 'cart'),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person_outline),
-          label: loginState ? 'My Account' : 'Log in',
+          label: loginState ? 'My Account' : getWord(isoCode, 'log_in'),
         ),
       ],
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/default_button.dart';
+import 'package:shop_app/models/Languages.dart';
+import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/main/home_screen.dart';
 import 'package:shop_app/size_config.dart';
 
@@ -16,7 +18,7 @@ class Body extends StatelessWidget {
           ),
           SizedBox(height: SizeConfig.screenHeight * 0.08),
           Text(
-            "Login Success",
+            getWord(isoCode, 'login_success'),
             style: TextStyle(
               fontSize: getProportionateScreenWidth(30),
               fontWeight: FontWeight.bold,
@@ -28,7 +30,7 @@ class Body extends StatelessWidget {
             width: SizeConfig.screenWidth * 0.6,
             child: DefaultButton(
               child: Text(
-                'Back to Home',
+                getWord(isoCode, 'back_to_home'),
                 style: TextStyle(
                   fontSize: getProportionateScreenWidth(18),
                   color: Colors.white,

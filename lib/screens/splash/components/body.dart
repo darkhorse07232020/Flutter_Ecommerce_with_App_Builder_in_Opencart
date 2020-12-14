@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/models/Languages.dart';
+import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/main/home_screen.dart';
 import 'package:shop_app/size_config.dart';
 
@@ -69,7 +71,7 @@ class _BodyState extends State<Body> {
                     Spacer(flex: 3),
                     DefaultButton(
                       child: Text(
-                        'Continue',
+                        getWord(isoCode, 'continue'),
                         style: TextStyle(
                           fontSize: getProportionateScreenWidth(18),
                           color: Colors.white,

@@ -3,7 +3,7 @@ Map<String, Map<String, String>> localizedValues = {
     'home': 'Home',
     'contact_us': 'Contact Us',
     'languages': 'Language(s)',
-    'currencies': 'Currency(S)',
+    'currencies': 'Currency(s)',
     'log_in': 'Log in',
     'categories': 'Categories',
     'cart': 'Cart',
@@ -26,5 +26,19 @@ Map<String, Map<String, String>> localizedValues = {
     'sort': 'Sort',
     'filter': 'Filter',
   },
-  'zh-hk': {'title': 'Título de App', 'googleLogin': 'Conectar con Google'},
+  'zh-hk': {
+    'home': '家',
+  },
 };
+
+String getWord(locale, key) {
+  if (localizedValues[locale][key] == null) {
+    if (localizedValues['en-gb'][key] == null) {
+      return key;
+    } else {
+      return localizedValues['en-gb'][key];
+    }
+  } else {
+    return localizedValues[locale][key];
+  }
+}
