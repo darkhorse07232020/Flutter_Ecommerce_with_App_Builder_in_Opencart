@@ -48,8 +48,8 @@ class BannerCountdown extends StatelessWidget {
                             context,
                             ProductScreen.routeName,
                             arguments: ProductsArguments(
-                              id: banner[index]['target_id'].toString(),
-                              title: banner[index]['title'],
+                              val: banner[index]['target_id'].toString(),
+                              key: 'category_id',
                             ),
                           )
                       : (banner[index]['click_target'] == 'product'

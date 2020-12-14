@@ -4,7 +4,7 @@ import 'package:shop_app/constants.dart';
 class ProductAppBar extends PreferredSize {
   final String title;
 
-  ProductAppBar(this.title);
+  ProductAppBar({this.title = ''});
 
   @override
   // AppBar().preferredSize.height provide us the height that appy on our app bar

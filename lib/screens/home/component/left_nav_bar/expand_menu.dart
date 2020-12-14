@@ -69,8 +69,8 @@ class _ExpandItemState extends State<ExpandItem> {
                       context,
                       ProductScreen.routeName,
                       arguments: ProductsArguments(
-                        id: widget.subMenu[index]['id'].toString(),
-                        // title: card['title'],
+                        val: widget.subMenu[index]['id'].toString(),
+                        key: 'category_id',
                       ),
                     ),
                   );

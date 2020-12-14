@@ -4,6 +4,8 @@ import 'package:shop_app/components/icon_with_counter.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/Login.dart';
 import 'package:shop_app/models/Variable.dart';
+import 'package:shop_app/screens/products/product_screen.dart';
+import 'package:toast/toast.dart';
 
 class HomeAppBar extends StatefulWidget {
   final Widget title;
@@ -51,22 +53,29 @@ class _HomeAppBarState extends State<HomeAppBar> {
   }
 
   void onSubmitted(String value) {
-    setState(() => _scaffoldKey.currentState
-        .showSnackBar(new SnackBar(content: new Text('You wrote $value!'))));
+    // setState(() => _scaffoldKey.currentState
+    //     .showSnackBar(new SnackBar(content: new Text('You wrote $value!'))));
+    // Toast.show(value, context);
+    Navigator.pushNamed(context, ProductScreen.routeName,
+        arguments: ProductsArguments(
+          val: value,
+          key: 'search_term',
+        ));
   }
 
   _HomeAppBarState() {
     searchBar = new SearchBar(
-        inBar: true,
-        buildDefaultAppBar: buildAppBar,
-        setState: setState,
-        onSubmitted: onSubmitted,
-        onCleared: () {
-          print("cleared");
-        },
-        onClosed: () {
-          print("closed");
-        });
+      inBar: true,
+      buildDefaultAppBar: buildAppBar,
+      setState: setState,
+      onSubmitted: onSubmitted,
+      onCleared: () {
+        Navigator.maybePop(context);
+      },
+      onClosed: () {
+        print("closed");
+      },
+    );
   }
 
   @override

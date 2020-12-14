@@ -63,8 +63,8 @@ class NavBar extends StatelessWidget {
                               context,
                               ProductScreen.routeName,
                               arguments: ProductsArguments(
-                                id: card['id'].toString(),
-                                // title: card['title'],
+                                val: card['id'].toString(),
+                                key: 'category_id',
                               ),
                             ),
                           );

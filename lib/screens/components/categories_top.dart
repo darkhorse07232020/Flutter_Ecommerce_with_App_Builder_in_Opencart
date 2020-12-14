@@ -24,8 +24,8 @@ class CategoriesTop extends StatelessWidget {
                 context,
                 ProductScreen.routeName,
                 arguments: ProductsArguments(
-                  id: categories[index]['id'].toString(),
-                  title: categories[index]['name'],
+                  val: categories[index]['id'].toString(),
+                  key: 'category_id',
                 ),
               );
             },

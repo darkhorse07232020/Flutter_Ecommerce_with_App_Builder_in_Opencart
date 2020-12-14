@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/Category.dart';
+import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/components/products_grid.dart';
 import 'package:shop_app/screens/components/products_square.dart';
 
@@ -20,8 +21,12 @@ class ProductScreen extends StatefulWidget {
 class _ProductScreenState extends State<ProductScreen> {
   bool isGridView;
 
-  Future<void> initialize(id) async {
-    await getCategoryData(id);
+  Future<void> initialize(key, val) async {
+    var map = new Map<String, dynamic>();
+    map['id_currency'] = idCurrency;
+    map['iso_code'] = isoCode;
+    map[key] = val;
+    await getCategoryData(map);
   }
 
   @override
@@ -35,11 +40,11 @@ class _ProductScreenState extends State<ProductScreen> {
     final ProductsArguments args = ModalRoute.of(context).settings.arguments;
 
     return FutureBuilder(
-      future: initialize(args.id),
+      future: initialize(args.key, args.val),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return Scaffold(
-            appBar: ProductAppBar(categoryVariable.title),
+            appBar: ProductAppBar(title: categoryVariable.title),
             body: Container(
               color: kBGColor,
               child: Column(
@@ -126,7 +131,7 @@ class _ProductScreenState extends State<ProductScreen> {
           );
         } else {
           return Scaffold(
-            appBar: ProductAppBar(args.title),
+            appBar: ProductAppBar(),
             body: Container(
               color: kBGColor,
               child: Column(
@@ -214,8 +219,8 @@ class _ProductScreenState extends State<ProductScreen> {
 }
 
 class ProductsArguments {
-  final String id;
-  final String title;
+  final String val;
+  final String key;
 
-  ProductsArguments({@required this.id, this.title = ''});
+  ProductsArguments({@required this.key, @required this.val});
 }
