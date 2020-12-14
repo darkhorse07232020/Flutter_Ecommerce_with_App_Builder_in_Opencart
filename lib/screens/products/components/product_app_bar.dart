@@ -17,24 +17,25 @@ class ProductAppBar extends PreferredSize {
         color: kBtnTxtColor,
       ),
       backgroundColor: kPrimaryColor,
+      centerTitle: true,
       title: Text(
         title,
         style: TextStyle(color: kBtnTxtColor),
       ),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.search),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: Icon(Icons.favorite_outline),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: Icon(Icons.card_travel),
-          onPressed: () {},
-        ),
-      ],
+      // actions: [
+      //   IconButton(
+      //     icon: Icon(Icons.search),
+      //     onPressed: () {},
+      //   ),
+      //   IconButton(
+      //     icon: Icon(Icons.favorite_outline),
+      //     onPressed: () {},
+      //   ),
+      //   IconButton(
+      //     icon: Icon(Icons.card_travel),
+      //     onPressed: () {},
+      //   ),
+      // ],
     );
   }
 }

@@ -183,12 +183,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           }
         },
       ),
-      bottomNavigationBar: _bottomNavBar(),
     );
-  }
-
-  Widget _bottomNavBar() {
-    return Container();
   }
 }
 
