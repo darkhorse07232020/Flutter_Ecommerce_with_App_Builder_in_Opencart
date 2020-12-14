@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_search_bar/flutter_search_bar.dart';
+import 'package:shop_app/components/icon_with_counter.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/Login.dart';
-
 import 'package:shop_app/models/Variable.dart';
-import 'package:shop_app/components/icon_with_counter.dart';
 
-class HomeAppBar extends PreferredSize {
+class HomeAppBar extends StatefulWidget {
   final Widget title;
 
   HomeAppBar({this.title});
 
   @override
-  // AppBar().preferredSize.height provide us the height that appy on our app bar
-  Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
+  _HomeAppBarState createState() => new _HomeAppBarState();
+}
 
-  @override
-  Widget build(BuildContext context) {
+class _HomeAppBarState extends State<HomeAppBar> {
+  SearchBar searchBar;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  AppBar buildAppBar(BuildContext context) {
     return AppBar(
       iconTheme: IconThemeData(
         color: kBtnTxtColor,
       ),
       backgroundColor: kPrimaryColor,
-      title: title,
+      title: widget.title,
       actions: [
-        IconButton(
-          icon: Icon(Icons.search),
-          onPressed: () {},
-        ),
+        searchBar.getSearchAction(context),
         loginState
             ? IconWithCounter(
                 text: '',
@@ -48,5 +48,29 @@ class HomeAppBar extends PreferredSize {
               ),
       ],
     );
+  }
+
+  void onSubmitted(String value) {
+    setState(() => _scaffoldKey.currentState
+        .showSnackBar(new SnackBar(content: new Text('You wrote $value!'))));
+  }
+
+  _HomeAppBarState() {
+    searchBar = new SearchBar(
+        inBar: true,
+        buildDefaultAppBar: buildAppBar,
+        setState: setState,
+        onSubmitted: onSubmitted,
+        onCleared: () {
+          print("cleared");
+        },
+        onClosed: () {
+          print("closed");
+        });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return searchBar.build(context);
   }
 }

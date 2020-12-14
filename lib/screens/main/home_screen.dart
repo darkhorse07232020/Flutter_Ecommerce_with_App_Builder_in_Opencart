@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/HomeScreen.dart';
 import 'package:shop_app/models/TokenData.dart';
@@ -58,7 +59,6 @@ class _HomePageState extends State<HomePage>
     HomeTab(),
     CategoriesTab(),
     SearchTab(),
-    SearchTab(),
     // CartScreen(),
     loginState ? SearchTab() : SignInScreen(),
   ];
@@ -105,10 +105,10 @@ class _HomePageState extends State<HomePage>
           icon: Icon(Icons.widgets),
           label: 'Categories',
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.search),
-          label: 'Search',
-        ),
+        // BottomNavigationBarItem(
+        //   icon: Icon(Icons.search),
+        //   label: 'Search',
+        // ),
         BottomNavigationBarItem(
           icon: Icon(Icons.shopping_cart_outlined),
           label: 'Cart',

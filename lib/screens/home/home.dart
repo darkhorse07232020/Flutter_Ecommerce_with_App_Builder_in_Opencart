@@ -36,10 +36,14 @@ class _HomeTabState extends State<HomeTab> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return Scaffold(
-            appBar: HomeAppBar(
-              title: homeScreenVariable.displayLogoOnTitleBar == 1
-                  ? Image.network(homeScreenVariable.titleBarLogoUrl)
-                  : Container(),
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(
+                  AppBar().preferredSize.height), // here the desired height
+              child: HomeAppBar(
+                title: homeScreenVariable.displayLogoOnTitleBar == 1
+                    ? Image.network(homeScreenVariable.titleBarLogoUrl)
+                    : Container(),
+              ),
             ),
             drawer: NavBar(),
             body: ListView.builder(
@@ -112,7 +116,11 @@ class _HomeTabState extends State<HomeTab> {
           );
         } else {
           return Scaffold(
-            appBar: HomeAppBar(title: Container()),
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(
+                  AppBar().preferredSize.height), // here the desired height
+              child: HomeAppBar(title: Container()),
+            ),
             drawer: NavBar(),
             body: Container(
               child: Center(
