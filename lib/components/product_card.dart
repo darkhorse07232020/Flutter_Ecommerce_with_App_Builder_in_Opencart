@@ -110,8 +110,9 @@ class _ProductCardState extends State<ProductCard> {
                           onTap: () {},
                           child: Container(
                             padding: EdgeInsets.only(right: 10),
-                            child: widget.product['is_in_wishlist']
-                                ? Icon(Icons.favorite)
+                            child: widget.product['is_in_wishlist'] != null &&
+                                    widget.product['is_in_wishlist'] == true
+                                ? Icon(Icons.favorite, color: Colors.pink)
                                 : Icon(Icons.favorite_outline, size: 20),
                           ),
                         ),
@@ -142,7 +143,6 @@ class _ProductCardState extends State<ProductCard> {
                         : CartOrderBtn(
                             width: widget.width,
                             onTap: (int cartnum) {
-                              print(cartnum);
                               setState(() {
                                 _cartNum = cartnum;
                               });

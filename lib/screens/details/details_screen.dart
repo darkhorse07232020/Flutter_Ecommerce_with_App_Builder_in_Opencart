@@ -4,7 +4,7 @@ import 'package:shop_app/components/add_button.dart';
 import 'package:shop_app/components/cart_order_btn.dart';
 import 'package:shop_app/components/product_card.dart';
 import 'package:shop_app/constants.dart';
-import 'package:shop_app/helpers/add_to_wishlist.dart';
+import 'package:shop_app/helpers/operate_wishlist.dart';
 import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/details/components/details_app_bar.dart';
@@ -20,6 +20,15 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  bool wishlistState;
+
+  @override
+  void initState() {
+    super.initState();
+    wishlistState = productVariable.product['is_in_wishlist'];
+    print(wishlistState);
+  }
+
   Future<void> initialize(id) async {
     await getProductData(id);
   }
@@ -28,6 +37,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   Widget build(BuildContext context) {
     final ProductDetailsArguments args =
         ModalRoute.of(context).settings.arguments;
+    print('OOOOOKKKKK');
     return Scaffold(
       backgroundColor: Color(0xFFF5F6F9),
       appBar: DetailsAppBar(),
@@ -199,17 +209,26 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         child: AddButton(
                           color: Colors.white,
                           press: () {
-                            addToWishlist(
-                              context,
-                              productVariable.product['id_product'],
-                            );
+                            productVariable.product['is_in_wishlist'] == false
+                                ? addToWishlist(
+                                    context,
+                                    productVariable.product['id_product'],
+                                  )
+                                : removeToWishlist(
+                                    context,
+                                    productVariable.product['id_product'],
+                                  );
+                            setState(() {
+                              wishlistState = !wishlistState;
+                            });
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
                                 Icons.favorite,
-                                color: Colors.grey,
+                                color:
+                                    wishlistState ? Colors.pink : Colors.grey,
                               ),
                               SizedBox(width: 20),
                               Text(
