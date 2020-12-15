@@ -120,7 +120,9 @@ class _HomePageState extends State<HomePage>
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.person_outline),
-          label: loginState ? 'My Account' : getWord(isoCode, 'log_in'),
+          label: loginState
+              ? getWord(isoCode, 'my_account')
+              : getWord(isoCode, 'log_in'),
         ),
       ],
     );

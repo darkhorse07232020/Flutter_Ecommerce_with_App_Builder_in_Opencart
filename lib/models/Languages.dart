@@ -25,6 +25,7 @@ final Map<String, Map<String, String>> localizedValues = {
     'loading_data': 'Loading data...',
     'sort': 'Sort',
     'filter': 'Filter',
+    'my_account': 'My Account',
   },
   'zh-hk': {
     'home': '主頁',
@@ -50,6 +51,7 @@ final Map<String, Map<String, String>> localizedValues = {
     'loading_data': '載入中...',
     'sort': '排序',
     'filter': '篩選',
+    'my_account': '我的帳戶',
   },
 };
 

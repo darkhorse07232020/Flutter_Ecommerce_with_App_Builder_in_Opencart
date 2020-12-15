@@ -22,13 +22,6 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   bool wishlistState;
 
-  @override
-  void initState() {
-    super.initState();
-    wishlistState = productVariable.product['is_in_wishlist'];
-    print(wishlistState);
-  }
-
   Future<void> initialize(id) async {
     await getProductData(id);
   }
@@ -37,7 +30,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
   Widget build(BuildContext context) {
     final ProductDetailsArguments args =
         ModalRoute.of(context).settings.arguments;
-    print('OOOOOKKKKK');
     return Scaffold(
       backgroundColor: Color(0xFFF5F6F9),
       appBar: DetailsAppBar(),
@@ -49,6 +41,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             productVariable.product['product_info'][2] =
                 productVariable.product['product_info'][0];
             productVariable.product['product_info'][0] = temp;
+            wishlistState = productVariable.product['is_in_wishlist'];
             return Column(
               children: [
                 Flexible(
@@ -218,9 +211,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     context,
                                     productVariable.product['id_product'],
                                   );
-                            setState(() {
-                              wishlistState = !wishlistState;
-                            });
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

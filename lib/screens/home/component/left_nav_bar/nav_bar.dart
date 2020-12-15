@@ -42,7 +42,10 @@ class NavBar extends StatelessWidget {
                   },
                 ),
                 loginState
-                    ? DrawerItem(icon: Icons.account_circle, text: 'My Account')
+                    ? DrawerItem(
+                        icon: Icons.account_circle,
+                        text: getWord(isoCode, 'my_account'),
+                      )
                     : Container(),
                 Divider(),
                 ListView.builder(
