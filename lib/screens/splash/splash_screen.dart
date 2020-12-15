@@ -31,7 +31,18 @@ class _SplashScreenState extends State<SplashScreen> {
     // You have to call it on your starting screen
     SizeConfig().init(context);
     return Scaffold(
-      body: Body(),
+      body: FutureBuilder(
+        future: initializeData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Body();
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
     );
   }
 }

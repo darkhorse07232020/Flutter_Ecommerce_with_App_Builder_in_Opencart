@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
 import '../size_config.dart';
 
-class DefaultButton extends StatelessWidget {
-  const DefaultButton({
+class AddButton extends StatelessWidget {
+  const AddButton({
     Key key,
     this.child,
     this.press,
+    @required this.color,
   }) : super(key: key);
   final Widget child;
   final Function press;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +19,7 @@ class DefaultButton extends StatelessWidget {
       width: double.infinity,
       height: getProportionateScreenHeight(56),
       child: FlatButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        color: kButtonColor,
+        color: color,
         onPressed: press,
         child: child,
       ),

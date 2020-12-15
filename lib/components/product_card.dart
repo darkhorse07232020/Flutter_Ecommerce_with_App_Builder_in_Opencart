@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/cart_order_btn.dart';
+import 'package:shop_app/models/Languages.dart';
+import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:shop_app/models/Product.dart';
@@ -135,7 +137,7 @@ class _ProductCardState extends State<ProductCard> {
                               }
                             },
                             child: Text(
-                              "Add to Cart",
+                              getWord(isoCode, 'add_to_cart'),
                               style: TextStyle(fontSize: 14.0),
                             ),
                           )
