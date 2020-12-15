@@ -5,6 +5,7 @@ import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/Login.dart';
 import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/products/product_screen.dart';
+import 'package:shop_app/screens/wishlist/wishlist_screen.dart';
 import 'package:toast/toast.dart';
 
 class HomeAppBar extends StatefulWidget {
@@ -18,7 +19,6 @@ class HomeAppBar extends StatefulWidget {
 
 class _HomeAppBarState extends State<HomeAppBar> {
   SearchBar searchBar;
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
@@ -34,7 +34,9 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 text: '',
                 iconData: Icons.favorite_outline,
                 notificationCount: wishlistCount,
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, WishlistScreen.routeName);
+                },
               )
             : Container(),
         loginState

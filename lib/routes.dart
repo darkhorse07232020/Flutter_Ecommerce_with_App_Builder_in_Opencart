@@ -7,6 +7,7 @@ import 'package:shop_app/screens/login_success/login_success_screen.dart';
 import 'package:shop_app/screens/otp/otp_screen.dart';
 import 'package:shop_app/screens/sign_in/sign_in_screen.dart';
 import 'package:shop_app/screens/splash/splash_screen.dart';
+import 'package:shop_app/screens/wishlist/wishlist_screen.dart';
 
 import 'screens/products/product_screen.dart';
 import 'screens/sign_up/sign_up_screen.dart';
@@ -24,4 +25,5 @@ final Map<String, WidgetBuilder> routes = {
   DetailsScreen.routeName: (context) => DetailsScreen(),
   // CartScreen.routeName: (context) => CartScreen(),
   ProductScreen.routeName: (context) => ProductScreen(),
+  WishlistScreen.routeName: (context) => WishlistScreen(),
 };
