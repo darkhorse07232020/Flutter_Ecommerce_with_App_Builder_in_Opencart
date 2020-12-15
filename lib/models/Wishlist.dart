@@ -6,15 +6,14 @@ import 'package:http/http.dart' as http;
 import '../models/Variable.dart';
 import 'TokenData.dart';
 
-Future<bool> getLogIn(String email, String password) async {
+Future<bool> getWishlist(String email) async {
   var map = new Map<String, dynamic>();
   map['id_currency'] = idCurrency;
   map['iso_code'] = isoCode;
   map['email'] = email;
-  map['password'] = password;
 
   final response = await http.post(
-    'https://easycartapp.com/index.php?route=webservices/api&method=appLogin&version=1.6&api_token=' +
+    'https://easycartapp.com/index.php?route=webservices/api&method=appGetWishlist&version=1.6&api_token=' +
         apiTokenKey,
     headers: {
       'Cookie': 'language=' +
@@ -29,32 +28,31 @@ Future<bool> getLogIn(String email, String password) async {
   Map<String, dynamic> responseJson = json.decode(response.body);
 
   if (response.statusCode == 200) {
-    loginVariable = LoginModel.fromJson(responseJson, email);
-    sessionData = responseJson['login_user']['session_data'];
+    wishlistVariable = WishlistModel.fromJson(responseJson, email);
   } else {
     throw Exception('Failed to load LangClass');
   }
   return (response.statusCode == 200);
 }
 
-LoginModel loginVariable;
+WishlistModel wishlistVariable;
 
-class LoginModel {
-  final dynamic loginUser;
+class WishlistModel {
+  final dynamic wishlistProduct;
   final dynamic installModule;
-  final dynamic email;
+  final dynamic status;
 
-  LoginModel({
-    this.loginUser,
+  WishlistModel({
+    this.wishlistProduct,
     this.installModule,
-    this.email,
+    this.status,
   });
 
-  factory LoginModel.fromJson(Map<String, dynamic> json, String email) {
-    return new LoginModel(
-      loginUser: json['login_user'],
+  factory WishlistModel.fromJson(Map<String, dynamic> json, String email) {
+    return new WishlistModel(
+      wishlistProduct: json['wishlist_products'],
       installModule: json['install_module'],
-      email: email,
+      status: json['status'],
     );
   }
 }

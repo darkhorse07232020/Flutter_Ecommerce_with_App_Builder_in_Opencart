@@ -4,6 +4,7 @@ bool loginState = false;
 String idCurrency = '';
 String isoCode = '';
 int wishlistCount = 0;
+String sessionData = '';
 
 void setData(String key, String data) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();

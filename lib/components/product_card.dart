@@ -110,11 +110,9 @@ class _ProductCardState extends State<ProductCard> {
                           onTap: () {},
                           child: Container(
                             padding: EdgeInsets.only(right: 10),
-                            child:
-                                /* widget.product['is_in_wishlist']
+                            child: widget.product['is_in_wishlist']
                                 ? Icon(Icons.favorite)
-                                :  */
-                                Icon(Icons.favorite_outline, size: 20),
+                                : Icon(Icons.favorite_outline, size: 20),
                           ),
                         ),
                       ],

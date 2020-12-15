@@ -2,19 +2,30 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:shop_app/models/Login.dart';
 import '../models/Variable.dart';
 import 'package:shop_app/models/TokenData.dart';
 
 Future<bool> getCategoryData(dynamic map) async {
+  print(apiTokenKey);
+  print(map);
   final response = await http.post(
     'https://easycartapp.com/index.php?route=webservices/api&method=appGetCategoryDetails&version=1.6&api_token=' +
         apiTokenKey,
-    headers: {'Cookie': 'language=' + isoCode + '; currency=' + idCurrency},
+    headers: {
+      'Cookie': 'language=' +
+          isoCode +
+          '; OCSESSID=' +
+          sessionData +
+          '; currency=' +
+          idCurrency
+    },
     body: map,
   );
   Map<String, dynamic> responseJson = json.decode(response.body);
   if (response.statusCode == 200) {
     categoryVariable = CategoryModel.fromJson(responseJson['fproducts']);
+    // print(responseJson['fproducts']);
   } else {
     throw Exception('Failed to load Response');
   }

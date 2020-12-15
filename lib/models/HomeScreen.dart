@@ -15,7 +15,14 @@ Future<bool> getHomeData() async {
   final response = await http.post(
     'https://easycartapp.com/index.php?route=webservices/api&method=appGetHome&version=1.6&api_token=' +
         apiTokenKey,
-    headers: {'Cookie': 'language=' + isoCode + '; currency=' + idCurrency},
+    headers: {
+      'Cookie': 'language=' +
+          isoCode +
+          '; OCSESSID=' +
+          sessionData +
+          '; currency=' +
+          idCurrency
+    },
     body: map,
   );
   Map<String, dynamic> responseJson = json.decode(response.body);

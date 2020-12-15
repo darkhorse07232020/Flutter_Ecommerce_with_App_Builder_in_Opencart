@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_surfix_icon.dart';
 import 'package:shop_app/components/form_error.dart';
 import 'package:shop_app/models/Languages.dart';
+import 'package:shop_app/models/Wishlist.dart';
 import 'package:shop_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:shop_app/screens/login_success/login_success_screen.dart';
 import 'package:toast/toast.dart';
@@ -45,8 +46,7 @@ class _SignFormState extends State<SignForm> {
       endApiCall = false;
     });
     await getLogIn(email, password);
-    wishlistCount =
-        int.parse(loginVariable.loginUser['wishlist_count'].toString());
+    await getWishlist(email);
     Toast.show(
       loginVariable.loginUser['message'],
       context,
@@ -55,7 +55,8 @@ class _SignFormState extends State<SignForm> {
     );
     if (loginVariable.loginUser['status'] == 'success') {
       loginState = true;
-
+      wishlistCount =
+          int.parse(loginVariable.loginUser['wishlist_count'].toString());
       Navigator.pushNamed(context, LoginSuccessScreen.routeName);
     }
     // if all are valid then go to success screen
