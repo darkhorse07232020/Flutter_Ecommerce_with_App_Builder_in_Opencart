@@ -33,7 +33,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
             ? IconWithCounter(
                 text: '',
                 iconData: Icons.favorite_outline,
-                notificationCount: loginVariable.loginUser["wishlist_count"],
+                notificationCount: wishlistCount,
                 onTap: () {},
               )
             : Container(),

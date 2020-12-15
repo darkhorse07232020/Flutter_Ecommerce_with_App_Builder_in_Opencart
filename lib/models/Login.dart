@@ -22,7 +22,7 @@ Future<bool> getLogIn(String email, String password) async {
   Map<String, dynamic> responseJson = json.decode(response.body);
 
   if (response.statusCode == 200) {
-    loginVariable = LoginModel.fromJson(responseJson);
+    loginVariable = LoginModel.fromJson(responseJson, email);
   } else {
     throw Exception('Failed to load LangClass');
   }
@@ -34,16 +34,19 @@ LoginModel loginVariable;
 class LoginModel {
   final dynamic loginUser;
   final dynamic installModule;
+  final dynamic email;
 
   LoginModel({
     this.loginUser,
     this.installModule,
+    this.email,
   });
 
-  factory LoginModel.fromJson(Map<String, dynamic> json) {
+  factory LoginModel.fromJson(Map<String, dynamic> json, String email) {
     return new LoginModel(
       loginUser: json['login_user'],
       installModule: json['install_module'],
+      email: email,
     );
   }
 }

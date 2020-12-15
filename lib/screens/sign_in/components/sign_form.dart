@@ -45,6 +45,8 @@ class _SignFormState extends State<SignForm> {
       endApiCall = false;
     });
     await getLogIn(email, password);
+    wishlistCount =
+        int.parse(loginVariable.loginUser['wishlist_count'].toString());
     Toast.show(
       loginVariable.loginUser['message'],
       context,

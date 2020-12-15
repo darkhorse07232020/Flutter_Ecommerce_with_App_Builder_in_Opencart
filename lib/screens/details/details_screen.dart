@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_html/html_parser.dart';
 import 'package:shop_app/components/add_button.dart';
 import 'package:shop_app/components/cart_order_btn.dart';
 import 'package:shop_app/components/product_card.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/helpers/add_to_wishlist.dart';
 import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/details/components/details_app_bar.dart';
@@ -35,8 +35,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
         future: initialize(args.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            // productVariable.product['product_info'] =
-            //     productVariable.product['product_info'].reversed.toList();
             dynamic temp = productVariable.product['product_info'][2];
             productVariable.product['product_info'][2] =
                 productVariable.product['product_info'][0];
@@ -193,7 +191,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   ),
                 ),
                 Container(
-                  height: 50,
                   width: MediaQuery.of(context).size.width,
                   child: Row(
                     children: [
@@ -201,7 +198,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         width: MediaQuery.of(context).size.width / 2.0,
                         child: AddButton(
                           color: Colors.white,
-                          press: () {},
+                          press: () {
+                            addToWishlist(
+                              context,
+                              productVariable.product['id_product'],
+                            );
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -235,7 +237,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               ),
                               SizedBox(width: 20),
                               Text(
-                                getWord(isoCode, 'add_to_cart'),
+                                // getWord(isoCode, 'add_to_cart'),
+                                'Add to Cart',
                                 style: TextStyle(
                                   color: kBtnTxtColor,
                                   fontSize: 14,

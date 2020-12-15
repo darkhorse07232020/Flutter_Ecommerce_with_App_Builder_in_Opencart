@@ -48,13 +48,17 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class HomePage extends StatefulWidget {
+  final int initTab;
+
+  const HomePage({Key key, this.initTab = 0}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  int _currentTab = 0;
+  int _currentTab;
 
   List<Widget> _pages = [
     HomeTab(),
@@ -67,8 +71,8 @@ class _HomePageState extends State<HomePage>
 
   @override
   void initState() {
-    _currentTab = 0;
-    _currentPage = HomeTab();
+    _currentTab = widget.initTab;
+    _currentPage = _pages[_currentTab];
     super.initState();
   }
 
