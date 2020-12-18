@@ -65,23 +65,10 @@ class _SignUpFormState extends State<SignUpForm> {
         '", "mobile_number": "' +
         phoneNumber +
         '"}';
-    final response = await http.post(
-      'https://easycartapp.com/index.php?route=webservices/api&method=appRegisterUser&version=1.6&api_token=' +
-          apiTokenKey,
-      headers: {
-        'Cookie': 'language=' +
-            isoCode +
-            '; OCSESSID=' +
-            sessionData +
-            '; currency=' +
-            idCurrency
-      },
-      body: map,
-    );
-    Map<String, dynamic> responseJson = json.decode(response.body);
-    if (responseJson['signup_user']['status'] == 'success') {
+    await getSignUp(map, email);
+    if (loginVariable.loginUser['status'] == 'success') {
       Toast.show(
-        responseJson['signup_user']['message'],
+        loginVariable.loginUser['message'],
         context,
         duration: Toast.LENGTH_LONG,
         gravity: Toast.CENTER,
@@ -92,15 +79,15 @@ class _SignUpFormState extends State<SignUpForm> {
       cartCount = int.parse(loginVariable.loginUser["cart_count"].toString());
       Navigator.pushNamed(context, LoginSuccessScreen.routeName);
     } else {
-      if (responseJson['signup_user']['message'].runtimeType == String) {
+      if (loginVariable.loginUser['message'].runtimeType == String) {
         Toast.show(
-          responseJson['signup_user']['message'],
+          loginVariable.loginUser['message'],
           context,
           duration: Toast.LENGTH_LONG,
           gravity: Toast.CENTER,
         );
       } else {
-        responseJson['signup_user']['message'].forEach((key, value) {
+        loginVariable.loginUser['message'].forEach((key, value) {
           Toast.show(
             value,
             context,

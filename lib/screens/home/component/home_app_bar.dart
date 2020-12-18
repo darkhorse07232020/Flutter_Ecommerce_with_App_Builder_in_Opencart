@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:shop_app/components/icon_with_counter.dart';
 import 'package:shop_app/constants.dart';
-import 'package:shop_app/models/Login.dart';
 import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/cart/cart_screen.dart';
 import 'package:shop_app/screens/products/product_screen.dart';

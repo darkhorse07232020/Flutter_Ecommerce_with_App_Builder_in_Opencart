@@ -52,9 +52,34 @@ class LoginModel {
 
   factory LoginModel.fromJson(Map<String, dynamic> json, String email) {
     return new LoginModel(
-      loginUser: json['login_user'],
+      loginUser: json['login_user'] ?? json['signup_user'],
       installModule: json['install_module'],
       email: email,
     );
   }
+}
+
+Future<bool> getSignUp(dynamic map, String email) async {
+  final response = await http.post(
+    'https://easycartapp.com/index.php?route=webservices/api&method=appRegisterUser&version=1.6&api_token=' +
+        apiTokenKey,
+    headers: {
+      'Cookie': 'language=' +
+          isoCode +
+          '; OCSESSID=' +
+          sessionData +
+          '; currency=' +
+          idCurrency
+    },
+    body: map,
+  );
+  Map<String, dynamic> responseJson = json.decode(response.body);
+
+  if (response.statusCode == 200) {
+    loginVariable = LoginModel.fromJson(responseJson, email);
+    sessionData = responseJson['signup_user']['session_data'];
+  } else {
+    throw Exception('Failed to load LangClass');
+  }
+  return (response.statusCode == 200);
 }
