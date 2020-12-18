@@ -51,7 +51,7 @@ class WishlistScreen extends StatelessWidget {
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 20),
-                      margin: EdgeInsets.symmetric(vertical: 10),
+                      margin: EdgeInsets.symmetric(vertical: 5),
                       height: 100,
                       width: MediaQuery.of(context).size.width,
                       color: Colors.white,

@@ -28,7 +28,7 @@ Future<bool> getWishlist(String email) async {
   Map<String, dynamic> responseJson = json.decode(response.body);
 
   if (response.statusCode == 200) {
-    wishlistVariable = WishlistModel.fromJson(responseJson, email);
+    wishlistVariable = WishlistModel.fromJson(responseJson);
   } else {
     throw Exception('Failed to load LangClass');
   }
@@ -48,7 +48,7 @@ class WishlistModel {
     this.status,
   });
 
-  factory WishlistModel.fromJson(Map<String, dynamic> json, String email) {
+  factory WishlistModel.fromJson(Map<String, dynamic> json) {
     return new WishlistModel(
       wishlistProduct: json['wishlist_products'],
       installModule: json['install_module'],

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/components/icon_with_counter.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/models/Login.dart';
+import 'package:shop_app/models/Variable.dart';
+import 'package:shop_app/screens/wishlist/wishlist_screen.dart';
 
 class ProductAppBar extends PreferredSize {
   final String title;
@@ -22,20 +26,29 @@ class ProductAppBar extends PreferredSize {
         title,
         style: TextStyle(color: kBtnTxtColor),
       ),
-      // actions: [
-      //   IconButton(
-      //     icon: Icon(Icons.search),
-      //     onPressed: () {},
-      //   ),
-      //   IconButton(
-      //     icon: Icon(Icons.favorite_outline),
-      //     onPressed: () {},
-      //   ),
-      //   IconButton(
-      //     icon: Icon(Icons.card_travel),
-      //     onPressed: () {},
-      //   ),
-      // ],
+      actions: [
+        loginState
+            ? IconWithCounter(
+                text: '',
+                iconData: Icons.favorite_outline,
+                notificationCount: wishlistCount,
+                onTap: () {
+                  Navigator.pushNamed(context, WishlistScreen.routeName);
+                },
+              )
+            : Container(),
+        loginState
+            ? IconWithCounter(
+                text: '',
+                iconData: Icons.card_travel,
+                notificationCount: loginVariable.loginUser["cart_count"],
+                onTap: () {},
+              )
+            : IconButton(
+                icon: Icon(Icons.card_travel),
+                onPressed: () {},
+              ),
+      ],
     );
   }
 }

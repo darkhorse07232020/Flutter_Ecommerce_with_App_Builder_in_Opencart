@@ -1,34 +1,112 @@
-// import 'package:flutter/material.dart';
-// import 'package:shop_app/models/Cart.dart';
+import 'package:flutter/material.dart';
+import 'package:shop_app/constants.dart';
+import 'package:shop_app/models/Cart.dart';
+import 'package:shop_app/models/Login.dart';
+import 'package:shop_app/screens/details/details_screen.dart';
 
-// import 'components/body.dart';
-// import 'components/check_out_card.dart';
+class CartScreen extends StatelessWidget {
+  static String routeName = "/cart";
 
-// class CartScreen extends StatelessWidget {
-//   static String routeName = "/cart";
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: buildAppBar(context),
-//       body: Body(),
-//       bottomNavigationBar: CheckoutCard(),
-//     );
-//   }
+  Future<void> initialize() async {
+    await getCartDetails(loginVariable.email);
+  }
 
-//   AppBar buildAppBar(BuildContext context) {
-//     return AppBar(
-//       title: Column(
-//         children: [
-//           Text(
-//             "Your Cart",
-//             style: TextStyle(color: Colors.black),
-//           ),
-//           Text(
-//             // "${demoCarts.length} items",
-//             style: Theme.of(context).textTheme.caption,
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kPrimaryColor,
+        iconTheme: IconThemeData(
+          color: kBtnTxtColor,
+        ),
+        centerTitle: true,
+        title: Padding(
+          padding: EdgeInsets.all(0),
+          child: Text(
+            'Add to Wishlist',
+            style: TextStyle(color: kBtnTxtColor),
+          ),
+        ),
+      ),
+      body: FutureBuilder(
+        future: initialize(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Container(
+              color: kBGColor,
+              child: ListView.builder(
+                itemCount: wishlistVariable.wishlistProduct.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  dynamic item = wishlistVariable.wishlistProduct[index];
+                  return InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        DetailsScreen.routeName,
+                        arguments: ProductDetailsArguments(
+                          id: item['product_id'].toString(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      margin: EdgeInsets.symmetric(vertical: 5),
+                      height: 100,
+                      width: MediaQuery.of(context).size.width,
+                      color: Colors.white,
+                      child: Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width / 4.0,
+                            child:
+                                Image.network(item['images'], fit: BoxFit.fill),
+                          ),
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item['title'],
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
+                                  item['discount_percentage'] == 0
+                                      ? ''
+                                      : ' ${item['discount_price']} ',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey,
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                                ),
+                                Text(
+                                  '${item['price']}',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            );
+          } else {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
+      ),
+    );
+  }
+}

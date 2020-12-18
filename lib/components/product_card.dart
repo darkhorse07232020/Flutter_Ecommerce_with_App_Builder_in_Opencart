@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/cart_order_btn.dart';
+import 'package:shop_app/helpers/operate_wishlist.dart';
 import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
@@ -31,10 +32,12 @@ class ProductCard extends StatefulWidget {
 
 class _ProductCardState extends State<ProductCard> {
   int _cartNum;
+  bool wishlistState;
 
   @override
   void initState() {
     _cartNum = 0;
+    wishlistState = widget.product['is_in_wishlist'] ?? false;
     super.initState();
   }
 
@@ -107,11 +110,23 @@ class _ProductCardState extends State<ProductCard> {
                           ),
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            // wishlistState == false
+                            //     ? addToWishlist(
+                            //         context,
+                            //         widget.product['id'],
+                            //       )
+                            //     : removeToWishlist(
+                            //         context,
+                            //         widget.product['id'],
+                            //       );
+                            // setState(() {
+                            //   wishlistState = !wishlistState;
+                            // });
+                          },
                           child: Container(
                             padding: EdgeInsets.only(right: 10),
-                            child: widget.product['is_in_wishlist'] != null &&
-                                    widget.product['is_in_wishlist'] == true
+                            child: widget.product['is_in_wishlist']
                                 ? Icon(Icons.favorite, color: Colors.pink)
                                 : Icon(Icons.favorite_outline, size: 20),
                           ),

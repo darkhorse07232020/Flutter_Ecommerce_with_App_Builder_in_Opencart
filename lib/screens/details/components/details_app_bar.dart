@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/components/icon_with_counter.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/Languages.dart';
+import 'package:shop_app/models/Login.dart';
 import 'package:shop_app/models/Variable.dart';
+import 'package:shop_app/screens/main/home_screen.dart';
+import 'package:shop_app/screens/wishlist/wishlist_screen.dart';
 
 class DetailsAppBar extends PreferredSize {
   @override
@@ -14,17 +18,23 @@ class DetailsAppBar extends PreferredSize {
       iconTheme: IconThemeData(
         color: kBtnTxtColor,
       ),
+      centerTitle: true,
       backgroundColor: kPrimaryColor,
       title: Text(
         getWord(isoCode, 'product'),
         style: TextStyle(color: kBtnTxtColor),
       ),
-      actions: [
-        IconButton(
-          icon: Icon(Icons.card_travel),
-          onPressed: () {},
-        ),
-      ],
+      leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePage(initTab: 0),
+              ),
+            );
+          }),
     );
   }
 }
