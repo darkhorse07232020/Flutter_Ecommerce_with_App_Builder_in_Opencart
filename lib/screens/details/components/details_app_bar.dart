@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/components/icon_with_counter.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/Languages.dart';
-import 'package:shop_app/models/Login.dart';
 import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/main/home_screen.dart';
-import 'package:shop_app/screens/wishlist/wishlist_screen.dart';
 
 class DetailsAppBar extends PreferredSize {
   @override

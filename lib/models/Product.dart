@@ -11,6 +11,7 @@ Future<bool> getProductData(String id) async {
   map['id_currency'] = idCurrency;
   map['iso_code'] = isoCode;
   map['product_id'] = id;
+  print('$id   $sessionData');
   final response = await http.post(
     'https://easycartapp.com/index.php?route=webservices/api&method=appGetProductDetails&version=1.6&api_token=' +
         apiTokenKey,

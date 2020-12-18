@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_search_bar/flutter_search_bar.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/HomeScreen.dart';
 import 'package:shop_app/models/Languages.dart';

@@ -7,7 +7,6 @@ import 'package:shop_app/screens/components/banners_grid.dart';
 import 'package:shop_app/screens/components/banners_horizontal_sliding.dart';
 import 'package:shop_app/screens/components/banners_square.dart';
 import 'package:shop_app/screens/components/categories_top.dart';
-import 'package:shop_app/screens/components/products_recent.dart';
 import 'package:shop_app/screens/home/component/home_app_bar.dart';
 import 'package:shop_app/screens/home/component/left_nav_bar/nav_bar.dart';
 

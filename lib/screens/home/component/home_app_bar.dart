@@ -4,9 +4,9 @@ import 'package:shop_app/components/icon_with_counter.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/Login.dart';
 import 'package:shop_app/models/Variable.dart';
+import 'package:shop_app/screens/cart/cart_screen.dart';
 import 'package:shop_app/screens/products/product_screen.dart';
 import 'package:shop_app/screens/wishlist/wishlist_screen.dart';
-import 'package:toast/toast.dart';
 
 class HomeAppBar extends StatefulWidget {
   final Widget title;
@@ -43,8 +43,10 @@ class _HomeAppBarState extends State<HomeAppBar> {
             ? IconWithCounter(
                 text: '',
                 iconData: Icons.card_travel,
-                notificationCount: loginVariable.loginUser["cart_count"],
-                onTap: () {},
+                notificationCount: cartCount,
+                onTap: () {
+                  Navigator.pushNamed(context, CartScreen.routeName);
+                },
               )
             : IconButton(
                 icon: Icon(Icons.card_travel),

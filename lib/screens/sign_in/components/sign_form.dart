@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_surfix_icon.dart';
 import 'package:shop_app/components/form_error.dart';
 import 'package:shop_app/models/Languages.dart';
-import 'package:shop_app/models/Wishlist.dart';
 import 'package:shop_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:shop_app/screens/login_success/login_success_screen.dart';
 import 'package:toast/toast.dart';
@@ -56,6 +55,7 @@ class _SignFormState extends State<SignForm> {
       loginState = true;
       wishlistCount =
           int.parse(loginVariable.loginUser['wishlist_count'].toString());
+      cartCount = int.parse(loginVariable.loginUser["cart_count"].toString());
       Navigator.pushNamed(context, LoginSuccessScreen.routeName);
     }
     // if all are valid then go to success screen
@@ -75,18 +75,8 @@ class _SignFormState extends State<SignForm> {
           buildPasswordFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Checkbox(
-                value: remember,
-                activeColor: kPrimaryColor,
-                onChanged: (value) {
-                  setState(() {
-                    remember = value;
-                  });
-                },
-              ),
-              Text("Remember me"),
-              Spacer(),
               GestureDetector(
                 onTap: () => Navigator.pushNamed(
                     context, ForgotPasswordScreen.routeName),
