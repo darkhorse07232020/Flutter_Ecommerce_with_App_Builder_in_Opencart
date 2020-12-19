@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_surfix_icon.dart';
 import 'package:shop_app/components/default_button.dart';
 import 'package:shop_app/components/form_error.dart';
-import 'package:http/http.dart' as http;
 import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/Login.dart';
-import 'package:shop_app/models/TokenData.dart';
 import 'package:shop_app/screens/login_success/login_success_screen.dart';
 import 'package:toast/toast.dart';
 
@@ -77,7 +73,7 @@ class _SignUpFormState extends State<SignUpForm> {
       wishlistCount =
           int.parse(loginVariable.loginUser['wishlist_count'].toString());
       cartCount = int.parse(loginVariable.loginUser["cart_count"].toString());
-      Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+      Navigator.popAndPushNamed(context, LoginSuccessScreen.routeName);
     } else {
       if (loginVariable.loginUser['message'].runtimeType == String) {
         Toast.show(
