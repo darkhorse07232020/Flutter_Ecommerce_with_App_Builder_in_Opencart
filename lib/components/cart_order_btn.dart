@@ -7,9 +7,15 @@ class CartOrderBtn extends StatefulWidget {
   final int currentCartNum;
   final productID;
   final Function(int) onTap;
-  const CartOrderBtn(
-      {Key key, this.width, this.onTap, this.currentCartNum, this.productID})
-      : super(key: key);
+  final parentContext;
+  const CartOrderBtn({
+    Key key,
+    this.width,
+    this.onTap,
+    this.currentCartNum,
+    this.productID,
+    @required this.parentContext,
+  }) : super(key: key);
 
   @override
   _CartOrderBtnState createState() => _CartOrderBtnState();
@@ -22,6 +28,11 @@ class _CartOrderBtnState extends State<CartOrderBtn> {
   void initState() {
     _cartNum = widget.currentCartNum;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -41,6 +52,12 @@ class _CartOrderBtnState extends State<CartOrderBtn> {
               setState(() {
                 _cartNum--;
               });
+              if (_cartNum == 0) {
+                removeToCart(widget.parentContext, widget.productID, '1');
+              } else {
+                updateQuantity(widget.parentContext, widget.productID,
+                    _cartNum.toString());
+              }
               widget.onTap(_cartNum);
             },
             child: Center(

@@ -32,11 +32,13 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     return FutureBuilder(
       future: initialize(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return Scaffold(
+            key: _scaffoldKey,
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(
                   AppBar().preferredSize.height), // here the desired height

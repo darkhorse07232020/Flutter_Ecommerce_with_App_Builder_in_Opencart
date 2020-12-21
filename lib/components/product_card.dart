@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/cart_order_btn.dart';
 import 'package:shop_app/helpers/operate_cart.dart';
-import 'package:shop_app/helpers/operate_wishlist.dart';
 import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
@@ -35,6 +34,11 @@ class _ProductCardState extends State<ProductCard> {
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -165,6 +169,7 @@ class _ProductCardState extends State<ProductCard> {
                             width: widget.width,
                             currentCartNum: widget.product['cart_quantity'],
                             productID: widget.product['id'],
+                            parentContext: context,
                             onTap: (int cartnum) {
                               setState(() {
                                 widget.product['cart_quantity'] = cartnum;

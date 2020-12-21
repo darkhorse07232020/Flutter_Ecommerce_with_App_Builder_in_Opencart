@@ -19,10 +19,11 @@ Future<bool> addToCart(context, productId, quantity) async {
         productId +
         ', "quantity": ' +
         quantity +
-        ', "option": [], "email" : "' +
+        ', "option": []' +
+        '}], "email" : "' +
         loginVariable.email +
-        '"}]}';
-
+        '"}';
+    print(map);
     final response = await http.post(
       'https://easycartapp.com/index.php?route=webservices/api&method=appAddToCart&version=1.6&api_token=' +
           apiTokenKey,
@@ -37,7 +38,7 @@ Future<bool> addToCart(context, productId, quantity) async {
       body: map,
     );
     Map<String, dynamic> responseJson = json.decode(response.body);
-
+    print(responseJson);
     if (response.statusCode == 200) {
       if (responseJson['status'] == 'success') {
         Toast.show(responseJson['message'], context);
@@ -71,8 +72,8 @@ Future<bool> removeToCart(context, productId, quantity) async {
         productId +
         ', "quantity": ' +
         quantity +
-        '"}]}';
-
+        '}]}';
+    print(map);
     final response = await http.post(
       'https://easycartapp.com/index.php?route=webservices/api&method=appRemoveProduct&version=1.6&api_token=' +
           apiTokenKey,
@@ -88,6 +89,58 @@ Future<bool> removeToCart(context, productId, quantity) async {
     );
     Map<String, dynamic> responseJson = json.decode(response.body);
 
+    print(responseJson['cart']);
+    if (response.statusCode == 200) {
+      if (responseJson['status'] == 'success') {
+        Toast.show(responseJson['message'], context);
+        // cartCount = int.parse(responseJson['total_cart_items'].toString());
+        Provider.of<DetailState>(context, listen: false).setCartCount(
+            int.parse(responseJson['cart']['total_cart_items'].toString()));
+        return true;
+      }
+    } else {
+      throw Exception('Failed to load LangClass');
+    }
+  } else {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomePage(initTab: 3),
+      ),
+    );
+  }
+  return false;
+}
+
+Future<bool> updateQuantity(context, productId, quantity) async {
+  if (loginState == true) {
+    var map = new Map<String, dynamic>();
+    map['id_currency'] = idCurrency;
+    map['iso_code'] = isoCode;
+    map['email'] = loginVariable.email;
+    map['session_data'] = sessionData;
+    map['cart_products'] = '{"cart_products": [{"product_id": ' +
+        productId +
+        ', "quantity": ' +
+        quantity +
+        '}]}';
+    print(map);
+    final response = await http.post(
+      'https://easycartapp.com/index.php?route=webservices/api&method=appUpdateCartQuantity&version=1.6&api_token=' +
+          apiTokenKey,
+      headers: {
+        'Cookie': 'language=' +
+            isoCode +
+            '; OCSESSID=' +
+            sessionData +
+            '; currency=' +
+            idCurrency
+      },
+      body: map,
+    );
+    Map<String, dynamic> responseJson = json.decode(response.body);
+
+    print(responseJson);
     if (response.statusCode == 200) {
       if (responseJson['status'] == 'success') {
         Toast.show(responseJson['message'], context);
