@@ -18,7 +18,6 @@ class ProductRecent extends StatelessWidget {
           shrinkWrap: true,
           itemCount: product.length,
           itemBuilder: (context, index) => ProductCard(
-            incVal: 1,
             product: product[index],
           ),
         ),

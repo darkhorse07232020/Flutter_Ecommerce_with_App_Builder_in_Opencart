@@ -44,7 +44,6 @@ class ProductSquare extends StatelessWidget {
                 //   ),
                 // );
                 return ProductCard(
-                  incVal: 1,
                   width: MediaQuery.of(context).size.width,
                   product: products[index],
                 );

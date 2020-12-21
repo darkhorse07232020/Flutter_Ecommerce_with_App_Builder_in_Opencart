@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/cart_order_btn.dart';
 import 'package:shop_app/helpers/operate_cart.dart';
+import 'package:shop_app/helpers/operate_wishlist.dart';
 import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
@@ -17,13 +18,11 @@ class ProductCard extends StatefulWidget {
     this.width = 140,
     this.aspectRetio = 1.02,
     @required this.product,
-    @required this.incVal,
     this.isCartButton = true,
   }) : super(key: key);
 
   final double width, aspectRetio;
   final dynamic product;
-  final int incVal;
   final bool isCartButton;
 
   @override
@@ -115,23 +114,24 @@ class _ProductCardState extends State<ProductCard> {
                         ),
                         InkWell(
                           onTap: () {
-                            // if (widget.product['is_in_wishlist'] == false) {
-                            //   addToWishlist(
-                            //     context,
-                            //     widget.product['id_product'],
-                            //   );
-                            //   setState(() {
-                            //     widget.product['is_in_wishlist'] = true;
-                            //   });
-                            // } else {
-                            //   removeToWishlist(
-                            //     context,
-                            //     widget.product['id_product'],
-                            //   );
-                            //   setState(() {
-                            //     widget.product['is_in_wishlist'] = false;
-                            //   });
-                            // }
+                            print(widget.product);
+                            if (widget.product['is_in_wishlist'] == false) {
+                              addToWishlist(
+                                context,
+                                widget.product['id'],
+                              );
+                              setState(() {
+                                widget.product['is_in_wishlist'] = true;
+                              });
+                            } else {
+                              removeToWishlist(
+                                context,
+                                widget.product['id'],
+                              );
+                              setState(() {
+                                widget.product['is_in_wishlist'] = false;
+                              });
+                            }
                           },
                           child: Container(
                             padding: EdgeInsets.only(right: 10),
@@ -156,8 +156,7 @@ class _ProductCardState extends State<ProductCard> {
                             onPressed: () {
                               addToCart(context, widget.product['id'], '1');
                               setState(() {
-                                widget.product['cart_quantity'] +=
-                                    widget.incVal;
+                                widget.product['cart_quantity'] += 1;
                               });
                             },
                             child: Text(

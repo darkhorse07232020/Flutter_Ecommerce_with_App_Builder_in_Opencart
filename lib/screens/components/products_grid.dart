@@ -42,7 +42,6 @@ class ProductsGrid extends StatelessWidget {
                   child: ProductCard(
                     product: products[index],
                     width: MediaQuery.of(context).size.width / 2.0,
-                    incVal: 0,
                   ),
                 );
               },

@@ -30,7 +30,6 @@ class ProductsHorizontal extends StatelessWidget {
               shrinkWrap: true,
               itemCount: products.length,
               itemBuilder: (context, index) => ProductCard(
-                incVal: 0,
                 width: MediaQuery.of(context).size.width / 2.5,
                 product: products[index],
               ),

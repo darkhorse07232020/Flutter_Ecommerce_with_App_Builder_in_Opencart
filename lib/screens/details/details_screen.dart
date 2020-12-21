@@ -185,7 +185,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     product: productVariable
                                             .product['related_products']
                                         ['related_products_items'][index],
-                                    incVal: 0,
                                     isCartButton: false,
                                   ),
                                 );
