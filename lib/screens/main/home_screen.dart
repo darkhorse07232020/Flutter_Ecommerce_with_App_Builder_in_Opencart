@@ -4,6 +4,7 @@ import 'package:shop_app/models/HomeScreen.dart';
 import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/TokenData.dart';
 import 'package:shop_app/models/Variable.dart';
+import 'package:shop_app/screens/cart/cart_screen.dart';
 import 'package:shop_app/screens/main/loading_screen.dart';
 import 'package:shop_app/screens/categories/categories.dart';
 import 'package:shop_app/screens/search/search.dart';
@@ -62,8 +63,7 @@ class _HomePageState extends State<HomePage>
   List<Widget> _pages = [
     HomeTab(),
     CategoriesTab(),
-    SearchTab(),
-    // CartScreen(),
+    CartScreen(),
     loginState ? SearchTab() : SignInScreen(),
   ];
   Widget _currentPage;

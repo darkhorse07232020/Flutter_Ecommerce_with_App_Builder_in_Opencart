@@ -20,8 +20,6 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
-  bool wishlistState;
-
   Future<void> initialize(id) async {
     await getProductData(id);
   }
@@ -41,7 +39,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
             productVariable.product['product_info'][2] =
                 productVariable.product['product_info'][0];
             productVariable.product['product_info'][0] = temp;
-            wishlistState = productVariable.product['is_in_wishlist'];
+            // wishlistState = productVariable.product['is_in_wishlist'];
+            // print(productVariable.product);
+
             return Column(
               children: [
                 Flexible(
@@ -202,15 +202,26 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         child: AddButton(
                           color: Colors.white,
                           press: () {
-                            productVariable.product['is_in_wishlist'] == false
-                                ? addToWishlist(
-                                    context,
-                                    productVariable.product['id_product'],
-                                  )
-                                : removeToWishlist(
-                                    context,
-                                    productVariable.product['id_product'],
-                                  );
+                            if (productVariable.product['is_in_wishlist'] ==
+                                false) {
+                              addToWishlist(
+                                context,
+                                productVariable.product['id_product'],
+                              );
+                              setState(() {
+                                productVariable.product['is_in_wishlist'] =
+                                    true;
+                              });
+                            } else {
+                              removeToWishlist(
+                                context,
+                                productVariable.product['id_product'],
+                              );
+                              setState(() {
+                                productVariable.product['is_in_wishlist'] =
+                                    false;
+                              });
+                            }
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -218,7 +229,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               Icon(
                                 Icons.favorite,
                                 color:
-                                    wishlistState ? Colors.pink : Colors.grey,
+                                    productVariable.product['is_in_wishlist'] ==
+                                            true
+                                        ? Colors.pink
+                                        : Colors.grey,
                               ),
                               SizedBox(width: 20),
                               Text(

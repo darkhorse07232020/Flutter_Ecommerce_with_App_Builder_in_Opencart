@@ -24,8 +24,10 @@ Future<bool> getProductData(String id) async {
     },
     body: map,
   );
+  print(sessionData);
   Map<String, dynamic> responseJson = json.decode(response.body);
   if (response.statusCode == 200) {
+    // print(responseJson['product']);
     productVariable = ProductModel.fromJson(responseJson);
   } else {
     throw Exception('Failed to load Response');

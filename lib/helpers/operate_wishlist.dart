@@ -35,7 +35,6 @@ Future<bool> addToWishlist(context, productId) async {
       if (responseJson['status'] == 'success') {
         Toast.show(responseJson['message'], context);
         wishlistCount = int.parse(responseJson['wishlist_count'].toString());
-
         return true;
       }
     } else {

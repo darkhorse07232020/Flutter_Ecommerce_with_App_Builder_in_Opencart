@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/cart_order_btn.dart';
+import 'package:shop_app/helpers/operate_wishlist.dart';
 import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
@@ -31,12 +32,10 @@ class ProductCard extends StatefulWidget {
 
 class _ProductCardState extends State<ProductCard> {
   int _cartNum;
-  bool wishlistState;
 
   @override
   void initState() {
     _cartNum = 0;
-    wishlistState = widget.product['is_in_wishlist'] ?? false;
     super.initState();
   }
 
@@ -110,18 +109,23 @@ class _ProductCardState extends State<ProductCard> {
                         ),
                         InkWell(
                           onTap: () {
-                            // wishlistState == false
-                            //     ? addToWishlist(
-                            //         context,
-                            //         widget.product['id'],
-                            //       )
-                            //     : removeToWishlist(
-                            //         context,
-                            //         widget.product['id'],
-                            //       );
-                            // setState(() {
-                            //   wishlistState = !wishlistState;
-                            // });
+                            // if (widget.product['is_in_wishlist'] == false) {
+                            //   addToWishlist(
+                            //     context,
+                            //     widget.product['id_product'],
+                            //   );
+                            //   setState(() {
+                            //     widget.product['is_in_wishlist'] = true;
+                            //   });
+                            // } else {
+                            //   removeToWishlist(
+                            //     context,
+                            //     widget.product['id_product'],
+                            //   );
+                            //   setState(() {
+                            //     widget.product['is_in_wishlist'] = false;
+                            //   });
+                            // }
                           },
                           child: Container(
                             padding: EdgeInsets.only(right: 10),
