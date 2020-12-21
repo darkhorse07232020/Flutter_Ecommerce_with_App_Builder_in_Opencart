@@ -164,6 +164,7 @@ class _ProductCardState extends State<ProductCard> {
                         : CartOrderBtn(
                             width: widget.width,
                             currentCartNum: widget.product['cart_quantity'],
+                            productID: widget.product['id'],
                             onTap: (int cartnum) {
                               setState(() {
                                 widget.product['cart_quantity'] = cartnum;

@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
-import 'package:shop_app/helpers/operate_cart.dart';
+import '../../../models/Variable.dart';
 
-class CartOrderBtn extends StatefulWidget {
+class CartNumBtn extends StatefulWidget {
   final double width;
   final int currentCartNum;
-  final productID;
-  final Function(int) onTap;
-  const CartOrderBtn(
-      {Key key, this.width, this.onTap, this.currentCartNum, this.productID})
+  // final Function(int) onTap;
+  const CartNumBtn({Key key, this.width, this.currentCartNum})
       : super(key: key);
 
   @override
-  _CartOrderBtnState createState() => _CartOrderBtnState();
+  _CartNumBtnState createState() => _CartNumBtnState();
 }
 
-class _CartOrderBtnState extends State<CartOrderBtn> {
-  int _cartNum = 0;
+class _CartNumBtnState extends State<CartNumBtn> {
+  int _cartNum = 1;
 
   @override
   void initState() {
     _cartNum = widget.currentCartNum;
+    tempCartNum = _cartNum;
     super.initState();
   }
 
@@ -37,11 +36,12 @@ class _CartOrderBtnState extends State<CartOrderBtn> {
             padding: EdgeInsets.all(0),
             splashColor: Colors.blueAccent,
             onPressed: () {
-              if (_cartNum == 0) return;
+              if (_cartNum == 1) return;
               setState(() {
                 _cartNum--;
               });
-              widget.onTap(_cartNum);
+              tempCartNum--;
+              // widget.onTap(_cartNum);
             },
             child: Center(
               child: Text(
@@ -63,11 +63,11 @@ class _CartOrderBtnState extends State<CartOrderBtn> {
             padding: EdgeInsets.all(0),
             splashColor: Colors.blueAccent,
             onPressed: () {
-              addToCart(context, widget.productID, '1');
               setState(() {
                 _cartNum++;
               });
-              widget.onTap(_cartNum);
+              tempCartNum++;
+              // widget.onTap(_cartNum);
             },
             child: Center(
               child: Text(

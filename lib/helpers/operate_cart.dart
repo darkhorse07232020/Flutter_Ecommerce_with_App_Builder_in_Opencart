@@ -60,16 +60,21 @@ Future<bool> addToCart(context, productId, quantity) async {
   return false;
 }
 
-Future<bool> removeToCart(context, productId) async {
+Future<bool> removeToCart(context, productId, quantity) async {
   if (loginState == true) {
     var map = new Map<String, dynamic>();
     map['id_currency'] = idCurrency;
     map['iso_code'] = isoCode;
     map['email'] = loginVariable.email;
-    map['product_id'] = productId;
+    map['session_data'] = sessionData;
+    map['cart_products'] = '{"cart_products": [{"product_id": ' +
+        productId +
+        ', "quantity": ' +
+        quantity +
+        '"}]}';
 
     final response = await http.post(
-      'https://easycartapp.com/index.php?route=webservices/api&method=appRemoveWishlist&version=1.6&api_token=' +
+      'https://easycartapp.com/index.php?route=webservices/api&method=appRemoveProduct&version=1.6&api_token=' +
           apiTokenKey,
       headers: {
         'Cookie': 'language=' +
@@ -86,8 +91,9 @@ Future<bool> removeToCart(context, productId) async {
     if (response.statusCode == 200) {
       if (responseJson['status'] == 'success') {
         Toast.show(responseJson['message'], context);
-        Provider.of<DetailState>(context, listen: false)
-            .setCartCount(int.parse(responseJson['wishlist_count'].toString()));
+        // cartCount = int.parse(responseJson['total_cart_items'].toString());
+        Provider.of<DetailState>(context, listen: false).setCartCount(
+            int.parse(responseJson['cart']['total_cart_items'].toString()));
         return true;
       }
     } else {

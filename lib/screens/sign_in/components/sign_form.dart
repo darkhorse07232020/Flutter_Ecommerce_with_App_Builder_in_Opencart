@@ -60,8 +60,6 @@ class _SignFormState extends State<SignForm> {
           int.parse(loginVariable.loginUser['wishlist_count'].toString()));
       Provider.of<DetailState>(context, listen: false).setCartCount(
           int.parse(loginVariable.loginUser["cart_count"].toString()));
-      print(Provider.of<DetailState>(context, listen: false).wishlistCount);
-      print(Provider.of<DetailState>(context, listen: false).cartCount);
       Navigator.popAndPushNamed(context, LoginSuccessScreen.routeName);
     }
     // if all are valid then go to success screen

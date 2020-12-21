@@ -5,10 +5,12 @@ import 'package:shop_app/components/add_button.dart';
 import 'package:shop_app/components/cart_order_btn.dart';
 import 'package:shop_app/components/product_card.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/helpers/operate_cart.dart';
 import 'package:shop_app/helpers/operate_wishlist.dart';
 import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/providers/detail_state.dart';
+import 'package:shop_app/screens/details/components/cart_num.dart';
 import 'package:shop_app/screens/details/components/details_app_bar.dart';
 
 import '../../models/Product.dart';
@@ -22,6 +24,7 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  int _cartNum = 0;
   Future<void> initialize(id) async {
     await getProductData(id);
   }
@@ -41,8 +44,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
             productVariable.product['product_info'][2] =
                 productVariable.product['product_info'][0];
             productVariable.product['product_info'][0] = temp;
-            // wishlistState = productVariable.product['is_in_wishlist'];
-            // print(productVariable.product);
 
             return Column(
               children: [
@@ -91,7 +92,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     width:
                                         MediaQuery.of(context).size.width * 0.4,
                                     height: 30,
-                                    child: CartOrderBtn(
+                                    child: CartNumBtn(
                                       currentCartNum: 1,
                                       width: MediaQuery.of(context).size.width *
                                           0.4,
@@ -253,7 +254,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         width: MediaQuery.of(context).size.width / 2.0,
                         child: AddButton(
                           press: () {
-                            print('OK');
+                            addToCart(
+                                context,
+                                productVariable.product['id_product'],
+                                tempCartNum.toString());
                           },
                           color: kButtonColor,
                           child: Row(

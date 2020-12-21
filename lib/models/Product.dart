@@ -24,8 +24,6 @@ Future<bool> getProductData(String id) async {
     },
     body: map,
   );
-  print(sessionData);
-  print(id);
   Map<String, dynamic> responseJson = json.decode(response.body);
   if (response.statusCode == 200) {
     // print(responseJson['product']);
