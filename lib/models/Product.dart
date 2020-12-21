@@ -25,6 +25,7 @@ Future<bool> getProductData(String id) async {
     body: map,
   );
   print(sessionData);
+  print(id);
   Map<String, dynamic> responseJson = json.decode(response.body);
   if (response.statusCode == 200) {
     // print(responseJson['product']);
@@ -49,6 +50,8 @@ class ProductModel {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
+    json['product']['cart_quantity'] =
+        int.parse(json['product']['cart_quantity'].toString());
     return new ProductModel(
       product: json['product'],
       fproducts: json['fproducts'],

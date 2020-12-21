@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/cart_order_btn.dart';
+import 'package:shop_app/helpers/operate_cart.dart';
 import 'package:shop_app/helpers/operate_wishlist.dart';
 import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/Variable.dart';
@@ -31,16 +32,17 @@ class ProductCard extends StatefulWidget {
 }
 
 class _ProductCardState extends State<ProductCard> {
-  int _cartNum;
-
   @override
   void initState() {
-    _cartNum = 0;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.isCartButton)
+      widget.product['cart_quantity'] =
+          int.parse(widget.product['cart_quantity'].toString());
+    // print(widget.product);
     return Padding(
       padding: EdgeInsets.all(5),
       child: SizedBox(
@@ -140,7 +142,7 @@ class _ProductCardState extends State<ProductCard> {
                   ],
                 ),
                 widget.isCartButton == true
-                    ? (_cartNum == 0
+                    ? (widget.product['cart_quantity'] == 0
                         ? FlatButton(
                             minWidth: widget.width,
                             color: kButtonColor,
@@ -148,11 +150,11 @@ class _ProductCardState extends State<ProductCard> {
                             padding: EdgeInsets.all(8.0),
                             splashColor: Colors.blueAccent,
                             onPressed: () {
-                              if (widget.incVal > 0) {
-                                setState(() {
-                                  _cartNum = widget.incVal;
-                                });
-                              }
+                              addToCart(context, widget.product['id'], '1');
+                              setState(() {
+                                widget.product['cart_quantity'] +=
+                                    widget.incVal;
+                              });
                             },
                             child: Text(
                               getWord(isoCode, 'add_to_cart'),
@@ -161,9 +163,10 @@ class _ProductCardState extends State<ProductCard> {
                           )
                         : CartOrderBtn(
                             width: widget.width,
+                            currentCartNum: widget.product['cart_quantity'],
                             onTap: (int cartnum) {
                               setState(() {
-                                _cartNum = cartnum;
+                                widget.product['cart_quantity'] = cartnum;
                               });
                             },
                           ))

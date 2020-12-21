@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_search_bar/flutter_search_bar.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/components/icon_with_counter.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/Variable.dart';
+import 'package:shop_app/providers/detail_state.dart';
 import 'package:shop_app/screens/cart/cart_screen.dart';
 import 'package:shop_app/screens/products/product_screen.dart';
 import 'package:shop_app/screens/wishlist/wishlist_screen.dart';
@@ -29,22 +31,30 @@ class _HomeAppBarState extends State<HomeAppBar> {
       actions: [
         searchBar.getSearchAction(context),
         loginState
-            ? IconWithCounter(
-                text: '',
-                iconData: Icons.favorite_outline,
-                notificationCount: wishlistCount,
-                onTap: () {
-                  Navigator.pushNamed(context, WishlistScreen.routeName);
+            ? Consumer<DetailState>(
+                builder: (context, details, child) {
+                  return IconWithCounter(
+                    text: '',
+                    iconData: Icons.favorite_outline,
+                    notificationCount: details.wishlistCount,
+                    onTap: () {
+                      Navigator.pushNamed(context, WishlistScreen.routeName);
+                    },
+                  );
                 },
               )
             : Container(),
         loginState
-            ? IconWithCounter(
-                text: '',
-                iconData: Icons.card_travel,
-                notificationCount: cartCount,
-                onTap: () {
-                  Navigator.pushNamed(context, CartScreen.routeName);
+            ? Consumer<DetailState>(
+                builder: (context, details, child) {
+                  return IconWithCounter(
+                    text: '',
+                    iconData: Icons.card_travel,
+                    notificationCount: details.cartCount,
+                    onTap: () {
+                      Navigator.pushNamed(context, CartScreen.routeName);
+                    },
+                  );
                 },
               )
             : IconButton(

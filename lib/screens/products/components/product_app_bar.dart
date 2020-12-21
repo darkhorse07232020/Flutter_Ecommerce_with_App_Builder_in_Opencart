@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/components/icon_with_counter.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/Login.dart';
 import 'package:shop_app/models/Variable.dart';
+import 'package:shop_app/providers/detail_state.dart';
 import 'package:shop_app/screens/wishlist/wishlist_screen.dart';
 
 class ProductAppBar extends PreferredSize {
@@ -28,21 +30,29 @@ class ProductAppBar extends PreferredSize {
       ),
       actions: [
         loginState
-            ? IconWithCounter(
-                text: '',
-                iconData: Icons.favorite_outline,
-                notificationCount: wishlistCount,
-                onTap: () {
-                  Navigator.pushNamed(context, WishlistScreen.routeName);
+            ? Consumer<DetailState>(
+                builder: (context, details, child) {
+                  return IconWithCounter(
+                    text: '',
+                    iconData: Icons.favorite_outline,
+                    notificationCount: details.wishlistCount,
+                    onTap: () {
+                      Navigator.pushNamed(context, WishlistScreen.routeName);
+                    },
+                  );
                 },
               )
             : Container(),
         loginState
-            ? IconWithCounter(
-                text: '',
-                iconData: Icons.card_travel,
-                notificationCount: loginVariable.loginUser["cart_count"],
-                onTap: () {},
+            ? Consumer<DetailState>(
+                builder: (context, details, child) {
+                  return IconWithCounter(
+                    text: '',
+                    iconData: Icons.card_travel,
+                    notificationCount: details.cartCount,
+                    onTap: () {},
+                  );
+                },
               )
             : IconButton(
                 icon: Icon(Icons.card_travel),

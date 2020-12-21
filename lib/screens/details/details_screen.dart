@@ -90,6 +90,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                         MediaQuery.of(context).size.width * 0.4,
                                     height: 30,
                                     child: CartOrderBtn(
+                                      currentCartNum: 1,
                                       width: MediaQuery.of(context).size.width *
                                           0.4,
                                     ),
@@ -202,6 +203,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         child: AddButton(
                           color: Colors.white,
                           press: () {
+                            print('OK');
                             if (productVariable.product['is_in_wishlist'] ==
                                 false) {
                               addToWishlist(
@@ -249,7 +251,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 2.0,
                         child: AddButton(
-                          press: () {},
+                          press: () {
+                            print('OK');
+                          },
                           color: kButtonColor,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,

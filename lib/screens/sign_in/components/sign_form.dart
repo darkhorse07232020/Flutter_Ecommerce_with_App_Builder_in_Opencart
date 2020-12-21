@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/components/custom_surfix_icon.dart';
 import 'package:shop_app/components/form_error.dart';
 import 'package:shop_app/models/Languages.dart';
+import 'package:shop_app/providers/detail_state.dart';
 import 'package:shop_app/screens/forgot_password/forgot_password_screen.dart';
 import 'package:shop_app/screens/login_success/login_success_screen.dart';
 import 'package:toast/toast.dart';
@@ -53,9 +55,10 @@ class _SignFormState extends State<SignForm> {
     );
     if (loginVariable.loginUser['status'] == 'success') {
       loginState = true;
-      wishlistCount =
-          int.parse(loginVariable.loginUser['wishlist_count'].toString());
-      cartCount = int.parse(loginVariable.loginUser["cart_count"].toString());
+      Provider.of<DetailState>(context, listen: false).setWishlistCount(
+          int.parse(loginVariable.loginUser['wishlist_count'].toString()));
+      Provider.of<DetailState>(context, listen: false).setCartCount(
+          int.parse(loginVariable.loginUser["cart_count"].toString()));
       Navigator.popAndPushNamed(context, LoginSuccessScreen.routeName);
     }
     // if all are valid then go to success screen

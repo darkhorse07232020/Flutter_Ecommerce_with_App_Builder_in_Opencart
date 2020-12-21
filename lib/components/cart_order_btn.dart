@@ -3,8 +3,10 @@ import 'package:shop_app/constants.dart';
 
 class CartOrderBtn extends StatefulWidget {
   final double width;
+  final int currentCartNum;
   final Function(int) onTap;
-  const CartOrderBtn({Key key, this.width, this.onTap}) : super(key: key);
+  const CartOrderBtn({Key key, this.width, this.onTap, this.currentCartNum})
+      : super(key: key);
 
   @override
   _CartOrderBtnState createState() => _CartOrderBtnState();
@@ -15,7 +17,7 @@ class _CartOrderBtnState extends State<CartOrderBtn> {
 
   @override
   void initState() {
-    _cartNum = 1;
+    _cartNum = widget.currentCartNum;
     super.initState();
   }
 

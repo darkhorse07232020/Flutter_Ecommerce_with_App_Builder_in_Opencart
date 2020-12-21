@@ -11,7 +11,7 @@ Future<bool> getWishlist(String email) async {
   map['id_currency'] = idCurrency;
   map['iso_code'] = isoCode;
   map['email'] = email;
-
+  print(sessionData);
   final response = await http.post(
     'https://easycartapp.com/index.php?route=webservices/api&method=appGetWishlist&version=1.6&api_token=' +
         apiTokenKey,

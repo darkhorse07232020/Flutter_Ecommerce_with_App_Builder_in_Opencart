@@ -10,16 +10,21 @@ import 'package:shop_app/providers/detail_state.dart';
 import 'package:shop_app/screens/main/home_screen.dart';
 import 'package:toast/toast.dart';
 
-Future<bool> addToWishlist(context, productId) async {
+Future<bool> addToCart(context, productId, quantity) async {
   if (loginState == true) {
     var map = new Map<String, dynamic>();
     map['id_currency'] = idCurrency;
     map['iso_code'] = isoCode;
-    map['email'] = loginVariable.email;
-    map['product_id'] = productId;
+    map['cart_products'] = '{"cart_products": [{"product_id": ' +
+        productId +
+        ', "quantity": ' +
+        quantity +
+        ', "option": [], "email" : "' +
+        loginVariable.email +
+        '"}]}';
 
     final response = await http.post(
-      'https://easycartapp.com/index.php?route=webservices/api&method=appAddToWishlist&version=1.6&api_token=' +
+      'https://easycartapp.com/index.php?route=webservices/api&method=appAddToCart&version=1.6&api_token=' +
           apiTokenKey,
       headers: {
         'Cookie': 'language=' +
@@ -36,8 +41,9 @@ Future<bool> addToWishlist(context, productId) async {
     if (response.statusCode == 200) {
       if (responseJson['status'] == 'success') {
         Toast.show(responseJson['message'], context);
-        Provider.of<DetailState>(context, listen: false).setWishlistCount(
-            int.parse(responseJson['wishlist_count'].toString()));
+        // cartCount = int.parse(responseJson['total_cart_items'].toString());
+        Provider.of<DetailState>(context, listen: false).setCartCount(
+            int.parse(responseJson['total_cart_items'].toString()));
         return true;
       }
     } else {
@@ -54,7 +60,7 @@ Future<bool> addToWishlist(context, productId) async {
   return false;
 }
 
-Future<bool> removeToWishlist(context, productId) async {
+Future<bool> removeToCart(context, productId) async {
   if (loginState == true) {
     var map = new Map<String, dynamic>();
     map['id_currency'] = idCurrency;
@@ -80,8 +86,8 @@ Future<bool> removeToWishlist(context, productId) async {
     if (response.statusCode == 200) {
       if (responseJson['status'] == 'success') {
         Toast.show(responseJson['message'], context);
-        Provider.of<DetailState>(context, listen: false).setWishlistCount(
-            int.parse(responseJson['wishlist_count'].toString()));
+        Provider.of<DetailState>(context, listen: false)
+            .setCartCount(int.parse(responseJson['wishlist_count'].toString()));
         return true;
       }
     } else {
