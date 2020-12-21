@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/components/add_button.dart';
 import 'package:shop_app/components/cart_order_btn.dart';
 import 'package:shop_app/components/product_card.dart';
@@ -7,6 +8,7 @@ import 'package:shop_app/constants.dart';
 import 'package:shop_app/helpers/operate_wishlist.dart';
 import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/Variable.dart';
+import 'package:shop_app/providers/detail_state.dart';
 import 'package:shop_app/screens/details/components/details_app_bar.dart';
 
 import '../../models/Product.dart';
@@ -203,7 +205,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         child: AddButton(
                           color: Colors.white,
                           press: () {
-                            print('OK');
                             if (productVariable.product['is_in_wishlist'] ==
                                 false) {
                               addToWishlist(

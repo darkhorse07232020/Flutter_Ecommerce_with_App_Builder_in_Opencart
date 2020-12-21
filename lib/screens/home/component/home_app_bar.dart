@@ -33,6 +33,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
         loginState
             ? Consumer<DetailState>(
                 builder: (context, details, child) {
+                  print(details.wishlistCount);
                   return IconWithCounter(
                     text: '',
                     iconData: Icons.favorite_outline,

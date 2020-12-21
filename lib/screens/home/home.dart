@@ -32,112 +32,105 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(
-          value: DetailState(),
-        ),
-      ],
-      child: FutureBuilder(
-        future: initialize(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return Scaffold(
-              appBar: PreferredSize(
-                preferredSize: Size.fromHeight(
-                    AppBar().preferredSize.height), // here the desired height
-                child: HomeAppBar(
-                  title: homeScreenVariable.displayLogoOnTitleBar == 1
-                      ? Image.network(homeScreenVariable.titleBarLogoUrl)
-                      : Container(),
-                ),
+    return FutureBuilder(
+      future: initialize(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return Scaffold(
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(
+                  AppBar().preferredSize.height), // here the desired height
+              child: HomeAppBar(
+                title: homeScreenVariable.displayLogoOnTitleBar == 1
+                    ? Image.network(homeScreenVariable.titleBarLogoUrl)
+                    : Container(),
               ),
-              drawer: NavBar(),
-              body: ListView.builder(
-                padding: EdgeInsets.all(0),
-                shrinkWrap: true,
-                itemCount: homeScreenVariable.elements.length,
-                itemBuilder: (context, index) {
-                  Widget child;
-                  switch (homeScreenVariable.elements[index]['element_type']) {
-                    case 'banners_horizontal_sliding':
-                      child = BannersHorizontalSliding(
-                          title: homeScreenVariable.elements[index]['heading'],
-                          banner: homeScreenVariable.elements[index]['data']);
-                      break;
-                    case 'categories_top':
-                      homeScreenVariable.elements[index]['data'] =
-                          homeScreenVariable.elements[index]['data'].reversed
-                              .toList();
-                      child = CategoriesTop(
-                        categories: homeScreenVariable.elements[index]['data'],
-                      );
-                      break;
-                    case 'banners_square':
-                      child = BannerSquare(
+            ),
+            drawer: NavBar(),
+            body: ListView.builder(
+              padding: EdgeInsets.all(0),
+              shrinkWrap: true,
+              itemCount: homeScreenVariable.elements.length,
+              itemBuilder: (context, index) {
+                Widget child;
+                switch (homeScreenVariable.elements[index]['element_type']) {
+                  case 'banners_horizontal_sliding':
+                    child = BannersHorizontalSliding(
                         title: homeScreenVariable.elements[index]['heading'],
-                        banner: homeScreenVariable.elements[index]['data'],
-                      );
-                      break;
-                    case 'banners_grid':
-                      child = BannerGrid(
-                        title: homeScreenVariable.elements[index]['heading'],
-                        banner: homeScreenVariable.elements[index]['data'],
-                      );
-                      break;
-                    case 'banners_countdown':
-                      child = BannerCountdown(
-                        title: homeScreenVariable.elements[index]['heading'],
-                        banner: homeScreenVariable.elements[index]['data'],
-                      );
-                      break;
-                    case 'products_square':
-                      child = ProductSquare(
-                        title: homeScreenVariable.elements[index]['heading'],
-                        products: homeScreenVariable.elements[index]['data'],
-                      );
-                      break;
-                    case 'products_horizontal':
-                      child = ProductsHorizontal(
-                        title: homeScreenVariable.elements[index]['heading'],
-                        products: homeScreenVariable.elements[index]['data'],
-                      );
-                      break;
-                    case 'products_grid':
-                      child = ProductsGrid(
-                        title: homeScreenVariable.elements[index]['heading'],
-                        products: homeScreenVariable.elements[index]['data'],
-                      );
-                      break;
-                    default:
-                      child = Container();
-                      break;
-                  }
-                  return Container(
-                    color: kBGColor,
-                    padding: EdgeInsets.only(top: 10),
-                    child: child,
-                  );
-                },
+                        banner: homeScreenVariable.elements[index]['data']);
+                    break;
+                  case 'categories_top':
+                    homeScreenVariable.elements[index]['data'] =
+                        homeScreenVariable.elements[index]['data'].reversed
+                            .toList();
+                    child = CategoriesTop(
+                      categories: homeScreenVariable.elements[index]['data'],
+                    );
+                    break;
+                  case 'banners_square':
+                    child = BannerSquare(
+                      title: homeScreenVariable.elements[index]['heading'],
+                      banner: homeScreenVariable.elements[index]['data'],
+                    );
+                    break;
+                  case 'banners_grid':
+                    child = BannerGrid(
+                      title: homeScreenVariable.elements[index]['heading'],
+                      banner: homeScreenVariable.elements[index]['data'],
+                    );
+                    break;
+                  case 'banners_countdown':
+                    child = BannerCountdown(
+                      title: homeScreenVariable.elements[index]['heading'],
+                      banner: homeScreenVariable.elements[index]['data'],
+                    );
+                    break;
+                  case 'products_square':
+                    child = ProductSquare(
+                      title: homeScreenVariable.elements[index]['heading'],
+                      products: homeScreenVariable.elements[index]['data'],
+                    );
+                    break;
+                  case 'products_horizontal':
+                    child = ProductsHorizontal(
+                      title: homeScreenVariable.elements[index]['heading'],
+                      products: homeScreenVariable.elements[index]['data'],
+                    );
+                    break;
+                  case 'products_grid':
+                    child = ProductsGrid(
+                      title: homeScreenVariable.elements[index]['heading'],
+                      products: homeScreenVariable.elements[index]['data'],
+                    );
+                    break;
+                  default:
+                    child = Container();
+                    break;
+                }
+                return Container(
+                  color: kBGColor,
+                  padding: EdgeInsets.only(top: 10),
+                  child: child,
+                );
+              },
+            ),
+          );
+        } else {
+          return Scaffold(
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(
+                  AppBar().preferredSize.height), // here the desired height
+              child: HomeAppBar(title: Container()),
+            ),
+            drawer: NavBar(),
+            body: Container(
+              child: Center(
+                child: CircularProgressIndicator(),
               ),
-            );
-          } else {
-            return Scaffold(
-              appBar: PreferredSize(
-                preferredSize: Size.fromHeight(
-                    AppBar().preferredSize.height), // here the desired height
-                child: HomeAppBar(title: Container()),
-              ),
-              drawer: NavBar(),
-              body: Container(
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
-            );
-          }
-        },
-      ),
+            ),
+          );
+        }
+      },
     );
   }
 }

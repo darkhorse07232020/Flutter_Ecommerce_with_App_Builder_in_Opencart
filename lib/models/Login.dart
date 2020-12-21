@@ -16,14 +16,7 @@ Future<bool> getLogIn(String email, String password) async {
   final response = await http.post(
     'https://easycartapp.com/index.php?route=webservices/api&method=appLogin&version=1.6&api_token=' +
         apiTokenKey,
-    headers: {
-      'Cookie': 'language=' +
-          isoCode +
-          '; OCSESSID=' +
-          sessionData +
-          '; currency=' +
-          idCurrency
-    },
+    headers: {'Cookie': 'language=' + isoCode + '; currency=' + idCurrency},
     body: map,
   );
   Map<String, dynamic> responseJson = json.decode(response.body);

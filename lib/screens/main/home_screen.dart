@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/HomeScreen.dart';
 import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/TokenData.dart';
 import 'package:shop_app/models/Variable.dart';
+import 'package:shop_app/providers/detail_state.dart';
 import 'package:shop_app/screens/cart/cart_screen.dart';
 import 'package:shop_app/screens/main/loading_screen.dart';
 import 'package:shop_app/screens/categories/categories.dart';

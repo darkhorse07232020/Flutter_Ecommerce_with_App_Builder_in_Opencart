@@ -8,15 +8,8 @@ class SignInScreen extends StatelessWidget {
   static String routeName = "/sign_in";
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(
-          value: DetailState(),
-        ),
-      ],
-      child: Scaffold(
-        body: Body(),
-      ),
+    return Scaffold(
+      body: Body(),
     );
   }
 }
