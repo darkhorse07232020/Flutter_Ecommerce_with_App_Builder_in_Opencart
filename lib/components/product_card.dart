@@ -45,7 +45,6 @@ class _ProductCardState extends State<ProductCard> {
     if (widget.isCartButton)
       widget.product['cart_quantity'] =
           int.parse(widget.product['cart_quantity'].toString());
-    // print(widget.product);
     return Padding(
       padding: EdgeInsets.all(5),
       child: SizedBox(
@@ -114,7 +113,6 @@ class _ProductCardState extends State<ProductCard> {
                         ),
                         InkWell(
                           onTap: () {
-                            print(widget.product);
                             if (widget.product['is_in_wishlist'] == false) {
                               addToWishlist(
                                 context,

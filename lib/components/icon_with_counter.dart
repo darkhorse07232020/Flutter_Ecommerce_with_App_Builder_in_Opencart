@@ -35,16 +35,19 @@ class IconWithCounter extends StatelessWidget {
             ),
             notificationCount > 0
                 ? Positioned(
-                    top: 8,
+                    top: 5,
                     right: 0,
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                      width: 20,
+                      height: 20,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle, color: Colors.red),
                       alignment: Alignment.center,
-                      child: Text(
-                        '$notificationCount',
-                        style: TextStyle(fontSize: 11),
+                      child: Center(
+                        child: Text(
+                          '$notificationCount',
+                          style: TextStyle(fontSize: 11),
+                        ),
                       ),
                     ),
                   )

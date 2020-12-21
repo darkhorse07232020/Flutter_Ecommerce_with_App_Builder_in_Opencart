@@ -23,7 +23,6 @@ Future<bool> addToCart(context, productId, quantity) async {
         '}], "email" : "' +
         loginVariable.email +
         '"}';
-    print(map);
     final response = await http.post(
       'https://easycartapp.com/index.php?route=webservices/api&method=appAddToCart&version=1.6&api_token=' +
           apiTokenKey,
@@ -38,7 +37,6 @@ Future<bool> addToCart(context, productId, quantity) async {
       body: map,
     );
     Map<String, dynamic> responseJson = json.decode(response.body);
-    print(responseJson);
     if (response.statusCode == 200) {
       if (responseJson['status'] == 'success') {
         Toast.show(responseJson['message'], context);
@@ -73,7 +71,6 @@ Future<bool> removeToCart(context, productId, quantity) async {
         ', "quantity": ' +
         quantity +
         '}]}';
-    print(map);
     final response = await http.post(
       'https://easycartapp.com/index.php?route=webservices/api&method=appRemoveProduct&version=1.6&api_token=' +
           apiTokenKey,
@@ -89,7 +86,6 @@ Future<bool> removeToCart(context, productId, quantity) async {
     );
     Map<String, dynamic> responseJson = json.decode(response.body);
 
-    print(responseJson['cart']);
     if (response.statusCode == 200) {
       if (responseJson['status'] == 'success') {
         Toast.show(responseJson['message'], context);
@@ -124,7 +120,6 @@ Future<bool> updateQuantity(context, productId, quantity) async {
         ', "quantity": ' +
         quantity +
         '}]}';
-    print(map);
     final response = await http.post(
       'https://easycartapp.com/index.php?route=webservices/api&method=appUpdateCartQuantity&version=1.6&api_token=' +
           apiTokenKey,
@@ -140,7 +135,6 @@ Future<bool> updateQuantity(context, productId, quantity) async {
     );
     Map<String, dynamic> responseJson = json.decode(response.body);
 
-    print(responseJson);
     if (response.statusCode == 200) {
       if (responseJson['status'] == 'success') {
         Toast.show(responseJson['message'], context);

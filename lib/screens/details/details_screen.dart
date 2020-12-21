@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:provider/provider.dart';
 import 'package:shop_app/components/add_button.dart';
-import 'package:shop_app/components/cart_order_btn.dart';
 import 'package:shop_app/components/product_card.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/helpers/operate_cart.dart';
 import 'package:shop_app/helpers/operate_wishlist.dart';
 import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/Variable.dart';
-import 'package:shop_app/providers/detail_state.dart';
 import 'package:shop_app/screens/details/components/cart_num.dart';
 import 'package:shop_app/screens/details/components/details_app_bar.dart';
 
@@ -24,7 +21,6 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
-  int _cartNum = 0;
   Future<void> initialize(id) async {
     await getProductData(id);
   }

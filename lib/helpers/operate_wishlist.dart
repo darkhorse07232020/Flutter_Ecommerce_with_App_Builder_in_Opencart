@@ -18,7 +18,6 @@ Future<bool> addToWishlist(context, productId) async {
     map['email'] = loginVariable.email;
     map['product_id'] = productId;
 
-    print(map);
     final response = await http.post(
       'https://easycartapp.com/index.php?route=webservices/api&method=appAddToWishlist&version=1.6&api_token=' +
           apiTokenKey,

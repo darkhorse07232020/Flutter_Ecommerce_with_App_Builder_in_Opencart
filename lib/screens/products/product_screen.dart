@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/Category.dart';
 import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/Variable.dart';
-import 'package:shop_app/providers/detail_state.dart';
 import 'package:shop_app/screens/components/products_grid.dart';
 import 'package:shop_app/screens/components/products_square.dart';
 
