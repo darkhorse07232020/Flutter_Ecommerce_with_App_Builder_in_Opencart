@@ -1,4 +1,7 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/helpers/operate_cart.dart';
 import 'package:shop_app/models/Cart.dart';
@@ -18,9 +21,35 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  TextEditingController _textController;
+  String updatedQuantity;
 
   Future<void> initialize() async {
     await getCartDetails(loginVariable.email);
+  }
+
+  Future<void> changeQuantity(updatedQuantity, id, index) async {
+    var res = await showTextInputDialog(
+      context: _scaffoldKey.currentContext,
+      textFields: [
+        DialogTextField(initialText: updatedQuantity),
+      ],
+    );
+    if (res == null) return;
+    updateQuantity(
+      _scaffoldKey.currentContext,
+      id,
+      res[0],
+    );
+    setState(() {
+      cartVariable.products[index]['quantity'] = updatedQuantity;
+    });
+  }
+
+  @override
+  void initState() {
+    _textController = new TextEditingController();
+    super.initState();
   }
 
   @override
@@ -59,8 +88,13 @@ class _CartScreenState extends State<CartScreen> {
                                 Positioned(
                                   child: PopupMenu(
                                     onTap: (int val) {
-                                      print(val);
-                                      if (val == 2) {
+                                      if (val == 1) {
+                                        changeQuantity(
+                                          item['quantity'],
+                                          item['product_id'],
+                                          index,
+                                        );
+                                      } else if (val == 2) {
                                         removeToCart(
                                           _scaffoldKey.currentContext,
                                           item['product_id'],

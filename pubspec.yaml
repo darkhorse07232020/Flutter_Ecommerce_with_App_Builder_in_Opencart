@@ -36,6 +36,7 @@ dependencies:
   flutter_html: ^1.1.1
   toast: ^0.1.5
   flutter_search_bar: ^2.1.0
+  adaptive_dialog: ^0.9.3
 
 dev_dependencies:
   flutter_test:
