@@ -39,7 +39,12 @@ Future<bool> addToCart(context, productId, quantity) async {
     Map<String, dynamic> responseJson = json.decode(response.body);
     if (response.statusCode == 200) {
       if (responseJson['status'] == 'success') {
-        Toast.show(responseJson['message'], context);
+        Toast.show(
+          responseJson['message'],
+          context,
+          duration: Toast.LENGTH_LONG,
+          gravity: Toast.CENTER,
+        );
         // cartCount = int.parse(responseJson['total_cart_items'].toString());
         Provider.of<DetailState>(context, listen: false).setCartCount(
             int.parse(responseJson['total_cart_items'].toString()));
@@ -88,7 +93,12 @@ Future<bool> removeToCart(context, productId, quantity) async {
 
     if (response.statusCode == 200) {
       if (responseJson['status'] == 'success') {
-        Toast.show(responseJson['message'], context);
+        Toast.show(
+          responseJson['message'],
+          context,
+          duration: Toast.LENGTH_LONG,
+          gravity: Toast.CENTER,
+        );
         // cartCount = int.parse(responseJson['total_cart_items'].toString());
         Provider.of<DetailState>(context, listen: false).setCartCount(
             int.parse(responseJson['cart']['total_cart_items'].toString()));

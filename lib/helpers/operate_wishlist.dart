@@ -35,7 +35,12 @@ Future<bool> addToWishlist(context, productId) async {
 
     if (response.statusCode == 200) {
       if (responseJson['status'] == 'success') {
-        Toast.show(responseJson['message'], context);
+        Toast.show(
+          responseJson['message'],
+          context,
+          duration: Toast.LENGTH_LONG,
+          gravity: Toast.CENTER,
+        );
         Provider.of<DetailState>(context, listen: false).setWishlistCount(
             int.parse(responseJson['wishlist_count'].toString()));
         return true;
@@ -79,7 +84,12 @@ Future<bool> removeToWishlist(context, productId) async {
 
     if (response.statusCode == 200) {
       if (responseJson['status'] == 'success') {
-        Toast.show(responseJson['message'], context);
+        Toast.show(
+          responseJson['message'],
+          context,
+          duration: Toast.LENGTH_LONG,
+          gravity: Toast.CENTER,
+        );
         Provider.of<DetailState>(context, listen: false).setWishlistCount(
             int.parse(responseJson['wishlist_count'].toString()));
         return true;

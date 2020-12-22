@@ -21,7 +21,6 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  TextEditingController _textController;
   String updatedQuantity;
 
   Future<void> initialize() async {
@@ -48,7 +47,6 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   void initState() {
-    _textController = new TextEditingController();
     super.initState();
   }
 

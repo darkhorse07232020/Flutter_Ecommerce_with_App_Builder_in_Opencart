@@ -5,6 +5,7 @@ import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/TokenData.dart';
 import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/screens/cart/cart_screen.dart';
+import 'package:shop_app/screens/login_success/login_success_screen.dart';
 import 'package:shop_app/screens/main/loading_screen.dart';
 import 'package:shop_app/screens/categories/categories.dart';
 import 'package:shop_app/screens/search/search.dart';
@@ -64,7 +65,7 @@ class _HomePageState extends State<HomePage>
     HomeTab(),
     CategoriesTab(),
     CartScreen(isLeadingButton: false),
-    loginState ? SearchTab() : SignInScreen(),
+    loginState ? LoginSuccessScreen() : SignInScreen(),
   ];
   Widget _currentPage;
 

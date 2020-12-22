@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/helpers/operate_wishlist.dart';
 import 'package:shop_app/models/Login.dart';
 import 'package:shop_app/models/Wishlist.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
 
-class WishlistScreen extends StatelessWidget {
+class WishlistScreen extends StatefulWidget {
   static String routeName = "/wishlist";
+
+  @override
+  _WishlistScreenState createState() => _WishlistScreenState();
+}
+
+class _WishlistScreenState extends State<WishlistScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Future<void> initialize() async {
     await getWishlist(loginVariable.email);
@@ -14,6 +22,7 @@ class WishlistScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         iconTheme: IconThemeData(
@@ -50,7 +59,7 @@ class WishlistScreen extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.only(left: 20),
                       margin: EdgeInsets.symmetric(vertical: 5),
                       height: 100,
                       width: MediaQuery.of(context).size.width,
@@ -63,6 +72,7 @@ class WishlistScreen extends StatelessWidget {
                                 Image.network(item['images'], fit: BoxFit.fill),
                           ),
                           Container(
+                            width: MediaQuery.of(context).size.width * 0.55,
                             padding: EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 20),
                             child: Column(
@@ -92,6 +102,23 @@ class WishlistScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.delete,
+                              color: Colors.grey,
+                              size: 24,
+                            ),
+                            onPressed: () {
+                              removeToWishlist(
+                                _scaffoldKey.currentContext,
+                                item['product_id'].toString(),
+                              );
+                              setState(() {
+                                wishlistVariable.wishlistProduct
+                                    .removeAt(index);
+                              });
+                            },
                           ),
                         ],
                       ),
