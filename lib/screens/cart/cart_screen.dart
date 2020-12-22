@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/components/icon_with_counter.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/Cart.dart';
 import 'package:shop_app/models/Login.dart';
+import 'package:shop_app/models/Variable.dart';
+import 'package:shop_app/providers/detail_state.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
+import 'package:shop_app/screens/wishlist/wishlist_screen.dart';
 
 class CartScreen extends StatelessWidget {
   static String routeName = "/cart";
@@ -27,6 +32,37 @@ class CartScreen extends StatelessWidget {
             style: TextStyle(color: kBtnTxtColor),
           ),
         ),
+        actions: [
+          loginState
+              ? Consumer<DetailState>(
+                  builder: (context, details, child) {
+                    return IconWithCounter(
+                      text: '',
+                      iconData: Icons.favorite_outline,
+                      notificationCount: details.wishlistCount,
+                      onTap: () {
+                        Navigator.pushNamed(context, WishlistScreen.routeName);
+                      },
+                    );
+                  },
+                )
+              : Container(),
+          loginState
+              ? Consumer<DetailState>(
+                  builder: (context, details, child) {
+                    return IconWithCounter(
+                      text: '',
+                      iconData: Icons.card_travel,
+                      notificationCount: details.cartCount,
+                      onTap: () {},
+                    );
+                  },
+                )
+              : IconButton(
+                  icon: Icon(Icons.card_travel),
+                  onPressed: () {},
+                ),
+        ],
       ),
       body: FutureBuilder(
         future: initialize(),
@@ -55,81 +91,89 @@ class CartScreen extends StatelessWidget {
                             );
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            padding: EdgeInsets.only(left: 20, right: 0),
                             margin: EdgeInsets.symmetric(vertical: 5),
                             height: 100,
                             width: MediaQuery.of(context).size.width,
                             color: Colors.white,
-                            child: Row(
-                              children: [
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width / 4.0,
-                                  child: Image.network(item['images'],
-                                      fit: BoxFit.fill),
+                            child: Stack(
+                              children: <Widget>[
+                                Positioned(
+                                  child: myPopMenu(),
+                                  right: 0,
                                 ),
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.6,
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 20),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        item['title'],
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            'Quantity:',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                          Text(
-                                            '${item['quantity']}',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                          SizedBox(width: 50),
-                                        ],
-                                      ),
-                                      Column(
+                                Row(
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width /
+                                          4.0,
+                                      child: Image.network(item['images'],
+                                          fit: BoxFit.fill),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.6,
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 10, horizontal: 20),
+                                      child: Column(
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            item['discount_percentage'] == 0
-                                                ? ''
-                                                : '${item['price']}',
+                                            item['title'],
                                             style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.grey,
-                                              decoration:
-                                                  TextDecoration.lineThrough,
+                                              fontSize: 16,
                                             ),
                                           ),
-                                          Text(
-                                            item['discount_percentage'] == 0
-                                                ? '${item['price']}'
-                                                : '${item['discount_price']}',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.green,
-                                            ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                'Quantity:',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                              Text(
+                                                '${item['quantity']}',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                ),
+                                              ),
+                                              SizedBox(width: 50),
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                item['discount_percentage'] == 0
+                                                    ? ''
+                                                    : '${item['price']}',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.grey,
+                                                  decoration: TextDecoration
+                                                      .lineThrough,
+                                                ),
+                                              ),
+                                              Text(
+                                                item['discount_percentage'] == 0
+                                                    ? '${item['price']}'
+                                                    : '${item['discount_price']}',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.green,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
@@ -179,6 +223,42 @@ class CartScreen extends StatelessWidget {
           }
         },
       ),
+    );
+  }
+
+  Widget myPopMenu() {
+    return PopupMenuButton(
+      padding: EdgeInsets.all(0),
+      elevation: 20,
+      onSelected: (value) {
+        print(value);
+      },
+      offset: Offset.lerp(Offset(0, 0), Offset(10, 10), 10),
+      itemBuilder: (context) => [
+        PopupMenuItem(
+          value: 1,
+          child: Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                child: Icon(Icons.edit),
+              ),
+              Text('Update Quantity'),
+            ],
+          ),
+        ),
+        PopupMenuItem(
+            value: 2,
+            child: Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
+                  child: Icon(Icons.delete),
+                ),
+                Text('Remove')
+              ],
+            )),
+      ],
     );
   }
 }
