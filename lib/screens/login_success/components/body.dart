@@ -37,7 +37,7 @@ class Body extends StatelessWidget {
                 ),
               ),
               press: () {
-                Navigator.pushNamed(context, HomeScreen.routeName);
+                Navigator.popAndPushNamed(context, HomeScreen.routeName);
               },
             ),
           ),

@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage>
   List<Widget> _pages = [
     HomeTab(),
     CategoriesTab(),
-    CartScreen(),
+    CartScreen(isLeadingButton: false),
     loginState ? SearchTab() : SignInScreen(),
   ];
   Widget _currentPage;

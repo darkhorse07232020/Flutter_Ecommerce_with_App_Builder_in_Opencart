@@ -57,16 +57,17 @@ class DetailsAppBar extends PreferredSize {
               ),
       ],
       leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomePage(initTab: 0),
-              ),
-            );
-          }),
+        icon: Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.pop(context);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(initTab: 0),
+            ),
+          );
+        },
+      ),
     );
   }
 }

@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/helpers/operate_cart.dart';
 import 'package:shop_app/models/Cart.dart';
 import 'package:shop_app/models/Login.dart';
 import 'package:shop_app/screens/cart/components/cart_app_bar.dart';
-import 'package:shop_app/screens/details/details_screen.dart';
+import 'package:shop_app/screens/cart/components/popup_menu.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   static String routeName = "/cart";
+  final bool isLeadingButton;
+
+  const CartScreen({Key key, this.isLeadingButton = true}) : super(key: key);
+
+  @override
+  _CartScreenState createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   Future<void> initialize() async {
     await getCartDetails(loginVariable.email);
@@ -15,7 +26,10 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CartAppBar(),
+      key: _scaffoldKey,
+      appBar: CartAppBar(
+        isLeadingButton: widget.isLeadingButton,
+      ),
       body: FutureBuilder(
         future: initialize(),
         builder: (context, snapshot) {
@@ -33,15 +47,7 @@ class CartScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         dynamic item = cartVariable.products[index];
                         return InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              DetailsScreen.routeName,
-                              arguments: ProductDetailsArguments(
-                                id: item['product_id'].toString(),
-                              ),
-                            );
-                          },
+                          onTap: () {},
                           child: Container(
                             padding: EdgeInsets.only(left: 20, right: 0),
                             margin: EdgeInsets.symmetric(vertical: 5),
@@ -51,7 +57,22 @@ class CartScreen extends StatelessWidget {
                             child: Stack(
                               children: <Widget>[
                                 Positioned(
-                                  child: myPopMenu(),
+                                  child: PopupMenu(
+                                    onTap: (int val) {
+                                      print(val);
+                                      if (val == 2) {
+                                        removeToCart(
+                                          _scaffoldKey.currentContext,
+                                          item['product_id'],
+                                          item['quantity'],
+                                        );
+
+                                        setState(() {
+                                          cartVariable.products.removeAt(index);
+                                        });
+                                      }
+                                    },
+                                  ),
                                   right: 0,
                                 ),
                                 Row(
@@ -175,42 +196,6 @@ class CartScreen extends StatelessWidget {
           }
         },
       ),
-    );
-  }
-
-  Widget myPopMenu() {
-    return PopupMenuButton(
-      padding: EdgeInsets.all(0),
-      elevation: 20,
-      onSelected: (value) {
-        print(value);
-      },
-      offset: Offset.lerp(Offset(0, 0), Offset(10, 10), 10),
-      itemBuilder: (context) => [
-        PopupMenuItem(
-          value: 1,
-          child: Row(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
-                child: Icon(Icons.edit),
-              ),
-              Text('Update Quantity'),
-            ],
-          ),
-        ),
-        PopupMenuItem(
-            value: 2,
-            child: Row(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(2, 2, 8, 2),
-                  child: Icon(Icons.delete),
-                ),
-                Text('Remove')
-              ],
-            )),
-      ],
     );
   }
 }

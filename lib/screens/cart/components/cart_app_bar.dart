@@ -7,6 +7,9 @@ import 'package:shop_app/providers/detail_state.dart';
 import 'package:shop_app/screens/wishlist/wishlist_screen.dart';
 
 class CartAppBar extends PreferredSize {
+  final bool isLeadingButton;
+
+  CartAppBar({@required this.isLeadingButton});
   @override
   // AppBar().preferredSize.height provide us the height that appy on our app bar
   Size get preferredSize => Size.fromHeight(AppBar().preferredSize.height);
@@ -26,6 +29,14 @@ class CartAppBar extends PreferredSize {
           style: TextStyle(color: kBtnTxtColor),
         ),
       ),
+      leading: isLeadingButton
+          ? IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.maybePop(context);
+              },
+            )
+          : Container(),
       actions: [
         loginState
             ? Consumer<DetailState>(
