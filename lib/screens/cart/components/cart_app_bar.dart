@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/components/icon_with_counter.dart';
 import 'package:shop_app/constants.dart';
-import 'package:shop_app/models/Languages.dart';
 import 'package:shop_app/models/Variable.dart';
 import 'package:shop_app/providers/detail_state.dart';
-import 'package:shop_app/screens/main/home_screen.dart';
 import 'package:shop_app/screens/wishlist/wishlist_screen.dart';
 
 class CartAppBar extends PreferredSize {
@@ -16,14 +14,17 @@ class CartAppBar extends PreferredSize {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: kPrimaryColor,
       iconTheme: IconThemeData(
         color: kBtnTxtColor,
       ),
       centerTitle: true,
-      backgroundColor: kPrimaryColor,
-      title: Text(
-        getWord(isoCode, 'product'),
-        style: TextStyle(color: kBtnTxtColor),
+      title: Padding(
+        padding: EdgeInsets.all(0),
+        child: Text(
+          'Shopping Bag',
+          style: TextStyle(color: kBtnTxtColor),
+        ),
       ),
       actions: [
         loginState
@@ -56,17 +57,6 @@ class CartAppBar extends PreferredSize {
                 onPressed: () {},
               ),
       ],
-      leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomePage(initTab: 0),
-              ),
-            );
-          }),
     );
   }
 }

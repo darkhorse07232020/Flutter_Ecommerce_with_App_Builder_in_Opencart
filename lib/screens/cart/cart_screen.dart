@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shop_app/components/icon_with_counter.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/models/Cart.dart';
 import 'package:shop_app/models/Login.dart';
-import 'package:shop_app/models/Variable.dart';
-import 'package:shop_app/providers/detail_state.dart';
+import 'package:shop_app/screens/cart/components/cart_app_bar.dart';
 import 'package:shop_app/screens/details/details_screen.dart';
-import 'package:shop_app/screens/wishlist/wishlist_screen.dart';
 
 class CartScreen extends StatelessWidget {
   static String routeName = "/cart";
@@ -19,51 +15,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kPrimaryColor,
-        iconTheme: IconThemeData(
-          color: kBtnTxtColor,
-        ),
-        centerTitle: true,
-        title: Padding(
-          padding: EdgeInsets.all(0),
-          child: Text(
-            'Shopping Bag',
-            style: TextStyle(color: kBtnTxtColor),
-          ),
-        ),
-        actions: [
-          loginState
-              ? Consumer<DetailState>(
-                  builder: (context, details, child) {
-                    return IconWithCounter(
-                      text: '',
-                      iconData: Icons.favorite_outline,
-                      notificationCount: details.wishlistCount,
-                      onTap: () {
-                        Navigator.pushNamed(context, WishlistScreen.routeName);
-                      },
-                    );
-                  },
-                )
-              : Container(),
-          loginState
-              ? Consumer<DetailState>(
-                  builder: (context, details, child) {
-                    return IconWithCounter(
-                      text: '',
-                      iconData: Icons.card_travel,
-                      notificationCount: details.cartCount,
-                      onTap: () {},
-                    );
-                  },
-                )
-              : IconButton(
-                  icon: Icon(Icons.card_travel),
-                  onPressed: () {},
-                ),
-        ],
-      ),
+      appBar: CartAppBar(),
       body: FutureBuilder(
         future: initialize(),
         builder: (context, snapshot) {
